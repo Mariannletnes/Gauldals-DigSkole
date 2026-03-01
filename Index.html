@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DigSkole — Reisen 2022–2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f12;
+    --surface: #1a1a20;
+    --border: rgba(255,255,255,0.07);
+    --text: #e8e4dc;
+    --muted: #7a7670;
+    --phase1: #c4935a;
+    --phase2: #7ab3b0;
+    --phase3: #9b8fad;
+    --now: #e8c547;
+    --future: #82a87d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  .digskole-wrap {
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    padding: 48px 40px 64px;
+    position: relative;
+    overflow-x: hidden;
+    border-radius: 8px;
+  }
+
+  .digskole-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 8px;
+  }
+
+  .page { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  .header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 64px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-left {
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+  }
+
+  /* Header icon */
+  .header-icon {
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
+    opacity: 0.9;
+  }
+
+  .header-left h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.2rem;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    color: var(--text);
+  }
+
+  .header-left h1 span {
+    color: var(--now);
+  }
+
+  .header-text p {
+    margin-top: 8px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .tpack-badge {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .tpack-letter {
+    width: 44px; height: 44px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .tpack-letter.t { background: var(--now); color: var(--bg); }
+  .tpack-letter.p { background: rgba(122,179,176,0.25); color: var(--phase2); }
+  .tpack-letter.ck { background: rgba(155,143,173,0.25); color: var(--phase3); font-size: 1rem; }
+
+  .tpack-label {
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-left: 8px;
+    line-height: 1.4;
+    max-width: 100px;
+  }
+
+  /* ── PHASE LEGEND ── */
+  .legend {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 140px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom,
+      var(--phase1) 0%,
+      var(--phase1) 20%,
+      var(--phase2) 20%,
+      var(--phase2) 50%,
+      var(--phase3) 50%,
+      var(--phase3) 72%,
+      var(--now) 72%,
+      var(--now) 78%,
+      var(--future) 78%,
+      var(--future) 100%
+    );
+    opacity: 0.4;
+  }
+
+  /* ── PHASE BLOCK ── */
+  .phase {
+    margin-bottom: 48px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .phase:nth-child(1) { animation-delay: 0.05s; }
+  .phase:nth-child(2) { animation-delay: 0.15s; }
+  .phase:nth-child(3) { animation-delay: 0.25s; }
+  .phase:nth-child(4) { animation-delay: 0.35s; }
+  .phase:nth-child(5) { animation-delay: 0.45s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .phase-year {
+    width: 140px;
+    flex-shrink: 0;
+    text-align: right;
+    padding-right: 24px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .phase-dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+    margin: 0 -7px;
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 1px currentColor;
+  }
+
+  .phase-title {
+    padding-left: 28px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .phase-title em {
+    font-style: normal;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  /* Phase icon */
+  .phase-icon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    opacity: 0.85;
+  }
+
+  /* ── EVENTS ── */
+  .events {
+    padding-left: 168px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .event {
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+    padding: 10px 14px;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+
+  .event:hover {
+    background: rgba(255,255,255,0.03);
+  }
+
+  .event-date {
+    font-size: 0.72rem;
+    color: var(--muted);
+    white-space: nowrap;
+    min-width: 80px;
+    letter-spacing: 0.04em;
+  }
+
+  .event-content strong {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .event-content span {
+    font-size: 0.76rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .event-tag {
+    font-size: 0.62rem;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-top: 4px;
+  }
+
+  /* ── PHASE COLORS ── */
+  .p1 .phase-year { color: var(--phase1); }
+  .p1 .phase-dot { color: var(--phase1); background: var(--phase1); }
+  .p1 .phase-title { color: var(--phase1); }
+  .p1 .event-tag { background: rgba(196,147,90,0.15); color: var(--phase1); }
+  .p1 .phase-icon { color: var(--phase1); }
+
+  .p2 .phase-year { color: var(--phase2); }
+  .p2 .phase-dot { color: var(--phase2); background: var(--phase2); }
+  .p2 .phase-title { color: var(--phase2); }
+  .p2 .event-tag { background: rgba(122,179,176,0.15); color: var(--phase2); }
+  .p2 .phase-icon { color: var(--phase2); }
+
+  .p3 .phase-year { color: var(--phase3); }
+  .p3 .phase-dot { color: var(--phase3); background: var(--phase3); }
+  .p3 .phase-title { color: var(--phase3); }
+  .p3 .event-tag { background: rgba(155,143,173,0.15); color: var(--phase3); }
+  .p3 .phase-icon { color: var(--phase3); }
+
+  .p-now .phase-year { color: var(--now); }
+  .p-now .phase-dot { color: var(--now); background: var(--now); box-shadow: 0 0 12px var(--now), 0 0 0 1px var(--now); }
+  .p-now .phase-title { color: var(--now); }
+  .p-now .event-tag { background: rgba(232,197,71,0.15); color: var(--now); }
+  .p-now .phase-icon { color: var(--now); }
+
+  .p-future .phase-year { color: var(--future); }
+  .p-future .phase-dot { color: var(--future); background: var(--future); }
+  .p-future .phase-title { color: var(--future); }
+  .p-future .event-tag { background: rgba(130,168,125,0.15); color: var(--future); }
+  .p-future .phase-icon { color: var(--future); }
+
+  /* ── NOW MARKER ── */
+  .now-marker {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 8px 0 32px;
+  }
+
+  .now-marker .spacer { width: 140px; flex-shrink: 0; }
+
+  .now-line {
+    flex: 1;
+    height: 1px;
+    background: var(--now);
+    margin-left: 14px;
+    opacity: 0.5;
+  }
+
+  .now-text {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--now);
+    padding: 4px 12px;
+    border: 1px solid rgba(232,197,71,0.3);
+    border-radius: 20px;
+    white-space: nowrap;
+    margin-left: 12px;
+  }
+
+  /* ── TPACK CALLOUT ── */
+  .tpack-callout {
+    margin: 48px 0 0;
+    padding: 28px 32px;
+    background: rgba(232,197,71,0.05);
+    border: 1px solid rgba(232,197,71,0.2);
+    border-radius: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+  }
+
+  .tpack-col { text-align: center; padding: 8px; }
+
+  .tpack-col .letter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .tpack-col .name {
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .tpack-col .desc {
+    font-size: 0.72rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .tpack-col .status {
+    margin-top: 10px;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    border-radius: 10px;
+    display: inline-block;
+  }
+
+  .tpack-col.done .letter { color: var(--phase2); }
+  .tpack-col.done .status { background: rgba(122,179,176,0.15); color: var(--phase2); }
+
+  .tpack-col.done2 .letter { color: var(--phase3); }
+  .tpack-col.done2 .status { background: rgba(155,143,173,0.15); color: var(--phase3); }
+
+  .tpack-col.missing .letter { color: var(--now); }
+  .tpack-col.missing .name { color: var(--now); }
+  .tpack-col.missing .status { background: rgba(232,197,71,0.15); color: var(--now); border: 1px solid rgba(232,197,71,0.3); }
+
+  .tpack-divider {
+    width: 1px;
+    background: var(--border);
+    align-self: stretch;
+  }
+</style>
+</head>
+<body>
+<div class="digskole-wrap">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+
+      <!-- Header SVG icon: a path/journey symbol representing a school + digital journey -->
+      <svg class="header-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Outer ring -->
+        <circle cx="36" cy="36" r="34" stroke="rgba(232,197,71,0.18)" stroke-width="1"/>
+        <!-- School building base -->
+        <rect x="20" y="38" width="32" height="18" rx="1.5" stroke="#e8c547" stroke-width="1.4" stroke-opacity="0.7"/>
+        <!-- Roof -->
+        <path d="M16 38 L36 22 L56 38" stroke="#e8c547" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.7"/>
+        <!-- Door -->
+        <rect x="30" y="46" width="12" height="10" rx="1" stroke="#e8c547" stroke-width="1.2" stroke-opacity="0.5"/>
+        <!-- Digital signal arcs (wifi-like above roof) -->
+        <path d="M29 17 Q36 11 43 17" stroke="var(--phase2)" stroke-width="1.3" stroke-linecap="round" fill="none" opacity="0.8"/>
+        <path d="M32.5 13.5 Q36 9 39.5 13.5" stroke="var(--phase2)" stroke-width="1.3" stroke-linecap="round" fill="none" opacity="0.5"/>
+        <!-- Center dot -->
+        <circle cx="36" cy="21" r="1.8" fill="var(--phase2)" opacity="0.9"/>
+        <!-- Stars / nodes on sides -->
+        <circle cx="14" cy="48" r="1.5" fill="var(--phase3)" opacity="0.6"/>
+        <circle cx="58" cy="48" r="1.5" fill="var(--phase1)" opacity="0.6"/>
+        <circle cx="14" cy="30" r="1" fill="var(--muted)" opacity="0.4"/>
+        <circle cx="58" cy="30" r="1" fill="var(--muted)" opacity="0.4"/>
+        <!-- Connecting line left side -->
+        <line x1="14" y1="30" x2="14" y2="48" stroke="var(--muted)" stroke-width="0.7" opacity="0.3"/>
+        <!-- Connecting line right side -->
+        <line x1="58" y1="30" x2="58" y2="48" stroke="var(--muted)" stroke-width="0.7" opacity="0.3"/>
+      </svg>
+
+      <div class="header-text">
+        <h1>DigSkole<br><span>Gauldal</span></h1>
+        <p>Reisen 2022 – 2027 · NTNU</p>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="tpack-badge">
+        <div class="tpack-letter t">T</div>
+        <div class="tpack-letter p">P</div>
+        <div class="tpack-letter ck">CK</div>
+      </div>
+      <div class="tpack-label">Nå er det <strong style="color:var(--now)">T-en</strong> sin tur</div>
+    </div>
+  </div>
+
+  <!-- TPACK MODEL -->
+  <div style="display:flex; flex-direction:column; align-items:center; margin-bottom:56px;">
+    <svg viewBox="0 0 600 390" xmlns="http://www.w3.org/2000/svg"
+         style="width:100%; max-width:560px; height:auto; overflow:visible;"
+         aria-label="TPACK-modellen: tre overlappende sirkler for Teknologi, Pedagogikk og Fagkunnskap">
+
+      <defs>
+        <!-- Clip paths for overlap regions -->
+        <clipPath id="clipP">
+          <circle cx="210" cy="165" r="132"/>
+        </clipPath>
+        <clipPath id="clipCK">
+          <circle cx="390" cy="165" r="132"/>
+        </clipPath>
+        <clipPath id="clipT">
+          <circle cx="300" cy="293" r="132"/>
+        </clipPath>
+      </defs>
+
+      <!-- Base circles (semi-transparent fills) -->
+      <circle cx="210" cy="165" r="132" fill="#7ab3b0" fill-opacity="0.10" stroke="#7ab3b0" stroke-width="1.4" stroke-opacity="0.5"/>
+      <circle cx="390" cy="165" r="132" fill="#9b8fad" fill-opacity="0.10" stroke="#9b8fad" stroke-width="1.4" stroke-opacity="0.5"/>
+      <circle cx="300" cy="293" r="132" fill="#e8c547" fill-opacity="0.10" stroke="#e8c547" stroke-width="1.4" stroke-opacity="0.5"/>
+
+      <!-- PCK overlap: P ∩ CK (top center) -->
+      <circle cx="390" cy="165" r="132" fill="#9b8fad" fill-opacity="0.13" clip-path="url(#clipP)"/>
+
+      <!-- TPK overlap: T ∩ P (bottom left) -->
+      <circle cx="300" cy="293" r="132" fill="#e8c547" fill-opacity="0.13" clip-path="url(#clipP)"/>
+
+      <!-- TCK overlap: T ∩ CK (bottom right) -->
+      <circle cx="300" cy="293" r="132" fill="#e8c547" fill-opacity="0.13" clip-path="url(#clipCK)"/>
+
+      <!-- TPACK center: T ∩ P ∩ CK -->
+      <circle cx="390" cy="165" r="132" fill="rgba(232,197,71,0.18)" clip-path="url(#clipP)"/>
+      <circle cx="210" cy="165" r="132" fill="rgba(232,197,71,0.18)" clip-path="url(#clipT)"/>
+
+      <!-- ── Main labels ── -->
+      <!-- PK -->
+      <text x="145" y="145" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="22" font-weight="600" fill="#7ab3b0" fill-opacity="0.95">PK</text>
+      <text x="145" y="165" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9.5" fill="#7ab3b0" fill-opacity="0.65" letter-spacing="0.06em">Pedagogical</text>
+      <text x="145" y="178" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9.5" fill="#7ab3b0" fill-opacity="0.65" letter-spacing="0.06em">Knowledge</text>
+
+      <!-- CK -->
+      <text x="455" y="145" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="22" font-weight="600" fill="#9b8fad" fill-opacity="0.95">CK</text>
+      <text x="455" y="165" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9.5" fill="#9b8fad" fill-opacity="0.65" letter-spacing="0.06em">Content</text>
+      <text x="455" y="178" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9.5" fill="#9b8fad" fill-opacity="0.65" letter-spacing="0.06em">Knowledge</text>
+
+      <!-- TK -->
+      <text x="300" y="368" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="22" font-weight="600" fill="#e8c547" fill-opacity="0.95">TK</text>
+      <text x="300" y="382" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9.5" fill="#e8c547" fill-opacity="0.65" letter-spacing="0.06em">Technological Knowledge</text>
+
+      <!-- ── Overlap labels ── -->
+      <!-- PCK -->
+      <text x="300" y="152" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" font-weight="500" fill="#e8e4dc" fill-opacity="0.5" letter-spacing="0.05em">PCK</text>
+
+      <!-- TPK -->
+      <text x="222" y="262" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" font-weight="500" fill="#e8e4dc" fill-opacity="0.5" letter-spacing="0.05em">TPK</text>
+
+      <!-- TCK -->
+      <text x="378" y="262" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" font-weight="500" fill="#e8e4dc" fill-opacity="0.5" letter-spacing="0.05em">TCK</text>
+
+      <!-- TPACK center -->
+      <text x="300" y="216" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="14" font-weight="600" fill="#e8c547" fill-opacity="0.9" letter-spacing="0.08em">TPACK</text>
+
+      <!-- Caption -->
+      <text x="300" y="23" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="#7a7670" letter-spacing="0.12em" text-transform="uppercase">RAMMEVERKET FOR DIGITAL KOMPETANSE</text>
+    </svg>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--phase1)"></div> Fase 1: Grunnmuren</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--phase2)"></div> Fase 2: Utforsking og fordypning</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--phase3)"></div> Fase 3: Deling og forankring</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--now)"></div> Vendepunktet — vi er her</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--future)"></div> Fremover</div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline">
+
+    <!-- FASE 1 -->
+    <div class="phase p1">
+      <div class="phase-header">
+        <div class="phase-year">2022–2023</div>
+        <div class="phase-dot"></div>
+        <div class="phase-title">
+          <!-- Icon: Foundation / pillars -->
+          <svg class="phase-icon" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="1" y="17" width="20" height="2.5" rx="1" fill="currentColor" opacity="0.9"/>
+            <rect x="3" y="8" width="3.5" height="9" rx="0.8" fill="currentColor" opacity="0.75"/>
+            <rect x="9.25" y="8" width="3.5" height="9" rx="0.8" fill="currentColor" opacity="0.75"/>
+            <rect x="15.5" y="8" width="3.5" height="9" rx="0.8" fill="currentColor" opacity="0.75"/>
+            <rect x="1" y="5.5" width="20" height="2.5" rx="1" fill="currentColor" opacity="0.9"/>
+            <path d="M4 5.5 L11 2 L18 5.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+          </svg>
+          <em>Fase 1</em> — Grunnmuren
+        </div>
+      </div>
+      <div class="events">
+        <div class="event">
+          <div class="event-date">11.02.2022</div>
+          <div class="event-content">
+            <strong>Oppstart og felles retning</strong>
+            <span>Digitalisering som samfunnsendring. Design for læring og PfDK som teoretisk ramme. DigSkole som samskapingsprosjekt med fem moduler.</span>
+            <div class="event-tag">CK · PK</div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="event-date">Vår/høst 2022</div>
+          <div class="event-content">
+            <strong>Rigging for kompetanseutvikling</strong>
+            <span>DigSkole online, prosjektbeskrivelse, produksjonsdag ved NTNU Akrin.</span>
+            <div class="event-tag">Organisering</div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="event-date">Vår 2023</div>
+          <div class="event-content">
+            <strong>Spørreundersøkelse og lokal forankring</strong>
+            <span>Surveys til lærere og elever. Lokal prosjektbeskrivelse.</span>
+            <div class="event-tag">Kartlegging</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 2 -->
+    <div class="phase p2">
+      <div class="phase-header">
+        <div class="phase-year">2023–2024</div>
+        <div class="phase-dot"></div>
+        <div class="phase-title">
+          <!-- Icon: Compass / exploration -->
+          <svg class="phase-icon" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="11" cy="11" r="9.5" stroke="currentColor" stroke-width="1.3" opacity="0.8"/>
+            <circle cx="11" cy="11" r="1.5" fill="currentColor"/>
+            <!-- N needle -->
+            <path d="M11 11 L8.5 5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.9"/>
+            <!-- S needle -->
+            <path d="M11 11 L13.5 16.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.4"/>
+            <!-- tick marks -->
+            <line x1="11" y1="2" x2="11" y2="3.5" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+            <line x1="11" y1="18.5" x2="11" y2="20" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+            <line x1="2" y1="11" x2="3.5" y2="11" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+            <line x1="18.5" y1="11" x2="20" y2="11" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+          </svg>
+          <em>Fase 2</em> — Utforsking og fordypning
+        </div>
+      </div>
+      <div class="events">
+        <div class="event">
+          <div class="event-date">Aug 2023</div>
+          <div class="event-content">
+            <strong>Planleggingsdag Oppdal — hele personalet i regionen</strong>
+            <div class="event-tag">Fellessamling</div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="event-date">2. okt 2023</div>
+          <div class="event-content">
+            <strong>Elevens digitale verden</strong>
+            <span>Custer dim. 4: teknologi som sosial kraft og makt</span>
+            <div class="event-tag">Custer D4 · Makt/kraft</div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="event-date">6. nov 2023</div>
+          <div class="event-content">
+            <strong>Modul 3 — Legge til rette for læring</strong>
+            <span>Custer dim. 2: kunnskap om hvorfor teknologi i undervisning</span>
+            <div class="event-tag">Custer D2 · Kunnskap</div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="event-date">5. jan 2024</div>
+          <div class="event-content">
+            <strong>KI og undervisning</strong>
+            <span>Custer dim. 2 og 4: kunnskap om KI og teknologi som sosial konstruksjon. Policy og etikk.</span>
+            <div class="event-tag">Custer D2 · D4</div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="event-date">28. feb 2024</div>
+          <div class="event-content">
+            <strong>Multimodal logg</strong>
+            <span>Custer dim. 2 og 3: kunnskap om multimodalitet og prosess — dokumentere og reflektere</span>
+            <div class="event-tag">Custer D2 · D3</div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="event-date">21. mai 2024</div>
+          <div class="event-content">
+            <strong>Kreativ problemløsning</strong>
+            <span>Custer dim. 3: prosess — problemløsning og innovasjon</span>
+            <div class="event-tag">Custer D3 · Prosess</div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="event-date">25. sep 2024</div>
+          <div class="event-content">
+            <strong>Inkluderende praksis</strong>
+            <span>Custer dim. 2: kunnskap om hvordan teknologi støtter inkludering</span>
+            <div class="event-tag">Custer D2 · Kunnskap</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 3 -->
+    <div class="phase p3">
+      <div class="phase-header">
+        <div class="phase-year">2025</div>
+        <div class="phase-dot"></div>
+        <div class="phase-title">
+          <!-- Icon: Share / network nodes -->
+          <svg class="phase-icon" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="11" cy="4" r="2.5" stroke="currentColor" stroke-width="1.3" opacity="0.9"/>
+            <circle cx="3.5" cy="17" r="2.5" stroke="currentColor" stroke-width="1.3" opacity="0.9"/>
+            <circle cx="18.5" cy="17" r="2.5" stroke="currentColor" stroke-width="1.3" opacity="0.9"/>
+            <line x1="11" y1="6.5" x2="4.8" y2="14.7" stroke="currentColor" stroke-width="1.2" opacity="0.6" stroke-linecap="round"/>
+            <line x1="11" y1="6.5" x2="17.2" y2="14.7" stroke="currentColor" stroke-width="1.2" opacity="0.6" stroke-linecap="round"/>
+            <line x1="5.9" y1="17" x2="16.1" y2="17" stroke="currentColor" stroke-width="1.2" opacity="0.4" stroke-linecap="round"/>
+          </svg>
+          <em>Fase 3</em> — Deling og forankring
+        </div>
+      </div>
+      <div class="events">
+        <div class="event">
+          <div class="event-date">21. mar 2025</div>
+          <div class="event-content">
+            <strong>Rammeverk for PfDK og grunnleggende digitale ferdigheter</strong>
+            <span>Hvordan lykkes med utviklingsarbeid.</span>
+            <div class="event-tag">PfDK · Rammeverk</div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="event-date">30. apr 2025</div>
+          <div class="event-content">
+            <strong>Presentasjon av PfDK-arbeid i personalet</strong>
+            <span>Planlegging av høsten 2025 og fagdag 29. oktober.</span>
+            <div class="event-tag">Forankring</div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="event-date">19. sep 2025</div>
+          <div class="event-content">
+            <strong>Planlegging av MiniNKUL</strong>
+            <div class="event-tag">Deling</div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="event-date">29. okt 2025</div>
+          <div class="event-content">
+            <strong>MiniNKUL — hele personalet i regionen</strong>
+            <div class="event-tag">Fellessamling</div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="event-date">14. nov 2025</div>
+          <div class="event-content">
+            <strong>Erfaringsdeling fra MiniNKUL</strong>
+            <span>Hvordan bruke det vi erfarte ved skolene.</span>
+            <div class="event-tag">Refleksjon</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VENDEPUNKT / NÅ -->
+    <div class="now-marker">
+      <div class="spacer"></div>
+      <div class="now-line"></div>
+      <div class="now-text">Vi er her nå</div>
+    </div>
+
+    <div class="phase p-now">
+      <div class="phase-header">
+        <div class="phase-year">Jan–mars 2026</div>
+        <div class="phase-dot"></div>
+        <div class="phase-title">
+          <!-- Icon: Lightbulb / turning point -->
+          <svg class="phase-icon" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M11 2.5 C7.5 2.5 5 5.2 5 8.5 C5 11 6.4 13.1 8.4 14.2 L8.4 16 L13.6 16 L13.6 14.2 C15.6 13.1 17 11 17 8.5 C17 5.2 14.5 2.5 11 2.5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" opacity="0.9"/>
+            <line x1="9" y1="17.5" x2="13" y2="17.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.8"/>
+            <line x1="9.5" y1="19.5" x2="12.5" y2="19.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.6"/>
+            <!-- Glow inner lines -->
+            <line x1="9" y1="9.5" x2="11" y2="7" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+            <line x1="11" y1="7" x2="13" y2="9.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+          <em>Vendepunktet</em> — T-en i TPACK · Custer D1 og D3
+        </div>
+      </div>
+      <div class="events">
+        <div class="event">
+          <div class="event-date">30. jan 2026</div>
+          <div class="event-content">
+            <strong>Workshop — Hva nå?</strong>
+            <span>Erkjennelsen: vi har jobbet mye med Custers dim. 2 (kunnskap om hvorfor) og dim. 4 (makt/etikk) — men dim. 1 (artefakt/verktøy) og dim. 3 (prosess/produksjon) har blitt glemt. T-en i TPACK mangler.</span>
+            <div class="event-tag">Produsent / Konsument</div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="event-date">6. mar 2026</div>
+          <div class="event-content">
+            <strong>Samling 22 — Teknologi og estetisk inngang til læring ← du er her</strong>
+            <span>Sanselig og estetisk inngang · Klafki · Akvarell + Book Creator · Eleven som produsent. Custer dim. 1: læreren bruker verktøyet selv. Custer dim. 3: skapende prosess med digitale materialer.</span>
+            <div class="event-tag">Custer D1 · D3 · T i TPACK</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FREMOVER -->
+    <div class="phase p-future">
+      <div class="phase-header">
+        <div class="phase-year">2026/2027 →</div>
+        <div class="phase-dot"></div>
+        <div class="phase-title">
+          <!-- Icon: Arrow / horizon forward -->
+          <svg class="phase-icon" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Horizon line -->
+            <line x1="2" y1="15" x2="20" y2="15" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
+            <!-- Sun arc -->
+            <path d="M5 15 Q11 5 17 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" fill="none" opacity="0.7"/>
+            <!-- Arrow pointing right -->
+            <path d="M14 10.5 L18 7.5 L14 4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+            <line x1="7" y1="7.5" x2="18" y2="7.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.9"/>
+          </svg>
+          <em>Fremover</em> — Alle fire Custer-dimensjoner i spill
+        </div>
+      </div>
+      <div class="events">
+        <div class="event">
+          <div class="event-date">Samling 23</div>
+          <div class="event-content">
+            <strong>Motivasjon</strong>
+            <span>Hva må læreren beherske av konkrete verktøy (D1) for å motivere eleven som produsent (D3)? Hvorfor virker det (D2) og hvilke maktforhold skapes (D4)?</span>
+            <div class="event-tag">Custer D1 · D3 · Motivasjon</div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="event-date">Samling 24</div>
+          <div class="event-content">
+            <strong>Inkluderende praksis</strong>
+            <span>Teknologi som inkluderingsverktøy (D1) — universell utforming i praksis. Prosessen med å designe for alle (D3). Teknologi som sosial kraft (D4).</span>
+            <div class="event-tag">Custer D1 · D3 · D4 · Inkludering</div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="event-date">Samling 25</div>
+          <div class="event-content">
+            <strong>Vurdering</strong>
+            <span>Digitale vurderingsverktøy (D1). Prosessen med å vurdere skapende digitalt arbeid (D3). Kunnskap om hva som gir god vurderingspraksis digitalt (D2).</span>
+            <div class="event-tag">Custer D1 · D2 · D3 · Vurdering</div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="event-date">Samling 26</div>
+          <div class="event-content">
+            <strong>KI</strong>
+            <span>Kunstig intelligens i alle fire dimensjoner — KI som artefakt/verktøy (D1), kunnskap om hvordan og hvorfor (D2), KI i skapende prosesser (D3) og KI som sosial kraft og maktforhold (D4).</span>
+            <div class="event-tag">Custer D1 · D2 · D3 · D4 · KI</div>
+          </div>
+        </div>
+        <div class="event" style="margin-top:8px; border-left: 2px solid rgba(232,197,71,0.3); padding-left:16px;">
+          <div class="event-date">Rød tråd</div>
+          <div class="event-content">
+            <strong>Custers fire dimensjoner + T i TPACK</strong>
+            <span>D1 Artefakt · D2 Kunnskap · D3 Prosess · D4 Makt/kraft — alle fire må være i spill for at læreren kan iscenesette eleven som produsent, ikke bare konsument.</span>
+            <div class="event-tag">TPACK · Custer · Produsent</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TPACK CALLOUT -->
+  <div class="tpack-callout">
+    <div class="tpack-col done">
+      <div class="letter">P</div>
+      <div class="name">Pedagogical Knowledge</div>
+      <div class="desc">Didaktikk, Klafki, design for læring, iscenesettelse, estetiske læreprosesser.<br><br>Custer D2 (kunnskap om hvorfor) og D4 (makt/etikk) godt dekket.</div>
+      <div class="status">✓ Godt jobbet</div>
+    </div>
+    <div class="tpack-col done2">
+      <div class="letter">CK</div>
+      <div class="name">Content Knowledge</div>
+      <div class="desc">PfDK-rammeverk, policy, mediedebatt, elevens digitale verden, inkludering, motivasjon, vurdering.<br><br>Custer D2 og D4 — men lite D1 og D3.</div>
+      <div class="status">✓ Godt jobbet</div>
+    </div>
+    <div class="tpack-col missing">
+      <div class="letter">T</div>
+      <div class="name">Technological Knowledge</div>
+      <div class="desc">Custer D1: konkrete verktøy og programvare<br>Custer D3: skapende prosess og produksjon<br><br>Dette er det som nå skal inn — fra samling 7 og fremover.</div>
+      <div class="status">→ Nå tar vi tak</div>
+    </div>
+  </div>
+
+</div>
+</div>
+</body>
+</html>
