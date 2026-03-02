@@ -3,297 +3,431 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CPS-metoden — Ressursside</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<title>CPS-metoden — Kreativ Problemløsning · DigSkole Gauldal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0f0f12;
+    --bg:      #0f0f12;
     --surface: #1a1a20;
-    --border: rgba(255,255,255,0.07);
-    --text: #e8e4dc;
-    --muted: #7a7670;
-    --accent: #e8c547;
-    --divergent: #7ab3b0;
-    --convergent: #9b8fad;
+    --text:    #e8e4dc;
+    --muted:   #7a7670;
+    --border:  rgba(255,255,255,0.07);
+    --warm:    #c4935a;
+    --teal:    #7ab3b0;
+    --purple:  #9b8fad;
+    --gold:    #e8c547;
+    --green:   #82a87d;
+    --pink:    #d4819a;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; line-height: 1.6; }
-  
-  .container { max-width: 1400px; margin: 0 auto; padding: 60px 40px; }
-  
-  .nav-back { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 40px; }
+  body { background: var(--bg); font-family: 'DM Sans', sans-serif; color: var(--text); min-height: 100vh; line-height: 1.6; }
 
-  header { margin-bottom: 60px; text-align: center; border-bottom: 1px solid var(--border); padding-bottom: 40px; }
-  h1 { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: var(--accent); margin-bottom: 10px; }
-  .lead { font-size: 1.1rem; color: var(--muted); max-width: 800px; margin: 0 auto; font-weight: 300; }
-
-  .thinking-rules {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    margin: 40px 0 80px 0;
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
   }
 
-  .rule-card {
-    padding: 40px;
-    border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.1);
+  .page { max-width: 1000px; margin: 0 auto; padding: 56px 32px 80px; position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  .site-header { margin-bottom: 64px; position: relative; }
+  .watercolor-blob { position: absolute; top: -24px; left: -16px; width: 440px; height: 200px; pointer-events: none; opacity: 0.15; z-index: 0; }
+  .header-content { position: relative; z-index: 1; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); text-decoration: none; margin-bottom: 28px; }
+  .kicker { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; font-weight: 500; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 300; line-height: 1.1; margin-bottom: 8px; }
+  h1 em { font-style: italic; color: var(--gold); }
+  .subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; font-style: italic; color: var(--muted); margin-bottom: 24px; }
+
+  /* ── SECTIONS ── */
+  .section-label { display: flex; align-items: center; gap: 10px; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.16em; color: #a09890; margin: 56px 0 24px; font-weight: 500; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .section-label .dot { width: 6px; height: 6px; border-radius: 50%; }
+
+  /* ── LÆREPLAN BOKSER ── */
+  .curriculum-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 48px; }
+  .curriculum-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; border-top: 3px solid var(--gold); }
+  .curriculum-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; color: var(--gold); }
+  .curriculum-card.pink { border-top-color: var(--pink); }
+  .curriculum-card.pink .curriculum-title { color: var(--pink); }
+  .curriculum-card.green { border-top-color: var(--green); }
+  .curriculum-card.green .curriculum-title { color: var(--green); }
+  .curriculum-desc { font-size: 0.75rem; color: var(--muted); font-weight: 300; }
+
+  /* ── MODUS-KORT ── */
+  .mode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px; }
+  .mode-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 32px; position: relative; }
+  .mode-card.div { border-top: 4px solid var(--teal); }
+  .mode-card.conv { border-top: 4px solid var(--purple); }
+  .mode-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 12px; }
+  .mode-card.div h2 { color: var(--teal); }
+  .mode-card.conv h2 { color: var(--purple); }
+  .mode-intro { font-size: 0.85rem; color: var(--text); margin-bottom: 20px; }
+  
+  .rule-list { list-style: none; }
+  .rule-list li { font-size: 0.82rem; color: var(--muted); margin-bottom: 14px; padding-left: 20px; position: relative; font-weight: 300; }
+  .rule-list li::before { content: "→"; position: absolute; left: 0; opacity: 0.4; }
+  .rule-list li strong { color: var(--text); font-weight: 500; display: block; margin-bottom: 2px; }
+
+  /* ── PROCESS STEPS ── */
+  .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .step-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 28px; position: relative; }
+  .step-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700; color: rgba(255,255,255,0.03); position: absolute; top: 10px; right: 20px; }
+  .step-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--gold); margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+  
+  .sub-label { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); margin: 18px 0 10px; display: block; opacity: 0.8; }
+  .step-list { list-style: none; }
+  .step-list li { font-size: 0.78rem; color: var(--muted); margin-bottom: 10px; font-weight: 300; }
+  .step-list li strong { color: var(--text); font-weight: 500; display: block; }
+
+  .tool-tag { display: inline-block; font-size: 0.65rem; padding: 3px 8px; border-radius: 4px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); margin: 0 4px 4px 0; color: var(--muted); }
+
+  /* ── REFLECTION ── */
+  .reflection-box { background: rgba(232,197,71,0.03); border: 1px solid rgba(232,197,71,0.15); border-radius: 16px; padding: 40px; margin-top: 64px; }
+  .reflection-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--gold); margin-bottom: 32px; text-align: center; font-style: italic; }
+  .q-item { display: flex; gap: 24px; margin-bottom: 32px; align-items: flex-start; }
+  .q-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: rgba(232,197,71,0.15); line-height: 1; }
+  .q-text { font-size: 1rem; font-style: italic; font-weight: 300; line-height: 1.7; }
+
+  /* ── RESOURCE LIST ── */
+  .resource-item { display: flex; align-items: center; gap: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; text-decoration: none; margin-bottom: 10px; transition: 0.2s; }
+  .resource-item:hover { border-color: var(--gold); background: rgba(255,255,255,0.02); }
+  .res-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; background: rgba(232,197,71,0.1); color: var(--gold); }
+  .res-title { font-size: 0.82rem; font-weight: 500; color: var(--text); }
+
+  /* ── MODUL CARDS ── */
+  .modul-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+
+  .modul-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .modul-card:hover {
+    border-color: rgba(255,255,255,0.12);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+
+  .modul-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .modul-card.fase1::before { background: var(--pink); }
+  .modul-card.fase2::before { background: var(--teal); }
+  .modul-card.utproving::before { background: var(--green); }
+
+  .modul-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .modul-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .modul-items {
+    list-style: none;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    gap: 4px;
   }
 
-  .divergent-style {
-    background: linear-gradient(145deg, rgba(122, 179, 176, 0.12), rgba(122, 179, 176, 0.03));
-    border-top: 4px solid var(--divergent);
-  }
-
-  .convergent-style {
-    background: linear-gradient(145deg, rgba(155, 143, 173, 0.12), rgba(155, 143, 173, 0.03));
-    border-top: 4px solid var(--convergent);
-  }
-
-  .rule-header h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem;
-    margin-bottom: 5px;
-    line-height: 1.1;
-  }
-
-  .divergent-style h2 { color: var(--divergent); }
-  .convergent-style h2 { color: var(--convergent); }
-
-  .rule-subtitle {
-    font-size: 0.85rem;
+  .modul-items li {
+    font-size: 0.77rem;
     color: var(--muted);
-    margin-bottom: 25px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-
-  .rule-list { list-style: none; flex-grow: 1; }
-  .rule-list li {
-    margin-bottom: 20px;
-    font-size: 0.95rem;
     line-height: 1.5;
-    color: var(--text);
-    font-weight: 300;
-  }
-
-  .rule-list strong {
-    display: block;
-    color: var(--text);
-    margin-bottom: 4px;
-    font-weight: 600;
-    font-size: 1.05rem;
-  }
-
-  .digital-tip {
-    margin-top: 30px;
-    padding: 20px;
-    background: rgba(0,0,0,0.3);
-    border-radius: 8px;
-    font-size: 0.85rem;
-    border-left: 3px solid var(--accent);
-    color: var(--text);
-    font-weight: 300;
-  }
-  .digital-tip strong { color: var(--accent); font-weight: 600; }
-
-  .process-grid { 
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 25px; 
-    margin-top: 40px; 
-  }
-  
-  .step-card { 
-    background: var(--surface); 
-    border: 1px solid var(--border); 
-    padding: 35px; 
-    display: flex; 
-    flex-direction: column; 
-    border-top: 3px solid var(--accent);
+    padding-left: 12px;
     position: relative;
   }
 
-  .step-num { 
-    position: absolute; top: 15px; right: 20px; 
-    font-family: 'Cormorant Garamond', serif; font-size: 3rem; opacity: 0.1; font-weight: 700; 
+  .modul-items li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: rgba(255,255,255,0.2);
   }
 
-  .step-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 20px; color: var(--accent); }
-  
-  .section-label { 
-    font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; 
-    color: var(--accent); margin: 20px 0 10px; display: block; font-weight: 700;
-  }
+  /* ── HEADER META ── */
+  .header-meta { display: flex; gap: 10px; flex-wrap: wrap; }
 
-  .step-card p { font-size: 0.9rem; color: var(--text); margin-bottom: 15px; font-weight: 300; }
-
-  ul.process-list { list-style: none; margin-bottom: 20px; }
-  ul.process-list li { font-size: 0.85rem; color: var(--muted); margin-bottom: 8px; padding-left: 18px; position: relative; font-weight: 300; }
-  ul.process-list li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
-  ul.process-list li strong { color: var(--text); font-weight: 500; }
-
-  .tool-pill { 
-    display: inline-block; font-size: 0.7rem; background: rgba(255,255,255,0.05); 
-    padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border); margin: 0 4px 4px 0;
+  .meta-chip {
+    font-size: 0.72rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
     color: var(--muted);
+    letter-spacing: 0.04em;
   }
 
-  .quote-box { 
-    margin-top: 80px; padding: 40px; background: rgba(232, 197, 71, 0.05); 
-    border-radius: 8px; font-style: italic; text-align: center; border: 1px solid rgba(232, 197, 71, 0.1);
+  .meta-chip.highlight {
+    background: rgba(232,197,71,0.1);
+    border-color: rgba(232,197,71,0.3);
+    color: var(--gold);
   }
 
-  footer { text-align: center; padding: 60px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; margin-top: 40px; }
+  /* ── STEP TEXT ── */
+  .step-text { font-size: 0.82rem; color: var(--muted); margin-bottom: 16px; line-height: 1.6; }
 
-  @media (max-width: 1100px) { .process-grid, .thinking-rules { grid-template-columns: 1fr; } }
+  /* ── BACK LINK HOVER ── */
+  .back-link:hover { color: var(--gold); }
+  .back-link svg { width: 12px; height: 12px; }
+
+  /* ── ANIMATIONS ── */
+  .animate { animation: fadeUp 0.5s ease both; }
+  .delay-1 { animation-delay: 0.05s; }
+  .delay-2 { animation-delay: 0.12s; }
+  .delay-3 { animation-delay: 0.2s; }
+  .delay-4 { animation-delay: 0.28s; }
+  .delay-5 { animation-delay: 0.36s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 900px) { .process-grid, .mode-grid, .curriculum-grid, .modul-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
+<div class="page">
 
-<div class="container">
-  <a href="index.html" class="nav-back">← Tilbake til reisen</a>
-  
-  <header>
-    <h1>Kreativ Problemløsning (CPS)</h1>
-    <p class="lead">En systematisk prosess for å transformere en utfordring til en ferdig løsning gjennom veksling mellom divergent og konvergent tenkning.</p>
+  <header class="site-header animate delay-1">
+    <svg class="watercolor-blob" viewBox="0 0 340 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="170" cy="80" rx="160" ry="68" fill="var(--gold)"/><ellipse cx="120" cy="60" rx="100" ry="55" fill="var(--teal)"/>
+    </svg>
+    <div class="header-content">
+      <a href="index.html" class="back-link">
+        <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 2L3 6L7 10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Tilbake til reisen
+      </a>
+      <div class="kicker">Metodisk Ressurs · Kreativ Problemløsning</div>
+      <h1>CPS-metoden: <em>Skapertrang</em> i praksis</h1>
+      <p class="subtitle">Systematisk kreativitet som motor for læring og teknologiforståelse</p>
+      <div class="header-meta">
+        <span class="meta-chip highlight">CPS · Kreativ problemløsning</span>
+        <span class="meta-chip">21. mai 2024</span>
+        <span class="meta-chip">NTNU · Mari-Ann Letnes</span>
+        <span class="meta-chip">Custer D3 · Prosess</span>
+      </div>
+    </div>
   </header>
 
-  <section class="thinking-rules">
-    <div class="rule-card divergent-style">
-      <div class="rule-header">
-        <span style="font-size: 1.5rem; margin-bottom: 10px; display: block;">✦</span>
-        <h2>Regler for divergent tenkning</h2>
-        <p class="rule-subtitle">Når vi skal spre oss og finne mange idéer</p>
-      </div>
-      <ul class="rule-list">
-        <li>
-          <strong>Utsett vurdering:</strong> 
-          Ingen kritikk nå. Verken "bra" eller "dårlig" – bare la idéene flomme. Kritikk er bremsen, fantasi er gassen.
-        </li>
-        <li>
-          <strong>Søk mengde:</strong> 
-          Kvantitet avler kvalitet. Jo flere idéer vi har, desto større er sjansen for å finne en unik juvel.
-        </li>
-        <li>
-          <strong>Vær vill og original:</strong> 
-          Det er lettere å temme en vill idé senere enn å prøve å gjøre en kjedelig idé kreativ. Tenk stort!
-        </li>
-        <li>
-          <strong>Kombiner og bygg videre:</strong> 
-          Bruk "Ja, og..." i stedet for "Ja, men...". Stjel fra naboen og gjør idéen enda bedre.
-        </li>
-      </ul>
-      <div class="digital-tip">
-        <strong>Digitalt tips:</strong> Bruk KI som en "ildpuster" – be den generere 20 ville forslag dere kan spinne videre på.
-      </div>
+  <div class="section-label animate delay-2"><span class="dot" style="background:var(--gold)"></span>Forankring i Overordnet del</div>
+  <div class="curriculum-grid animate delay-2">
+    <div class="curriculum-card">
+      <div class="curriculum-title">Utforskertrang</div>
+      <p class="curriculum-desc">Skolen skal la elevene oppleve gleden ved å utforske det ukjente gjennom systematiske undersøkelser. CPS gir strukturen for denne utforskingen.</p>
     </div>
-
-    <div class="rule-card convergent-style">
-      <div class="rule-header">
-        <span style="font-size: 1.5rem; margin-bottom: 10px; display: block;">🎯</span>
-        <h2>Regler for konvergent tenkning</h2>
-        <p class="rule-subtitle">Når vi skal samle oss og velge retning</p>
-      </div>
-      <ul class="rule-list">
-        <li>
-          <strong>Bruk positiv kritikk:</strong> 
-          Se etter potensialet først. Spør: "Hva er bra her, og hvordan kan vi gjøre de svake punktene sterkere?"
-        </li>
-        <li>
-          <strong>Vær målrettet:</strong> 
-          Hold fokus på problemstillingen. Svarer denne idéen faktisk på det vi ønsket å oppnå?
-        </li>
-        <li>
-          <strong>Se etter nyhetsverdi:</strong> 
-          Ikke velg den tryggeste løsningen. Velg den som har mest kraft og originalitet i seg.
-        </li>
-        <li>
-          <strong>Vurder gjennomførbarhet:</strong> 
-          Har vi teknologien, tiden og ressursene? En god idé må kunne gjennomføres for å ha verdi.
-        </li>
-      </ul>
-      <div class="digital-tip">
-        <strong>Sjekkliste:</strong> Bruk "Kriterier for aksept" som et felles kompass før dere tar det endelige valget.
-      </div>
+    <div class="curriculum-card pink">
+      <div class="curriculum-title">Skaperglede</div>
+      <p class="curriculum-desc">Den divergente fasen er selve motoren for å generere originale og verdifulle idéer, slik læreplanen ber om for kreativ virksomhet.</p>
     </div>
-  </section>
+    <div class="curriculum-card green">
+      <div class="curriculum-title">Kritisk tenkning</div>
+      <p class="curriculum-desc">Gjennom konvergent tenkning lærer elevene å vurdere idéer kritisk: Er dette nytt, nyttig og teknisk gjennomførbart?</p>
+    </div>
+  </div>
 
-  <div class="process-grid">
+  <div class="section-label animate delay-3"><span class="dot" style="background:var(--teal)"></span>Hjernens to arbeidsmåter</div>
+  <div class="mode-grid animate delay-3">
+    <div class="mode-card div">
+      <h2>Divergent (Spre)</h2>
+      <p class="mode-intro">Mål: Å skape et univers av muligheter uten begrensninger.</p>
+      <ul class="rule-list">
+        <li><strong>Utsett vurdering</strong>Kritikk er bremsen, fantasi er gassen. Alle dommer må settes på pause for å la mulighetene vokse.</li>
+        <li><strong>Søk mengde</strong>Kvantitet avler kvalitet. Jo flere idéer på bordet, desto større sjanse for en unik perle.</li>
+        <li><strong>Vær vill og original</strong>Det er lettere å temme en vill idé senere enn å prøve å gjøre en kjedelig idé kreativ.</li>
+        <li><strong>Kombiner og bygg videre</strong>Bruk andres innspill som springbrett. Ved å koble tanker skapes helt nye veier.</li>
+      </ul>
+    </div>
+    <div class="mode-card conv">
+      <h2>Konvergent (Samle)</h2>
+      <p class="mode-intro">Mål: Å velge ut, foredle og styrke de beste løsningene.</p>
+      <ul class="rule-list">
+        <li><strong>Bruk positiv kritikk</strong>Se etter potensialet først. Spør: "Hvordan kan vi gjøre denne idéen enda sterkere?"</li>
+        <li><strong>Vær målrettet</strong>Sjekk idéen mot utfordringen vi definerte. Svarer denne løsningen faktisk på spørsmålet?</li>
+        <li><strong>Se nyhetsverdi</strong>Ikke velg bare den tryggeste løsningen. Velg idéen med mest originalitet og kraft.</li>
+        <li><strong>Våg å velge bort</strong>For at én idé skal bli virkelig god, må vi tørre å la de andre ligge. Fokus krever prioritering.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-label animate delay-4"><span class="dot" style="background:var(--purple)"></span>Slik kan elevene jobbe med oppdraget</div>
+  <div class="process-grid animate delay-4">
+    
     <div class="step-card">
       <div class="step-num">01</div>
-      <h3>Utforske utfordringen</h3>
-      <p>Å løse feil problem er bortkastet tid. Her rigger vi oss for å forstå dybden i oppgaven.</p>
+      <h3>Utforske & Forstå</h3>
+      <p class="step-text">Hva er egentlig oppdraget? Enten dere skal løse et matteproblem, bygge i Lego eller finne ut hvordan vi stopper forsøpling i skolegården, må dere forstå utgangspunktet først.</p>
       
-      <span class="section-label">Fokusområder</span>
-      <ul class="process-list">
-        <li><strong>Finne mål:</strong> Hva er ønsket suksess?</li>
-        <li><strong>Finne fakta:</strong> Hva vet vi? Hva har skapt problemet og hva holder det ved like?</li>
-        <li><strong>Finne problemet:</strong> Reformuler til spørsmål: "På hvilke måter kan vi...?"</li>
+      <span class="sub-label">Bli en detektiv</span>
+      <ul class="step-list">
+        <li><strong>Sjekk rammene:</strong> Hva MÅ være med? Er det en naturfagsrapport, et dikt på rim, eller en Lego-figur som skal tåle en viss vekt? Finn ut hvor dere er frie til å velge selv.</li>
+        <li><strong>Finn fakta:</strong> Hva vet dere om temaet? Bruk iPad til å søke opp fakta om plast i havet, eller ta bilder av klossene dere har tilgjengelig.</li>
+        <li><strong>Reformuler:</strong> Lag deres eget spørsmål: <em>"På hvilke måter kan vi lage et dikt som får folk til å le?"</em> eller <em>"Hvordan kan vi bygge en bro av pinner?"</em></li>
       </ul>
-
-      <span class="section-label">KI & Verktøy</span>
-      <div>
-        <span class="tool-pill">ChatGPT (Data-analyse)</span>
-        <span class="tool-pill">MindNode</span>
-        <span class="tool-pill">Safari/Kunnskap</span>
+      
+      <span class="sub-label">Verktøy & Teknikk</span>
+      <div class="tool-tags">
+        <span class="tool-tag">Intervju / Safari</span>
+        <span class="tool-tag">Foto & Målebånd</span>
+        <span class="tool-tag">DigKi.no (Fakta-søk)</span>
       </div>
     </div>
 
     <div class="step-card">
       <div class="step-num">02</div>
-      <h3>Generere idéer</h3>
-      <p>Her skal vi produsere alternativer. Målet er mengde, og ingen idéer er for "ville" i denne fasen.</p>
+      <h3>Skape & Drømme</h3>
+      <p class="step-text">Nå skal idéene flomme uten filter! Her skal dere bruke fantasien til å finne opp mange forskjellige løsninger før dere velger én.</p>
       
-      <span class="section-label">Teknikker</span>
-      <ul class="process-list">
-        <li><strong>Brainstorming:</strong> Alle poster idéer anonymt for å sikre trygghet.</li>
-        <li><strong>Assosiasjon:</strong> Bruk bilder, natur og erfaringer for å stimulere nye tanker.</li>
-        <li><strong>SCAMPER:</strong> Kan vi kombinere, erstatte eller forstørre noe?</li>
+      <span class="sub-label">Slipp idéene løs</span>
+      <ul class="step-list">
+        <li><strong>Tenk multimodalt:</strong> Ikke bare skriv – tegn skisser, nynn på en melodi til diktet, eller bygg små "kladdemodeller" i Lego eller leire for å se om idéen funker.</li>
+        <li><strong>Vri på alt (SCAMPER):</strong> Kan diktet være en rap? Kan vi bruke pinner i stedet for Lego? Kan vi løse matteoppgaven ved å tegne den i stedet for å bare skrive tall?</li>
+        <li><strong>Ville idéer:</strong> Hva er den sprøeste løsningen dere kan tenke dere? Ofte ligger den beste løsningen gjemt i en idé som virker helt rar i starten.</li>
       </ul>
-
-      <span class="section-label">KI & Verktøy</span>
-      <div>
-        <span class="tool-pill">Padlet</span>
-        <span class="tool-pill">Miro / Freeform</span>
-        <span class="tool-pill">KI som sparring</span>
+      
+      <span class="sub-label">Verktøy & Teknikk</span>
+      <div class="tool-tags">
+        <span class="tool-tag">Hurtigskissing</span>
+        <span class="tool-tag">Post-it / Padlet</span>
+        <span class="tool-tag">Lego-prototyping</span>
       </div>
     </div>
 
     <div class="step-card">
       <div class="step-num">03</div>
-      <h3>Planlegge for handling</h3>
-      <p>Vi går fra abstrakt idé til konkret løsning. Dette krever kritikk og handlingsvilje.</p>
+      <h3>Gjøre & Vurdere</h3>
+      <p class="step-text">Nå skal produktet bli ferdig. Enten det er en ferdig kodet robot, en sangopptreden eller en modell av en gapahuk, skal det nå testes og vises frem.</p>
       
-      <span class="section-label">Kriterier for aksept</span>
-      <ul class="process-list">
-        <li><strong>Originalitet:</strong> Er det en egen idé og ikke en kopi?</li>
-        <li><strong>Verdi:</strong> Er budskapet tilgjengelig og forståelig for mottakeren?</li>
-        <li><strong>Handlingsplan:</strong> Hvem gjør hva, når og hvordan?</li>
+      <span class="sub-label">Fra plan til handling</span>
+      <ul class="step-list">
+        <li><strong>Rollefordeling:</strong> Hvem er "snekkeren", hvem skriver teksten, og hvem bruker iPaden til å dokumentere? Lag en plan for hvem som gjør hva.</li>
+        <li><strong>Er det godt nok?</strong> Sjekk mot målet: Løser vi samfunnsproblemet? Er diktet slik vi ønsket? Er Lego-bygget stødig?</li>
+        <li><strong>Produser:</strong> Bruk Book Creator til å lage en bok om reisen deres, film prosessen med Clips, eller lag en utstilling i klasserommet.</li>
       </ul>
-
-      <span class="section-label">KI & Verktøy</span>
-      <div>
-        <span class="tool-pill">Book Creator</span>
-        <span class="tool-pill">Clips / iMovie</span>
-        <span class="tool-pill">Canva Prototyping</span>
+      
+      <span class="sub-label">Verktøy & Teknikk</span>
+      <div class="tool-tags">
+        <span class="tool-tag">Book Creator (Logg)</span>
+        <span class="tool-tag">iMovie / Clips</span>
+        <span class="tool-tag">Stop Motion</span>
       </div>
     </div>
   </div>
-
-  <div class="quote-box">
-    "Idéer er ikke sommerfugler, de er et resultat av hardt arbeid." 
-    <br><small style="opacity: 0.6; font-size: 0.8rem; margin-top: 10px; display: block;">— Rudolf Rolfs</small>
-  </div>
-
-  <footer>
-    Basert på Mari-Ann Letnes (2009): <em>Kreativ problemløsning i undervisningsdesign</em>.
-  </footer>
+<div class="section-label animate delay-3">
+  <span class="dot" style="background:var(--gold)"></span>
+  Digital verktøykasse for skapende prosesser
 </div>
 
+<div class="modul-grid animate delay-3">
+
+  <div class="modul-card fase2">
+    <div class="modul-label">Fase 1: Registrere og forstå</div>
+    <div class="modul-title">Verktøy for detektiven</div>
+    <ul class="modul-items">
+      <li><strong>Måling og data:</strong> Bruk <em>Phyphox</em> eller <em>Sensors</em> på iPad for å måle lys, lyd eller fart i naturfag-prosjekter.</li>
+      <li><strong>Visuell kartlegging:</strong> Bruk <em>MindNode</em> eller <em>Freeform</em> for å koble sammen fakta og oppdagelser i samfunnsfag.</li>
+      <li><strong>KI som fakta-sparring:</strong> Bruk <em>DigKi.no</em> til å forklare vanskelige begreper eller finne historiske fakta til et dikt-prosjekt.</li>
+      <li><strong>Geotagging:</strong> Bruk <em>Kart-appen</em> til å markere steder i skogen der dere finner spesielle materialer eller spor.</li>
+    </ul>
+  </div>
+
+  <div class="modul-card fase1">
+    <div class="modul-label">Fase 2: Idémyldring og lek</div>
+    <div class="modul-title">Verktøy for skaperen</div>
+    <ul class="modul-items">
+      <li><strong>3D-design:</strong> Bruk <em>Tinkercad</em> for å planlegge hvordan en Lego-konstruksjon eller en oppfinnelse skal se ut.</li>
+      <li><strong>Musikk og rytme:</strong> Bruk <em>GarageBand</em> til å nynne inn melodier eller lage beats til en sang eller et rap-dikt.</li>
+      <li><strong>Animasjon:</strong> Bruk <em>Stop Motion Studio</em> for å teste ut hvordan en figur i leire eller Lego kan bevege seg.</li>
+      <li><strong>Samarbeidstavler:</strong> Bruk <em>Padlet</em> for å samle bilder og ville idéer fra hele gruppa samtidig uten å dømme hverandre.</li>
+    </ul>
+  </div>
+
+  <div class="modul-card utproving">
+    <div class="modul-label">Fase 3: Produsere og vise frem</div>
+    <div class="modul-title">Verktøy for produsenten</div>
+    <ul class="modul-items">
+      <li><strong>Interaktiv bok:</strong> Bruk <em>Book Creator</em> til å samle hele prosessen med lyd, film av byggingen og bilder av resultatet.</li>
+      <li><strong>Koding:</strong> Bruk <em>Swift Playgrounds</em> eller <em>Micro:bit</em> for å gi liv til produktet dere har laget.</li>
+      <li><strong>Film og formidling:</strong> Bruk <em>Clips</em> eller <em>iMovie</em> for å lage en nyhetssending om samfunnsproblemet dere har løst.</li>
+      <li><strong>AR-presentasjon:</strong> Bruk <em>Reality Composer</em> for å vise frem Lego-modellen deres som et virtuelt objekt i skolegården.</li>
+    </ul>
+  </div>
+
+</div>
+  <div class="reflection-box animate delay-5">
+    <div class="reflection-title">Til refleksjon i personalet</div>
+    <div class="q-item">
+      <div class="q-num">1</div>
+      <div class="q-text">Hvordan kan vi bruke CPS-metoden for å flytte elevene fra å være passive konsumenter av teknologi til å bli aktive produsenter som bruker digitale verktøy til å løse reelle utfordringer?</div>
+    </div>
+    <div class="q-item">
+      <div class="q-num">2</div>
+      <div class="q-text">Hvordan kan vi i den konvergente fasen av CPS trene elevene i å bruke digitale kilder kritisk når de skal velge ut hvilke løsninger som er mest verdifulle?</div>
+    </div>
+    <div class="q-item">
+      <div class="q-num">3</div>
+      <div class="q-text">På hvilke måter kan CPS-metoden fungere som en rød tråd når elevene skal jobbe med tverrfaglige temaer som bærekraft eller demokrati?</div>
+    </div>
+  </div>
+
+  <div class="section-label animate delay-5"><span class="dot" style="background:var(--green)"></span>Læreplan og ressurser</div>
+  <div style="margin-bottom: 40px;">
+    <a href="https://www.udir.no/lk20/overordnet-del/opplaringens-verdigrunnlag/1.4-skaperglede-engasjement-og-utforskertrang?lang=nob" target="_blank" class="resource-item">
+      <div class="res-icon">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="2" width="12" height="14" rx="1.5" stroke="var(--gold)" stroke-width="1.2"/>
+          <line x1="5.5" y1="6" x2="12.5" y2="6" stroke="var(--gold)" stroke-width="0.9" stroke-linecap="round"/>
+          <line x1="5.5" y1="9" x2="12.5" y2="9" stroke="var(--gold)" stroke-width="0.9" stroke-linecap="round"/>
+          <line x1="5.5" y1="12" x2="9.5" y2="12" stroke="var(--gold)" stroke-width="0.9" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="res-title">Udir: Overordnet del 1.4 — Skapertrang og utforskertrang</div>
+    </a>
+    <a href="samling-okt23-ressurs.html" class="resource-item">
+      <div class="res-icon">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 14 L4 7 L9 4 L14 7 L14 14" stroke="var(--gold)" stroke-width="1.2" stroke-linejoin="round"/>
+          <rect x="7" y="9" width="4" height="5" rx="0.5" stroke="var(--gold)" stroke-width="1.1"/>
+          <path d="M3 7 L9 4 L15 7" stroke="var(--gold)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="res-title">Ressursside: Estetiske innganger til læring (DigSkole)</div>
+    </a>
+  </div>
+
+  <footer style="margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--muted);">
+    <div>DigSkole Gauldal · 2022–2027</div>
+    <div>Basert på Letnes, M. (2009): <em>Kreativ problemløsning</em></div>
+  </footer>
+
+</div>
 </body>
 </html>
