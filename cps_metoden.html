@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPS-metoden — Ressursside</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f12;
+    --surface: #1a1a20;
+    --border: rgba(255,255,255,0.07);
+    --text: #e8e4dc;
+    --muted: #7a7670;
+    --accent: #e8c547;
+    --divergent: #7ab3b0;
+    --convergent: #9b8fad;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; line-height: 1.6; }
+  
+  .container { max-width: 1400px; margin: 0 auto; padding: 60px 40px; }
+  
+  .nav-back { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 40px; }
+
+  header { margin-bottom: 60px; text-align: center; border-bottom: 1px solid var(--border); padding-bottom: 40px; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: var(--accent); margin-bottom: 10px; }
+  .lead { font-size: 1.1rem; color: var(--muted); max-width: 800px; margin: 0 auto; font-weight: 300; }
+
+  .thinking-rules {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin: 40px 0 80px 0;
+  }
+
+  .rule-card {
+    padding: 40px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+
+  .divergent-style {
+    background: linear-gradient(145deg, rgba(122, 179, 176, 0.12), rgba(122, 179, 176, 0.03));
+    border-top: 4px solid var(--divergent);
+  }
+
+  .convergent-style {
+    background: linear-gradient(145deg, rgba(155, 143, 173, 0.12), rgba(155, 143, 173, 0.03));
+    border-top: 4px solid var(--convergent);
+  }
+
+  .rule-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    margin-bottom: 5px;
+    line-height: 1.1;
+  }
+
+  .divergent-style h2 { color: var(--divergent); }
+  .convergent-style h2 { color: var(--convergent); }
+
+  .rule-subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .rule-list { list-style: none; flex-grow: 1; }
+  .rule-list li {
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text);
+    font-weight: 300;
+  }
+
+  .rule-list strong {
+    display: block;
+    color: var(--text);
+    margin-bottom: 4px;
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+
+  .digital-tip {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    border-left: 3px solid var(--accent);
+    color: var(--text);
+    font-weight: 300;
+  }
+  .digital-tip strong { color: var(--accent); font-weight: 600; }
+
+  .process-grid { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 25px; 
+    margin-top: 40px; 
+  }
+  
+  .step-card { 
+    background: var(--surface); 
+    border: 1px solid var(--border); 
+    padding: 35px; 
+    display: flex; 
+    flex-direction: column; 
+    border-top: 3px solid var(--accent);
+    position: relative;
+  }
+
+  .step-num { 
+    position: absolute; top: 15px; right: 20px; 
+    font-family: 'Cormorant Garamond', serif; font-size: 3rem; opacity: 0.1; font-weight: 700; 
+  }
+
+  .step-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 20px; color: var(--accent); }
+  
+  .section-label { 
+    font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; 
+    color: var(--accent); margin: 20px 0 10px; display: block; font-weight: 700;
+  }
+
+  .step-card p { font-size: 0.9rem; color: var(--text); margin-bottom: 15px; font-weight: 300; }
+
+  ul.process-list { list-style: none; margin-bottom: 20px; }
+  ul.process-list li { font-size: 0.85rem; color: var(--muted); margin-bottom: 8px; padding-left: 18px; position: relative; font-weight: 300; }
+  ul.process-list li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
+  ul.process-list li strong { color: var(--text); font-weight: 500; }
+
+  .tool-pill { 
+    display: inline-block; font-size: 0.7rem; background: rgba(255,255,255,0.05); 
+    padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border); margin: 0 4px 4px 0;
+    color: var(--muted);
+  }
+
+  .quote-box { 
+    margin-top: 80px; padding: 40px; background: rgba(232, 197, 71, 0.05); 
+    border-radius: 8px; font-style: italic; text-align: center; border: 1px solid rgba(232, 197, 71, 0.1);
+  }
+
+  footer { text-align: center; padding: 60px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; margin-top: 40px; }
+
+  @media (max-width: 1100px) { .process-grid, .thinking-rules { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <a href="index.html" class="nav-back">← Tilbake til reisen</a>
+  
+  <header>
+    <h1>Kreativ Problemløsning (CPS)</h1>
+    <p class="lead">En systematisk prosess for å transformere en utfordring til en ferdig løsning gjennom veksling mellom divergent og konvergent tenkning.</p>
+  </header>
+
+  <section class="thinking-rules">
+    <div class="rule-card divergent-style">
+      <div class="rule-header">
+        <span style="font-size: 1.5rem; margin-bottom: 10px; display: block;">✦</span>
+        <h2>Regler for divergent tenkning</h2>
+        <p class="rule-subtitle">Når vi skal spre oss og finne mange idéer</p>
+      </div>
+      <ul class="rule-list">
+        <li>
+          <strong>Utsett vurdering:</strong> 
+          Ingen kritikk nå. Verken "bra" eller "dårlig" – bare la idéene flomme. Kritikk er bremsen, fantasi er gassen.
+        </li>
+        <li>
+          <strong>Søk mengde:</strong> 
+          Kvantitet avler kvalitet. Jo flere idéer vi har, desto større er sjansen for å finne en unik juvel.
+        </li>
+        <li>
+          <strong>Vær vill og original:</strong> 
+          Det er lettere å temme en vill idé senere enn å prøve å gjøre en kjedelig idé kreativ. Tenk stort!
+        </li>
+        <li>
+          <strong>Kombiner og bygg videre:</strong> 
+          Bruk "Ja, og..." i stedet for "Ja, men...". Stjel fra naboen og gjør idéen enda bedre.
+        </li>
+      </ul>
+      <div class="digital-tip">
+        <strong>Digitalt tips:</strong> Bruk KI som en "ildpuster" – be den generere 20 ville forslag dere kan spinne videre på.
+      </div>
+    </div>
+
+    <div class="rule-card convergent-style">
+      <div class="rule-header">
+        <span style="font-size: 1.5rem; margin-bottom: 10px; display: block;">🎯</span>
+        <h2>Regler for konvergent tenkning</h2>
+        <p class="rule-subtitle">Når vi skal samle oss og velge retning</p>
+      </div>
+      <ul class="rule-list">
+        <li>
+          <strong>Bruk positiv kritikk:</strong> 
+          Se etter potensialet først. Spør: "Hva er bra her, og hvordan kan vi gjøre de svake punktene sterkere?"
+        </li>
+        <li>
+          <strong>Vær målrettet:</strong> 
+          Hold fokus på problemstillingen. Svarer denne idéen faktisk på det vi ønsket å oppnå?
+        </li>
+        <li>
+          <strong>Se etter nyhetsverdi:</strong> 
+          Ikke velg den tryggeste løsningen. Velg den som har mest kraft og originalitet i seg.
+        </li>
+        <li>
+          <strong>Vurder gjennomførbarhet:</strong> 
+          Har vi teknologien, tiden og ressursene? En god idé må kunne gjennomføres for å ha verdi.
+        </li>
+      </ul>
+      <div class="digital-tip">
+        <strong>Sjekkliste:</strong> Bruk "Kriterier for aksept" som et felles kompass før dere tar det endelige valget.
+      </div>
+    </div>
+  </section>
+
+  <div class="process-grid">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <h3>Utforske utfordringen</h3>
+      <p>Å løse feil problem er bortkastet tid. Her rigger vi oss for å forstå dybden i oppgaven.</p>
+      
+      <span class="section-label">Fokusområder</span>
+      <ul class="process-list">
+        <li><strong>Finne mål:</strong> Hva er ønsket suksess?</li>
+        <li><strong>Finne fakta:</strong> Hva vet vi? Hva har skapt problemet og hva holder det ved like?</li>
+        <li><strong>Finne problemet:</strong> Reformuler til spørsmål: "På hvilke måter kan vi...?"</li>
+      </ul>
+
+      <span class="section-label">KI & Verktøy</span>
+      <div>
+        <span class="tool-pill">ChatGPT (Data-analyse)</span>
+        <span class="tool-pill">MindNode</span>
+        <span class="tool-pill">Safari/Kunnskap</span>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <h3>Generere idéer</h3>
+      <p>Her skal vi produsere alternativer. Målet er mengde, og ingen idéer er for "ville" i denne fasen.</p>
+      
+      <span class="section-label">Teknikker</span>
+      <ul class="process-list">
+        <li><strong>Brainstorming:</strong> Alle poster idéer anonymt for å sikre trygghet.</li>
+        <li><strong>Assosiasjon:</strong> Bruk bilder, natur og erfaringer for å stimulere nye tanker.</li>
+        <li><strong>SCAMPER:</strong> Kan vi kombinere, erstatte eller forstørre noe?</li>
+      </ul>
+
+      <span class="section-label">KI & Verktøy</span>
+      <div>
+        <span class="tool-pill">Padlet</span>
+        <span class="tool-pill">Miro / Freeform</span>
+        <span class="tool-pill">KI som sparring</span>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <h3>Planlegge for handling</h3>
+      <p>Vi går fra abstrakt idé til konkret løsning. Dette krever kritikk og handlingsvilje.</p>
+      
+      <span class="section-label">Kriterier for aksept</span>
+      <ul class="process-list">
+        <li><strong>Originalitet:</strong> Er det en egen idé og ikke en kopi?</li>
+        <li><strong>Verdi:</strong> Er budskapet tilgjengelig og forståelig for mottakeren?</li>
+        <li><strong>Handlingsplan:</strong> Hvem gjør hva, når og hvordan?</li>
+      </ul>
+
+      <span class="section-label">KI & Verktøy</span>
+      <div>
+        <span class="tool-pill">Book Creator</span>
+        <span class="tool-pill">Clips / iMovie</span>
+        <span class="tool-pill">Canva Prototyping</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-box">
+    "Idéer er ikke sommerfugler, de er et resultat av hardt arbeid." 
+    <br><small style="opacity: 0.6; font-size: 0.8rem; margin-top: 10px; display: block;">— Rudolf Rolfs</small>
+  </div>
+
+  <footer>
+    Basert på Mari-Ann Letnes (2009): <em>Kreativ problemløsning i undervisningsdesign</em>.
+  </footer>
+</div>
+
+</body>
+</html>
