@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modul 2 — Elevens digitale verden · DigSkole Gauldal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #0f0f12;
+    --surface: #1a1a20;
+    --text:    #e8e4dc;
+    --muted:   #7a7670;
+    --border:  rgba(255,255,255,0.07);
+    --warm:    #c4935a;
+    --teal:    #7ab3b0;
+    --purple:  #9b8fad;
+    --gold:    #e8c547;
+    --green:   #82a87d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 56px 32px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .site-header {
+    margin-bottom: 64px;
+    position: relative;
+  }
+
+  .watercolor-blob {
+    position: absolute;
+    top: -24px;
+    left: -16px;
+    width: 340px;
+    height: 160px;
+    pointer-events: none;
+    opacity: 0.22;
+    z-index: 0;
+  }
+
+  .header-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 28px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--teal); }
+  .back-link svg { width: 12px; height: 12px; }
+
+  .kicker {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .site-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .site-header h1 em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .site-header .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .meta-chip {
+    font-size: 0.72rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .meta-chip.highlight {
+    background: rgba(122,179,176,0.1);
+    border-color: rgba(122,179,176,0.3);
+    color: var(--teal);
+  }
+
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #a09890;
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section-label .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .framing-quote {
+    padding: 28px 32px;
+    background: rgba(122,179,176,0.07);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 48px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+  }
+
+  .framing-quote blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .framing-quote cite {
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    font-style: normal;
+  }
+
+  /* ── THEORY CARDS ── */
+  .theory-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 640px) {
+    .theory-grid { grid-template-columns: 1fr; }
+    .site-header h1 { font-size: 2.2rem; }
+    .page { padding: 32px 20px 64px; }
+    .flow-phases { grid-template-columns: 1fr; }
+    .flow-center { display: none; }
+    .dilemma-grid { grid-template-columns: 1fr; }
+  }
+
+  .theory-card {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .theory-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .theory-card.medietilsynet::before { background: var(--warm); }
+  .theory-card.eukids::before        { background: var(--teal); }
+  .theory-card.cyberhate::before     { background: var(--purple); }
+  .theory-card.covid::before         { background: var(--gold); }
+  .theory-card.custer::before        { background: var(--teal); }
+
+  .theory-card .card-icon {
+    width: 36px; height: 36px;
+    margin-bottom: 14px;
+  }
+
+  .theory-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .theory-card.medietilsynet h3 { color: var(--warm); }
+  .theory-card.eukids h3        { color: var(--teal); }
+  .theory-card.cyberhate h3     { color: var(--purple); }
+  .theory-card.covid h3         { color: #b8962a; }
+  .theory-card.custer h3        { color: var(--teal); }
+
+  .theory-card p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .theory-card ul {
+    margin-top: 12px;
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+
+  .theory-card ul li {
+    font-size: 0.82rem;
+    color: var(--text);
+    line-height: 1.6;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .theory-card ul li::before {
+    content: '·';
+    position: absolute;
+    left: 2px;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .theory-card.full {
+    grid-column: 1 / -1;
+  }
+
+  /* ── RESOURCE LIST ── */
+  .resource-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .resource-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    transition: border-color 0.2s;
+  }
+
+  .resource-item:hover { border-color: var(--teal); }
+
+  .resource-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .resource-item .resource-text .resource-title {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .resource-item .resource-text .resource-desc {
+    font-size: 0.74rem;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+
+  /* ── MODUL FLOW ── */
+  .modul-flow {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 28px 32px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  }
+
+  .flow-phases {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 20px;
+    align-items: start;
+    margin-bottom: 16px;
+  }
+
+  .flow-phase {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .flow-phase-title {
+    font-size: 0.62rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 4px;
+  }
+
+  .flow-phase-title.fase1 { color: var(--warm); }
+  .flow-phase-title.fase2 { color: var(--teal); }
+
+  .flow-step {
+    background: rgba(122,179,176,0.08);
+    border: 1px solid rgba(122,179,176,0.18);
+    border-radius: 8px;
+    padding: 10px 14px;
+  }
+
+  .flow-step.warm {
+    background: rgba(196,147,90,0.08);
+    border-color: rgba(196,147,90,0.18);
+  }
+
+  .flow-step .step-label {
+    font-size: 0.58rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--teal);
+    margin-bottom: 3px;
+    display: block;
+  }
+
+  .flow-step.warm .step-label { color: var(--warm); }
+
+  .flow-step-title {
+    font-weight: 500;
+    font-size: 0.82rem;
+    color: var(--text);
+  }
+
+  .flow-step-desc {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  .flow-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    gap: 6px;
+    align-self: stretch;
+  }
+
+  .flow-divider-v {
+    flex: 1;
+    width: 1px;
+    background: var(--border);
+  }
+
+  /* ── DILEMMAS ── */
+  .dilemma-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 4px;
+  }
+
+  .dilemma-group-title {
+    grid-column: 1 / -1;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+    margin-top: 8px;
+    font-weight: 500;
+  }
+
+  .dilemma-card {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .dilemma-icon {
+    width: 30px; height: 30px;
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .dilemma-icon.barn { background: rgba(122,179,176,0.12); color: var(--teal); }
+  .dilemma-icon.foreldre { background: rgba(196,147,90,0.12); color: var(--warm); }
+
+  .dilemma-title {
+    font-size: 0.83rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+
+  .dilemma-desc {
+    font-size: 0.73rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── FINDINGS LIST ── */
+  .findings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .finding-item {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 16px;
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 16px 20px;
+    border: 1px solid var(--border);
+    align-items: start;
+  }
+
+  .finding-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 1;
+    opacity: 0.22;
+    color: var(--text);
+    padding-top: 4px;
+  }
+
+  .finding-text {
+    font-size: 0.82rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ── VERDENSKAFFE ── */
+  .kafe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+    margin-top: 4px;
+  }
+
+  .kafe-card {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 18px 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+  }
+
+  .kafe-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    opacity: 0.3;
+    color: var(--teal);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .kafe-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--teal);
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .kafe-desc {
+    font-size: 0.76rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* ── WORKSHOP ── */
+  .workshop-box {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 32px 36px;
+    border: 1px solid rgba(122,179,176,0.18);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  }
+
+  .format-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .format-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: rgba(122,179,176,0.05);
+    border: 1px solid rgba(122,179,176,0.1);
+  }
+
+  .format-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
+
+  .format-text {
+    font-size: 0.82rem;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .format-text span {
+    font-size: 0.72rem;
+    color: var(--muted);
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* ── VERDIDISKUSJONER ── */
+  .verdi-section {
+    border: 1px solid rgba(122,179,176,0.12);
+    border-radius: 16px;
+    padding: 32px 36px;
+    margin-top: 4px;
+  }
+
+  .verdi-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .verdi-list { display: flex; flex-direction: column; }
+
+  .verdi-item {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 20px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+
+  .verdi-item:last-child { border-bottom: none; }
+
+  .verdi-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    line-height: 1;
+    opacity: 0.22;
+    color: var(--text);
+    padding-top: 4px;
+  }
+
+  .verdi-q {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.45;
+    margin-bottom: 8px;
+  }
+
+  .verdi-q em { font-style: italic; color: var(--teal); }
+
+  .verdi-context {
+    font-size: 0.79rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .footer-brand .brand-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--muted);
+  }
+
+  .footer-brand .brand-text span { color: var(--gold); }
+
+  .footer-note {
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate { animation: fadeUp 0.5s ease both; }
+  .delay-1 { animation-delay: 0.05s; }
+  .delay-2 { animation-delay: 0.15s; }
+  .delay-3 { animation-delay: 0.25s; }
+  .delay-4 { animation-delay: 0.35s; }
+  .delay-5 { animation-delay: 0.45s; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HEADER ── -->
+  <header class="site-header animate">
+
+    <svg class="watercolor-blob" viewBox="0 0 340 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <filter id="blur"><feGaussianBlur stdDeviation="18"/></filter>
+      </defs>
+      <ellipse cx="120" cy="80" rx="130" ry="70" fill="#7ab3b0" filter="url(#blur)"/>
+      <ellipse cx="260" cy="55" rx="85" ry="50" fill="#9b8fad" filter="url(#blur)"/>
+      <ellipse cx="70" cy="115" rx="65" ry="38" fill="#c4935a" filter="url(#blur)"/>
+    </svg>
+
+    <div class="header-content">
+      <a href="https://mariannletnes.github.io/Gauldals-DigSkole/" class="back-link" target="_blank">
+        <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 2 L4 6 L8 10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        DigSkole Gauldal — reisen 2022–2027
+      </a>
+
+      <div class="kicker">Modul 2 · 2. oktober 2023 · DigSkole Trøndelag sørvest</div>
+
+      <h1>Elevens digitale verden —<br><em>inn i arbeidet med modulene</em></h1>
+      <p class="subtitle">Ressursside etter Samling 2 · Oktober 2023</p>
+
+      <div class="header-meta">
+        <span class="meta-chip highlight">Custer D4 · Makt og kraft</span>
+        <span class="meta-chip">Medietilsynet 2023</span>
+        <span class="meta-chip">EU Kids Online 2020</span>
+        <span class="meta-chip">Verdenskafé</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── INTRO QUOTE ── -->
+  <div class="framing-quote animate delay-1">
+    <blockquote>
+      «Barn og unge er ikke passive mottakere av digitale medier — de er aktive deltakere som skaper, deler og former sin egen digitale verden.»
+    </blockquote>
+    <cite>— Tema for Samling 2 · Modul 2 · DigSkole Trøndelag sørvest 2. oktober 2023</cite>
+  </div>
+
+  <!-- ── MODUL 2 STRUKTUR ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-2">
+    <span class="dot" style="background:var(--teal)"></span>
+    Modul 2 — struktur og forløp
+  </div>
+
+  <p style="font-size:0.82rem; color:var(--muted); line-height:1.65; margin-bottom:20px;" class="animate delay-2">
+    Modul 2 er strukturert i <strong style="color:var(--text)">to faser</strong> med pedagogisk fellestid som bro. Fase 1 legger grunnlaget — kunnskap, holdninger og ferdigheter. Fase 2 handler om erfaringsdeling og evaluering etter utprøving i eigen klasse.
+  </p>
+
+  <div class="modul-flow animate delay-2">
+    <div class="flow-phases">
+
+      <!-- FASE 1 -->
+      <div class="flow-phase">
+        <div class="flow-phase-title fase1">Fase 1 — Kompetansepåfyll</div>
+        <div class="flow-step warm">
+          <span class="step-label">Steg 1</span>
+          <div class="flow-step-title">Kunnskapspåfyll</div>
+          <div class="flow-step-desc">Forskning om barns digitale liv: Medietilsynet, EU Kids Online, Cyberhate, COVID-19</div>
+        </div>
+        <div class="flow-step warm">
+          <span class="step-label">Steg 2</span>
+          <div class="flow-step-title">Holdningsdiskusjon</div>
+          <div class="flow-step-desc">2–3 verdispørsmål · Verdenskafé med 5 bord</div>
+        </div>
+        <div class="flow-step warm">
+          <span class="step-label">Steg 3</span>
+          <div class="flow-step-title">Ferdigheter-workshop</div>
+          <div class="flow-step-desc">Min digitale verden · Differensiert multimodal oppgave</div>
+        </div>
+        <div class="flow-step warm">
+          <span class="step-label">Steg 4</span>
+          <div class="flow-step-title">Utprøving</div>
+          <div class="flow-step-desc">Lærerne prøver ut Min digitale verden med egne elever</div>
+        </div>
+      </div>
+
+      <!-- MIDTSTYKKE -->
+      <div class="flow-center">
+        <div class="flow-divider-v"></div>
+        <div style="background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:8px 10px; font-size:0.6rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); text-align:center; white-space:nowrap;">Pedagogisk<br>fellestid</div>
+        <div class="flow-divider-v"></div>
+      </div>
+
+      <!-- FASE 2 -->
+      <div class="flow-phase">
+        <div class="flow-phase-title fase2">Fase 2 — Erfaringsdeling</div>
+        <div class="flow-step">
+          <span class="step-label">Steg 5</span>
+          <div class="flow-step-title">Erfaringsdeling</div>
+          <div class="flow-step-desc">Lærerne deler hva de oppdaget om elevenes digitale verden</div>
+        </div>
+        <div class="flow-step">
+          <span class="step-label">Steg 6</span>
+          <div class="flow-step-title">Evaluering</div>
+          <div class="flow-step-desc">Refleksjon over modulen: hva lærte vi — om elevene og om oss selv?</div>
+        </div>
+      </div>
+
+    </div>
+    <p style="font-size:0.72rem; color:var(--muted); font-style:italic; border-top:1px solid var(--border); padding-top:12px;">Denne strukturen er gjennomgående for alle moduler i DigSkole: kunnskap → holdninger → ferdigheter → utprøving → erfaringsdeling → evaluering.</p>
+  </div>
+
+  <!-- ── KUNNSKAPSPÅFYLL ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background:var(--warm)"></span>
+    Kunnskapspåfyll — fire forskningsbidrag
+  </div>
+
+  <p style="font-size:0.82rem; color:var(--muted); line-height:1.65; margin-bottom:20px;" class="animate delay-3">
+    Før holdningsdiskusjonen fikk deltakerne kunnskapspåfyll fra fire aktuelle forsknings- og kartleggingskilder om barns digitale hverdag. Funnene var designet for å utfordre lærernes forutsetninger og åpne for refleksjon.
+  </p>
+
+  <div class="theory-grid animate delay-3">
+
+    <!-- Medietilsynet 2023 -->
+    <div class="theory-card medietilsynet">
+      <svg class="card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="4" y="6" width="28" height="20" rx="2" stroke="var(--warm)" stroke-width="1.1" fill="rgba(196,147,90,0.08)"/>
+        <line x1="4" y1="30" x2="32" y2="30" stroke="var(--warm)" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
+        <line x1="18" y1="26" x2="18" y2="30" stroke="var(--warm)" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+        <circle cx="18" cy="16" r="5" stroke="var(--warm)" stroke-width="1.1" fill="none"/>
+        <line x1="18" y1="11" x2="18" y2="21" stroke="var(--warm)" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+        <line x1="13" y1="16" x2="23" y2="16" stroke="var(--warm)" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+      </svg>
+      <h3>Digitale dilemmaer · Medietilsynet 2023</h3>
+      <p>Medietilsynets rapport om barns digitale hverdag viste en rekke dilemmaer barn og foreldre opplever — og at disse ofte er forskjellige.</p>
+      <ul>
+        <li><strong style="color:var(--text)">Over halvparten</strong> av 10-åringene er på sosiale medier — til tross for aldersgrensen på 13 år</li>
+        <li>Barn og foreldre opplever ulike digitale dilemmaer — til dels motstridende</li>
+        <li>6 digitale dilemmaer ble identifisert: 3 barnas og 3 foreldrenes</li>
+      </ul>
+    </div>
+
+    <!-- EU Kids Online 2020 -->
+    <div class="theory-card eukids">
+      <svg class="card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="18" cy="18" r="13" stroke="var(--teal)" stroke-width="1.1" fill="rgba(122,179,176,0.08)"/>
+        <ellipse cx="18" cy="18" rx="5" ry="13" stroke="var(--teal)" stroke-width="1" fill="none" opacity="0.5"/>
+        <line x1="5" y1="18" x2="31" y2="18" stroke="var(--teal)" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+        <line x1="7" y1="12" x2="29" y2="12" stroke="var(--teal)" stroke-width="0.9" stroke-linecap="round" opacity="0.4"/>
+        <line x1="7" y1="24" x2="29" y2="24" stroke="var(--teal)" stroke-width="0.9" stroke-linecap="round" opacity="0.4"/>
+      </svg>
+      <h3>EU Kids Online 2020 — Norge</h3>
+      <p>Den ledende europeiske studien av barns nettbruk. Norge-rapporten gir detaljerte data om hva norske barn (9–17 år) gjør på nettet og hvilke risikoer de møter.</p>
+      <ul>
+        <li>De fleste norske barn bruker internett <strong style="color:var(--text)">daglig</strong>, fra tidlig alder</li>
+        <li>Mobilen er den primære enheten — alltid tilgjengelig, alltid koblet til</li>
+        <li>Kontakt med fremmede, sexting og hatefullt innhold er blant de kartlagte risikoene</li>
+      </ul>
+    </div>
+
+    <!-- Cyberhate -->
+    <div class="theory-card cyberhate">
+      <svg class="card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="18" cy="14" r="6" stroke="var(--purple)" stroke-width="1.2" fill="rgba(155,143,173,0.08)"/>
+        <path d="M10 30 C10 24 26 24 26 30" stroke="var(--purple)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        <path d="M27 10 L30 7 M27 7 L30 10" stroke="var(--purple)" stroke-width="1.3" stroke-linecap="round"/>
+        <circle cx="28.5" cy="8.5" r="4" stroke="var(--purple)" stroke-width="1" fill="none" opacity="0.4"/>
+      </svg>
+      <h3>Children's Experiences with Cyberhate</h3>
+      <p>Internasjonal forskning på barns møte med netthat og hatefullt innhold. Mange barn opplever netthat, men normaliserer det som «slik det er».</p>
+      <ul>
+        <li>Barn og unge møter hatefullt innhold rettet mot etnisitet, religion og seksualitet</li>
+        <li>Mange normaliserer netthat — det er «bare slik det er»</li>
+        <li>Kritisk digital literacy er avgjørende for å gjenkjenne og håndtere netthat</li>
+      </ul>
+    </div>
+
+    <!-- Kids' Digital Lives During COVID-19 -->
+    <div class="theory-card covid">
+      <svg class="card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="18" cy="18" r="8" stroke="var(--gold)" stroke-width="1.1" fill="rgba(232,197,71,0.08)"/>
+        <circle cx="18" cy="18" r="3" fill="rgba(232,197,71,0.2)" stroke="var(--gold)" stroke-width="1"/>
+        <line x1="18" y1="4" x2="18" y2="10" stroke="var(--gold)" stroke-width="1.1" stroke-linecap="round"/>
+        <line x1="18" y1="26" x2="18" y2="32" stroke="var(--gold)" stroke-width="1.1" stroke-linecap="round"/>
+        <line x1="4" y1="18" x2="10" y2="18" stroke="var(--gold)" stroke-width="1.1" stroke-linecap="round"/>
+        <line x1="26" y1="18" x2="32" y2="18" stroke="var(--gold)" stroke-width="1.1" stroke-linecap="round"/>
+      </svg>
+      <h3>Kids' Digital Lives During COVID-19</h3>
+      <p>Forskning på barns digitale liv under pandemien — da digital teknologi ble den eneste kanalen for sosialt liv og læring.</p>
+      <ul>
+        <li>Gaming og sosiale medier ble viktigste sosiale arena</li>
+        <li>Digitale ferdigheter ble mer ujevnt fordelt — digitale skiller økte</li>
+        <li>Pandemien akselererte digitaliseringen, også for barn som ikke var klare</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- ── DIGITALE DILEMMAER ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background:var(--warm)"></span>
+    De 6 digitale dilemmaene — Medietilsynet 2023
+  </div>
+
+  <p style="font-size:0.82rem; color:var(--muted); line-height:1.65; margin-bottom:20px;" class="animate delay-3">
+    Medietilsynet identifiserte seks sentrale digitale dilemmaer — tre fra barnets perspektiv og tre fra foreldrenes. Disse ble brukt som utgangspunkt for holdningsdiskusjonen i Verdenskafé.
+  </p>
+
+  <div class="dilemma-grid animate delay-3">
+
+    <div class="dilemma-group-title">Barnas dilemmaer</div>
+
+    <div class="dilemma-card">
+      <div class="dilemma-icon barn">1</div>
+      <div>
+        <div class="dilemma-title">Å delta vs. å stå utenfor</div>
+        <div class="dilemma-desc">Sosiale medier er der alle er — å stå utenfor er å miste tilhørighet. Men å delta betyr å bryte aldersgrenser og utsette seg for risiko.</div>
+      </div>
+    </div>
+
+    <div class="dilemma-card">
+      <div class="dilemma-icon barn">2</div>
+      <div>
+        <div class="dilemma-title">Frihet vs. kontroll</div>
+        <div class="dilemma-desc">Barn ønsker frihet til å utforske digitalt — men foreldrenes kontroll oppleves av mange som trygghetsskapende, av andre som inntrengende.</div>
+      </div>
+    </div>
+
+    <div class="dilemma-card">
+      <div class="dilemma-icon barn">3</div>
+      <div>
+        <div class="dilemma-title">Morsomt vs. skadelig innhold</div>
+        <div class="dilemma-desc">Grensen mellom det som er morsomt og det som er skadelig er uklar. Barn opplever ofte at voksne overreagerer på innhold de selv betrakter som uskyldig.</div>
+      </div>
+    </div>
+
+    <div class="dilemma-group-title">Foreldrenes dilemmaer</div>
+
+    <div class="dilemma-card">
+      <div class="dilemma-icon foreldre">4</div>
+      <div>
+        <div class="dilemma-title">Teknologi som verktøy vs. trussel</div>
+        <div class="dilemma-desc">Foreldre vet at digital kompetanse er nødvendig — men er urolige for skadelig innhold, avhengighet og sosiale risikoer.</div>
+      </div>
+    </div>
+
+    <div class="dilemma-card">
+      <div class="dilemma-icon foreldre">5</div>
+      <div>
+        <div class="dilemma-title">Skjermtid — grenser vs. fleksibilitet</div>
+        <div class="dilemma-desc">Å sette grenser for skjermbruk er vanskelig — hva er for mye? Hva skiller passivt konsum fra aktiv og kreativ bruk?</div>
+      </div>
+    </div>
+
+    <div class="dilemma-card">
+      <div class="dilemma-icon foreldre">6</div>
+      <div>
+        <div class="dilemma-title">Å følge med uten å overvåke</div>
+        <div class="dilemma-desc">Foreldre vil vite hva barna gjør digitalt — men uten å krenke privatlivet. Grensen mellom omsorg og kontroll er hårfin.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── EU KIDS ONLINE ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-4">
+    <span class="dot" style="background:var(--teal)"></span>
+    EU Kids Online 2020 — nøkkelfunn for Norge
+  </div>
+
+  <p style="font-size:0.82rem; color:var(--muted); line-height:1.65; margin-bottom:20px;" class="animate delay-4">
+    EU Kids Online er den største europeiske studien av barn og unges nettbruk. For norske lærere er funnene særlig relevante — de tegner et nyansert bilde av det digitale livet til elevene vi møter i klasserommet.
+  </p>
+
+  <div class="findings-list animate delay-4">
+    <div class="finding-item">
+      <div class="finding-num">1</div>
+      <div class="finding-text"><strong style="color:var(--teal)">Tidlig og daglig bruk.</strong> De aller fleste norske barn (9–17 år) bruker internett daglig. Mobiltelefonen er den primære enheten — alltid med, alltid koblet til.</div>
+    </div>
+    <div class="finding-item">
+      <div class="finding-num">2</div>
+      <div class="finding-text"><strong style="color:var(--teal)">Sosiale medier og gaming dominerer.</strong> Sosiale medier og spill er de klart dominerende aktivitetene. Gaming er særlig utbredt blant gutter, sosiale medier blant jenter — men kjønnsforskjellene er i endring.</div>
+    </div>
+    <div class="finding-item">
+      <div class="finding-num">3</div>
+      <div class="finding-text"><strong style="color:var(--teal)">Risikoer og ubehagelige opplevelser.</strong> Mange norske barn har opplevd noe ubehagelig på nettet: hatefullt innhold, kontakt med ukjente, seksuelle meldinger. En av fire har opplevd nettmobbing.</div>
+    </div>
+    <div class="finding-item">
+      <div class="finding-num">4</div>
+      <div class="finding-text"><strong style="color:var(--teal)">Digital literacy varierer.</strong> Evnen til kritisk vurdering av nettinnhold varierer mye. Barn med høyere sosioøkonomisk bakgrunn skårer gjennomgående høyere på digital literacy.</div>
+    </div>
+    <div class="finding-item">
+      <div class="finding-num">5</div>
+      <div class="finding-text"><strong style="color:var(--teal)">Mange har lært seg selv opp.</strong> Barn lærer mest om digital teknologi av hverandre — ikke av lærere eller foreldre. Dette er en ressurs, men også en risiko: ingen kvalitetssikring av det de lærer.</div>
+    </div>
+  </div>
+
+  <!-- ── VERDENSKAFFE ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-4">
+    <span class="dot" style="background:var(--purple)"></span>
+    Holdningsdiskusjon — Verdenskafé
+  </div>
+
+  <p style="font-size:0.82rem; color:var(--muted); line-height:1.65; margin-bottom:20px;" class="animate delay-4">
+    Etter kunnskapspåfyllet ble deltakerne invitert til en <strong style="color:var(--text)">Verdenskafé</strong> — deltakerne roterer mellom bord med ulike temaer. Formålet er ikke å komme til enighet, men å bringe frem ulike perspektiver og utfordre egne standpunkter.
+  </p>
+
+  <div class="kafe-grid animate delay-4">
+
+    <div class="kafe-card">
+      <div class="kafe-num">1</div>
+      <div class="kafe-title">Skjerm VS. Penn og papir</div>
+      <div class="kafe-desc">Er digital skriving og håndskriving like verdifulle? Hva gir hvert medium som det andre ikke kan — og hva mister vi?</div>
+    </div>
+
+    <div class="kafe-card">
+      <div class="kafe-num">2</div>
+      <div class="kafe-title">Gaming i skolen</div>
+      <div class="kafe-desc">Har spill en plass i undervisningen? Hva er forskjellen på underholdningsspill og læringsspill — og hvem bestemmer det?</div>
+    </div>
+
+    <div class="kafe-card">
+      <div class="kafe-num">3</div>
+      <div class="kafe-title">AI i skolen</div>
+      <div class="kafe-desc">Hva skjer med læring når AI kan løse de fleste skoleoppgaver? Hva bør elever fremdeles lære å gjøre selv — og hvorfor?</div>
+    </div>
+
+    <div class="kafe-card">
+      <div class="kafe-num">4</div>
+      <div class="kafe-title">Fremtidens ferdigheter</div>
+      <div class="kafe-desc">Hvilke ferdigheter trenger elevene i 2040? Er vi rigget for å forberede dem — og hva er skolens rolle?</div>
+    </div>
+
+    <div class="kafe-card">
+      <div class="kafe-num">5</div>
+      <div class="kafe-title">Digitalt samarbeid</div>
+      <div class="kafe-desc">Digitale verktøy muliggjør nye former for samarbeid. Men hva skjer med de menneskelige relasjonene — hva er vunnet, hva er tapt?</div>
+    </div>
+
+  </div>
+
+  <!-- ── FERDIGHETER-WORKSHOP ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-5">
+    <span class="dot" style="background:var(--green)"></span>
+    Ferdigheter-workshop — Min digitale verden
+  </div>
+
+  <p style="font-size:0.82rem; color:var(--muted); line-height:1.65; margin-bottom:20px;" class="animate delay-5">
+    Lærerne prøvde ut oppgaven <strong style="color:var(--text)">«Min digitale verden»</strong> — slik elevene vil møte den. Formålet var å forstå oppgaven innenfra, og å oppdage hva elevene faktisk produserer når de får friheten til å velge format og innhold selv.
+  </p>
+
+  <div class="workshop-box animate delay-5">
+    <p style="font-size:0.82rem; color:var(--muted); line-height:1.65;"><strong style="color:var(--text)">Oppgave:</strong> Lag en multimodal presentasjon av din digitale verden — det digitale livet du lever, de verktøyene du bruker, de plattformene du er på. Velg et format som passer deg.</p>
+
+    <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--teal); font-weight:500; margin-bottom:12px; margin-top:20px;">Mulige formater (differensiert)</div>
+    <div class="format-list">
+      <div class="format-item">
+        <div class="format-dot"></div>
+        <div class="format-text">
+          Digitalt tankekart
+          <span>Visuell oversikt over plattformer, verktøy og aktiviteter i den digitale hverdagen</span>
+        </div>
+      </div>
+      <div class="format-item">
+        <div class="format-dot"></div>
+        <div class="format-text">
+          Kortvideo eller lydopptak
+          <span>En personlig fortelling om det digitale livet — sett gjennom elevens egne øyne</span>
+        </div>
+      </div>
+      <div class="format-item">
+        <div class="format-dot"></div>
+        <div class="format-text">
+          Skriftlig refleksjon
+          <span>En tekst som reflekterer over hva det digitale livet betyr — for deg, for relasjonene dine, for læringen</span>
+        </div>
+      </div>
+      <div class="format-item">
+        <div class="format-dot"></div>
+        <div class="format-text">
+          Collage eller plansje
+          <span>Visuell fremstilling som kombinerer bilder, skjermbilder, logoer og tekst</span>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:0.74rem; color:var(--muted); margin-top:20px; font-style:italic; border-top:1px solid var(--border); padding-top:12px;">Oppgaven fremmer elevmedvirkning: eleven bringer sin egen digitale verden inn i klasserommet og blir en ressurs — ikke bare en mottaker. Slik kobles Modul 2 til Modul 3 om didaktikk og Modul 4 om produksjon.</p>
+  </div>
+
+  <!-- ── CUSTER D4 ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-5">
+    <span class="dot" style="background:var(--teal)"></span>
+    Custer — teknologi som sosial kraft og makt (D4)
+  </div>
+
+  <p style="font-size:0.82rem; color:var(--muted); line-height:1.65; margin-bottom:20px;" class="animate delay-5">
+    Den teoretiske rammen for denne modulen er <strong style="color:var(--text)">Custers fjerde dimensjon (D4)</strong> — teknologi som sosial kraft og makt. Teknologi er ikke nøytral: den former og formes av sosiale og politiske strukturer.
+  </p>
+
+  <div class="theory-card custer full animate delay-5" style="background:rgba(122,179,176,0.05); border-color:rgba(122,179,176,0.2);">
+    <svg class="card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="18" cy="18" r="13" stroke="var(--teal)" stroke-width="1" stroke-opacity="0.4"/>
+      <circle cx="18" cy="18" r="8" stroke="var(--teal)" stroke-width="1.1" fill="rgba(122,179,176,0.08)"/>
+      <path d="M14 18 L18 14 L22 18 L18 22 Z" stroke="var(--teal)" stroke-width="1.1" fill="rgba(122,179,176,0.15)"/>
+      <line x1="18" y1="5" x2="18" y2="10" stroke="var(--teal)" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+      <line x1="18" y1="26" x2="18" y2="31" stroke="var(--teal)" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+      <line x1="5" y1="18" x2="10" y2="18" stroke="var(--teal)" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+      <line x1="26" y1="18" x2="31" y2="18" stroke="var(--teal)" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+    </svg>
+    <h3>Custers 4 dimensjoner — med vekt på D4</h3>
+    <p style="margin-bottom:16px;">Custer (1995) beskriver teknologi i fire dimensjoner. For denne modulen er D4 primær — men alle fire henger sammen:</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+      <div style="background:rgba(122,179,176,0.06); border-radius:8px; padding:12px 14px; border:1px solid rgba(122,179,176,0.12);">
+        <div style="font-size:0.62rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--teal); font-weight:500; margin-bottom:4px;">D1</div>
+        <div style="font-family:'Cormorant Garamond',serif; font-size:0.95rem; font-weight:600; color:var(--teal); margin-bottom:4px;">Teknologi som artefakt</div>
+        <div style="font-size:0.74rem; color:var(--muted); line-height:1.5;">Den fysiske gjenstanden — enheten, verktøyet, maskinen</div>
+      </div>
+      <div style="background:rgba(155,143,173,0.06); border-radius:8px; padding:12px 14px; border:1px solid rgba(155,143,173,0.12);">
+        <div style="font-size:0.62rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--purple); font-weight:500; margin-bottom:4px;">D2</div>
+        <div style="font-family:'Cormorant Garamond',serif; font-size:0.95rem; font-weight:600; color:var(--purple); margin-bottom:4px;">Teknologi som kunnskap</div>
+        <div style="font-size:0.74rem; color:var(--muted); line-height:1.5;">Teknikk og kompetanse — å vite og å mestre</div>
+      </div>
+      <div style="background:rgba(130,168,125,0.06); border-radius:8px; padding:12px 14px; border:1px solid rgba(130,168,125,0.12);">
+        <div style="font-size:0.62rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--green); font-weight:500; margin-bottom:4px;">D3</div>
+        <div style="font-family:'Cormorant Garamond',serif; font-size:0.95rem; font-weight:600; color:var(--green); margin-bottom:4px;">Teknologi som prosess</div>
+        <div style="font-size:0.74rem; color:var(--muted); line-height:1.5;">Skapelsesprosessen og produksjonen</div>
+      </div>
+      <div style="background:rgba(122,179,176,0.12); border-radius:8px; padding:12px 14px; border:1px solid rgba(122,179,176,0.3);">
+        <div style="font-size:0.62rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--teal); font-weight:500; margin-bottom:4px;">D4 ← Denne samlingen</div>
+        <div style="font-family:'Cormorant Garamond',serif; font-size:0.95rem; font-weight:600; color:var(--teal); margin-bottom:4px;">Teknologi som makt og kraft</div>
+        <div style="font-size:0.74rem; color:var(--muted); line-height:1.5;">Teknologi former samfunnet — og samfunnet former teknologien. Hvem bestemmer, og hvem er sårbare?</div>
+      </div>
+    </div>
+    <p style="font-size:0.74rem; color:var(--muted); margin-top:12px; font-style:italic;">Custer, R. L. (1995). Examining the dimensions of technology. <em>International Journal of Technology and Design Education, 5</em>(3), 219–244.</p>
+  </div>
+
+  <!-- ── VERDIDISKUSJONER ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-5">
+    <span class="dot" style="background:var(--teal)"></span>
+    Verdidiskusjoner — kom tilbake til disse
+  </div>
+
+  <div class="verdi-section animate delay-5">
+    <p class="verdi-intro">Disse spørsmålene har ikke ett svar. Ta dem med inn i planleggingen, i samtalen med kollegiet, i møtet med elevene — og kom tilbake til dem underveis i reisen.</p>
+    <div class="verdi-list">
+
+      <div class="verdi-item">
+        <div class="verdi-num">1</div>
+        <div>
+          <div class="verdi-q">Er teknologi <em>nøytral</em> — eller former den hvem vi er og hva vi kan tenke?</div>
+          <p class="verdi-context">Custer D4 minner oss om at teknologi ikke bare er et verktøy — det er en sosial kraft. Sosiale medier designer ikke bare en plattform; de designer sosiale normer, identiteter og maktstrukturer. Hva betyr dette for elevene dine?</p>
+        </div>
+      </div>
+
+      <div class="verdi-item">
+        <div class="verdi-num">2</div>
+        <div>
+          <div class="verdi-q">Hvem eier elevenes digitale data — og bør det ha noe å si for skolen?</div>
+          <p class="verdi-context">EU Kids Online viser at barn deler enorme mengder data uten å forstå konsekvensene. Hvem har ansvar for å ruste elevene til å forstå dette? Er det foreldrenes ansvar, skolens ansvar — eller samfunnets?</p>
+        </div>
+      </div>
+
+      <div class="verdi-item">
+        <div class="verdi-num">3</div>
+        <div>
+          <div class="verdi-q">Hva er forskjellen på å <em>konsumere</em> og å <em>produsere</em> digitalt?</div>
+          <p class="verdi-context">Verdenskafé-diskusjonene berørte grensen mellom passiv skjermbruk og aktiv, kreativ digital produksjon. Betyr det noe om eleven ser på en video eller lager den? Og hva sier det om vår pedagogiske praksis om vi nesten aldri ber elevene om det siste?</p>
+        </div>
+      </div>
+
+      <div class="verdi-item">
+        <div class="verdi-num">4</div>
+        <div>
+          <div class="verdi-q">Hva skjer med <em>tilhørighet</em> og identitet i en digital verden — og er det skolens sak?</div>
+          <p class="verdi-context">Medietilsynet viser at over halvparten av 10-åringene er på sosiale medier fordi det er der alle andre er. Tilhørighet er et grunnleggende menneskelig behov. Har skolen et ansvar for å forstå dette landskapet — ikke for å kontrollere, men for å møte elevene der de er?</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── RESSURSER ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-5">
+    <span class="dot" style="background:var(--green)"></span>
+    Ressurser og videre lesing
+  </div>
+
+  <div class="resource-list animate delay-5">
+
+    <a href="https://www.medietilsynet.no/fakta/rapporter/barn-og-medier/" target="_blank" rel="noopener" class="resource-item">
+      <div class="resource-icon" style="background:rgba(196,147,90,0.12);">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="9" cy="9" r="7" stroke="var(--warm)" stroke-width="1.2"/>
+          <path d="M9 5 L9 9 L12 11" stroke="var(--warm)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="resource-text">
+        <div class="resource-title">Barn og medier-undersøkelsen · Medietilsynet</div>
+        <div class="resource-desc">Medietilsynets store kartlegging av norske barns medievaner. Grunnlaget for «Digitale dilemmaer 2023».</div>
+      </div>
+    </a>
+
+    <a href="https://www.udir.no/kvalitet-og-kompetanse/digitalisering-skole/rammeverk-larerens-profesjonsfaglige-digitale-komp/" target="_blank" rel="noopener" class="resource-item">
+      <div class="resource-icon" style="background:rgba(122,179,176,0.12);">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="3" width="14" height="12" rx="1.5" stroke="var(--teal)" stroke-width="1.2"/>
+          <line x1="6" y1="3" x2="6" y2="15" stroke="var(--teal)" stroke-width="1" stroke-opacity="0.5"/>
+          <line x1="2" y1="8" x2="16" y2="8" stroke="var(--teal)" stroke-width="1" stroke-opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="resource-text">
+        <div class="resource-title">PfDK — Profesjonsfaglig digital kompetanse · Udir</div>
+        <div class="resource-desc">Det nasjonale rammeverket for læreres digitale kompetanse. Grunnlaget for hele DigSkole-reisen.</div>
+      </div>
+    </a>
+
+    <a href="https://mariannletnes.github.io/Gauldals-DigSkole/" target="_blank" rel="noopener" class="resource-item">
+      <div class="resource-icon" style="background:rgba(232,197,71,0.12);">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 16 L4 7 L9 4 L14 7 L14 16" stroke="#b8962a" stroke-width="1.2" stroke-linejoin="round"/>
+          <rect x="7" y="11" width="4" height="5" rx="0.5" stroke="#b8962a" stroke-width="1.1"/>
+          <path d="M3 7 L9 4 L15 7" stroke="#b8962a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="resource-text">
+        <div class="resource-title">DigSkole Gauldal — reisen 2022–2027</div>
+        <div class="resource-desc">Se hele reisen vi har vært på sammen — fra grunnmuren i 2022 til vendepunktet i 2026.</div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ── REFERANSER ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-5">
+    <span class="dot" style="background:var(--muted)"></span>
+    Sentrale referanser
+  </div>
+
+  <div style="background:var(--surface); border-radius:12px; padding:24px 28px; border:1px solid var(--border); box-shadow:0 2px 10px rgba(0,0,0,0.25);" class="animate delay-5">
+    <ul style="list-style:none; display:flex; flex-direction:column; gap:12px;">
+      <li style="font-size:0.79rem; color:var(--muted); line-height:1.7; padding-bottom:12px; border-bottom:1px solid var(--border);">
+        <strong style="color:var(--text);">Custer, R. L. (1995).</strong> Examining the dimensions of technology. <em>International Journal of Technology and Design Education, 5</em>(3), 219–244. — De fire dimensjonene av teknologi; D4 som sosial kraft og makt.
+      </li>
+      <li style="font-size:0.79rem; color:var(--muted); line-height:1.7; padding-bottom:12px; border-bottom:1px solid var(--border);">
+        <strong style="color:var(--text);">Livingstone, S., Mascheroni, G. &amp; Staksrud, E. (2018).</strong> European research on children's internet use: Assessing the past and anticipating the future. <em>New Media &amp; Society, 20</em>(3), 1103–1122. — EU Kids Online-rammeverket.
+      </li>
+      <li style="font-size:0.79rem; color:var(--muted); line-height:1.7; padding-bottom:12px; border-bottom:1px solid var(--border);">
+        <strong style="color:var(--text);">Medietilsynet (2023).</strong> <em>Barn og medier 2023: Digitale dilemmaer.</em> Medietilsynet. — Kartlegging av norske barns digitale liv og seks sentrale dilemmaer.
+      </li>
+      <li style="font-size:0.79rem; color:var(--muted); line-height:1.7;">
+        <strong style="color:var(--text);">Smahel, D., m.fl. (2020).</strong> <em>EU Kids Online 2020: Survey results from 19 countries.</em> EU Kids Online. — Data om netthat, digitale ferdigheter og risikoer blant europeiske barn.
+      </li>
+    </ul>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <a href="https://mariannletnes.github.io/Gauldals-DigSkole/" class="footer-brand" target="_blank">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="14" cy="14" r="13" stroke="rgba(232,197,71,0.3)" stroke-width="1"/>
+        <rect x="8" y="14" width="12" height="8" rx="0.8" stroke="var(--gold)" stroke-width="1" stroke-opacity="0.6"/>
+        <path d="M6 14 L14 8 L22 14" stroke="var(--gold)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.6"/>
+        <path d="M11.5 11 Q14 8.5 16.5 11" stroke="var(--teal)" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0.7"/>
+        <circle cx="14" cy="10" r="1" fill="var(--teal)" opacity="0.8"/>
+      </svg>
+      <span class="brand-text">DigSkole <span>Gauldal</span> · 2022–2027</span>
+    </a>
+    <div class="footer-note">
+      Ressursside for Samling 2 · 2. oktober 2023<br>
+      DigSkole Trøndelag sørvest · NTNU<br>
+      Mari-Ann Letnes &amp; Cecilie Skaalvik
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

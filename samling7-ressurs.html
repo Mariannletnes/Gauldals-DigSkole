@@ -633,6 +633,64 @@
     line-height: 1.45;
   }
 
+  /* ── VERDIDISKUSJONER ── */
+  .verdi-section {
+    border: 1px solid rgba(196,147,90,0.15);
+    border-radius: 16px;
+    padding: 32px 36px;
+    margin-top: 4px;
+  }
+
+  .verdi-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .verdi-list { display: flex; flex-direction: column; }
+
+  .verdi-item {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 20px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+
+  .verdi-item:last-child { border-bottom: none; }
+
+  .verdi-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    line-height: 1;
+    opacity: 0.22;
+    color: var(--text);
+    padding-top: 4px;
+  }
+
+  .verdi-q {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.45;
+    margin-bottom: 8px;
+  }
+
+  .verdi-q em { font-style: italic; color: var(--warm); }
+
+  .verdi-context {
+    font-size: 0.79rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
   /* ── FOOTER ── */
   .site-footer {
     margin-top: 64px;
@@ -1121,6 +1179,52 @@
         <strong style="color:var(--text);">Utdanningsdirektoratet (2017).</strong> <em>Rammeverk for grunnleggende ferdigheter.</em> Udir. — Digitale ferdigheter som grunnleggende ferdighet i fagfornyelsen.
       </li>
     </ul>
+  </div>
+
+  <!-- ── VERDIDISKUSJONER ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-5">
+    <span class="dot" style="background:var(--warm)"></span>
+    Verdidiskusjoner — kom tilbake til disse
+  </div>
+
+  <div class="verdi-section animate delay-5">
+    <p class="verdi-intro">Disse spørsmålene bor i samlingens innhold. De er ikke ment å besvares én gang — men å vende tilbake til, i kollegiet, i planleggingen, og underveis med elevene.</p>
+    <div class="verdi-list">
+
+      <div class="verdi-item">
+        <div class="verdi-num">1</div>
+        <div>
+          <div class="verdi-q">Er estetisk erfaring en form for kunnskap?</div>
+          <p class="verdi-context">Klafki spør om nåtidsbetydning: hva er meningsfullt for eleven her og nå? Akvarellen gir en sanselig erfaring — fargen sprer seg, teksturene endrer seg med vannet. Kan sanseerfaring gi en kunnskap som begrepene ikke kan nå? Hva vet hendene som forstanden ikke vet?</p>
+        </div>
+      </div>
+
+      <div class="verdi-item">
+        <div class="verdi-num">2</div>
+        <div>
+          <div class="verdi-q">Hva er det eksemplariske i dette innholdet?</div>
+          <p class="verdi-context">Klafkis første spørsmål handler om eksemplarisk betydning: hva er det ved akkurat <em>dette</em> eksemplet som åpner noe allment og viktig? Hva er det store spørsmålet som gjemmer seg i det lille, konkrete møtet mellom eleven, akvarellen og Book Creator?</p>
+        </div>
+      </div>
+
+      <div class="verdi-item">
+        <div class="verdi-num">3</div>
+        <div>
+          <div class="verdi-q">Hva er egentlig forskjellen på å reprodusere og å produsere?</div>
+          <p class="verdi-context">Custer-modellen skiller mellom eleven som konsument og produsent. Men er skillet alltid klart? Hva kjennetegner ekte produksjon — er det originaliteten, prosessen, det bevisste valget, eller hensikten bak? Kan man produsere noe genuint ved å bruke andres verktøy og maler?</p>
+        </div>
+      </div>
+
+      <div class="verdi-item">
+        <div class="verdi-num">4</div>
+        <div>
+          <div class="verdi-q">Er et digitalt medium nøytralt — eller former det det som skapes?</div>
+          <p class="verdi-context">Book Creator er et bestemt medium med bestemte muligheter og begrensninger — maler, layoutvalg, fonter. Hva gjør dette mediet med det eleven skaper? Er det eleven som uttrykker seg fritt, eller tilpasser eleven seg plattformens forventninger? McLuhan sa at mediet er budskapet — gjelder det her?</p>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <!-- ── FOOTER ── -->

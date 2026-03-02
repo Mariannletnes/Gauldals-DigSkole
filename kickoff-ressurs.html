@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kickoff · Grunnmuren legges — DigSkole Gauldal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #0f0f12;
+    --surface: #1a1a20;
+    --text:    #e8e4dc;
+    --muted:   #7a7670;
+    --border:  rgba(255,255,255,0.07);
+    --warm:    #c4935a;
+    --teal:    #7ab3b0;
+    --purple:  #9b8fad;
+    --gold:    #e8c547;
+    --green:   #82a87d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 56px 32px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .site-header {
+    margin-bottom: 64px;
+    position: relative;
+  }
+
+  .watercolor-blob {
+    position: absolute;
+    top: -24px;
+    left: -16px;
+    width: 340px;
+    height: 160px;
+    pointer-events: none;
+    opacity: 0.22;
+    z-index: 0;
+  }
+
+  .header-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 28px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--teal); }
+  .back-link svg { width: 12px; height: 12px; }
+
+  .kicker {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .site-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .site-header h1 em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .site-header .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .meta-chip {
+    font-size: 0.72rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .meta-chip.highlight {
+    background: rgba(122,179,176,0.1);
+    border-color: rgba(122,179,176,0.3);
+    color: var(--teal);
+  }
+
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #a09890;
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section-label .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .framing-quote {
+    padding: 28px 32px;
+    background: rgba(122,179,176,0.07);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 48px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+  }
+
+  .framing-quote blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .framing-quote cite {
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    font-style: normal;
+  }
+
+  .theory-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 640px) {
+    .theory-grid { grid-template-columns: 1fr; }
+    .site-header h1 { font-size: 2.2rem; }
+    .page { padding: 32px 20px 64px; }
+  }
+
+  .theory-card {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .theory-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .theory-card.game::before   { background: var(--teal); }
+  .theory-card.danning::before { background: var(--warm); }
+  .theory-card.selander::before { background: var(--purple); }
+  .theory-card.tpack::before  { background: var(--gold); }
+  .theory-card.letnes::before { background: rgba(155,143,173,0.8); }
+
+  .theory-card .card-icon {
+    width: 36px; height: 36px;
+    margin-bottom: 14px;
+  }
+
+  .theory-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .theory-card.game h3    { color: var(--teal); }
+  .theory-card.danning h3 { color: var(--warm); }
+  .theory-card.selander h3 { color: var(--purple); }
+  .theory-card.tpack h3   { color: #c4a028; }
+  .theory-card.letnes h3  { color: var(--purple); }
+
+  .theory-card p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .theory-card ul {
+    margin-top: 12px;
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+
+  .theory-card ul li {
+    font-size: 0.82rem;
+    color: var(--text);
+    line-height: 1.6;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .theory-card ul li::before {
+    content: '·';
+    position: absolute;
+    left: 2px;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .theory-card.full {
+    grid-column: 1 / -1;
+  }
+
+  /* ── SELANDER FLOW ── */
+  .selander-flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-top: 16px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .flow-step {
+    background: rgba(155,143,173,0.1);
+    border: 1px solid rgba(155,143,173,0.2);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 0.72rem;
+    color: var(--purple);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .flow-arrow {
+    color: var(--muted);
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  .flow-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin: 10px 0;
+  }
+
+  .flow-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  /* ── LETNES MATRISE ── */
+  .letnes-wrap {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 28px 32px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    margin-top: 4px;
+  }
+
+  .letnes-intro {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+
+  .letnes-matrix {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    position: relative;
+  }
+
+  .letnes-q {
+    border-radius: 10px;
+    padding: 16px 18px;
+    position: relative;
+  }
+
+  .letnes-q .q-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 4px;
+    opacity: 0.5;
+  }
+
+  .letnes-q .q-role {
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+
+  .letnes-q .q-desc {
+    font-size: 0.76rem;
+    line-height: 1.5;
+    opacity: 0.85;
+  }
+
+  .lq1 { background: rgba(155,143,173,0.12); }
+  .lq1 .q-num, .lq1 .q-role, .lq1 .q-desc { color: var(--purple); }
+
+  .lq2 { background: rgba(232,197,71,0.1); }
+  .lq2 .q-num, .lq2 .q-role, .lq2 .q-desc { color: #b8962a; }
+
+  .lq3 { background: rgba(130,168,125,0.1); }
+  .lq3 .q-num, .lq3 .q-role, .lq3 .q-desc { color: var(--green); }
+
+  .lq4 { background: rgba(122,179,176,0.1); }
+  .lq4 .q-num, .lq4 .q-role, .lq4 .q-desc { color: var(--teal); }
+
+  .letnes-axes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .axis-label {
+    font-size: 0.62rem;
+    color: var(--muted);
+    text-align: center;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ── MODULER ── */
+  .modul-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 4px;
+  }
+
+  .modul-item {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 16px;
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 18px 20px;
+    border: 1px solid var(--border);
+    align-items: start;
+  }
+
+  .modul-num {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .m1 .modul-num { background: rgba(122,179,176,0.12); color: var(--teal); }
+  .m2 .modul-num { background: rgba(196,147,90,0.12);  color: var(--warm); }
+  .m3 .modul-num { background: rgba(155,143,173,0.12); color: var(--purple); }
+  .m4 .modul-num { background: rgba(232,197,71,0.12);  color: #b8962a; }
+  .m5 .modul-num { background: rgba(130,168,125,0.12); color: var(--green); }
+
+  .modul-body h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--text);
+  }
+
+  .modul-body p {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .modul-tag {
+    display: inline-block;
+    font-size: 0.58rem;
+    padding: 2px 7px;
+    border-radius: 8px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .m1 .modul-tag { background: rgba(122,179,176,0.12); color: var(--teal); }
+  .m2 .modul-tag { background: rgba(196,147,90,0.12);  color: var(--warm); }
+  .m3 .modul-tag { background: rgba(155,143,173,0.12); color: var(--purple); }
+  .m4 .modul-tag { background: rgba(232,197,71,0.12);  color: #b8962a; }
+  .m5 .modul-tag { background: rgba(130,168,125,0.12); color: var(--green); }
+
+  /* ── CONCEPTS GRID ── */
+  .concepts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 14px;
+    margin-top: 4px;
+  }
+
+  .concept-card {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 18px 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+  }
+
+  .concept-card .concept-term {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .concept-card .concept-term .indicator {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .concept-card .concept-def {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── RESOURCES / LINKS ── */
+  .resource-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .resource-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 18px;
+    background: var(--surface);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .resource-item:hover {
+    border-color: rgba(122,179,176,0.4);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+
+  .resource-item .resource-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .resource-item .resource-text .resource-title {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .resource-item .resource-text .resource-desc {
+    font-size: 0.74rem;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+
+  /* ── VERDIDISKUSJONER ── */
+  .verdi-section {
+    border: 1px solid rgba(232,197,71,0.12);
+    border-radius: 16px;
+    padding: 32px 36px;
+    margin-top: 4px;
+  }
+
+  .verdi-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .verdi-list { display: flex; flex-direction: column; }
+
+  .verdi-item {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 20px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+
+  .verdi-item:last-child { border-bottom: none; }
+
+  .verdi-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    line-height: 1;
+    opacity: 0.22;
+    color: var(--text);
+    padding-top: 4px;
+  }
+
+  .verdi-q {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.45;
+    margin-bottom: 8px;
+  }
+
+  .verdi-q em { font-style: italic; color: var(--gold); }
+
+  .verdi-context {
+    font-size: 0.79rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .footer-brand .brand-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--muted);
+  }
+
+  .footer-brand .brand-text span { color: var(--gold); }
+
+  .footer-note {
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate { animation: fadeUp 0.5s ease both; }
+  .delay-1 { animation-delay: 0.05s; }
+  .delay-2 { animation-delay: 0.15s; }
+  .delay-3 { animation-delay: 0.25s; }
+  .delay-4 { animation-delay: 0.35s; }
+  .delay-5 { animation-delay: 0.45s; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HEADER ── -->
+  <header class="site-header animate">
+
+    <svg class="watercolor-blob" viewBox="0 0 340 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <filter id="blur"><feGaussianBlur stdDeviation="18"/></filter>
+      </defs>
+      <ellipse cx="120" cy="80" rx="130" ry="70" fill="#7ab3b0" filter="url(#blur)"/>
+      <ellipse cx="260" cy="55" rx="85" ry="50" fill="#c4935a" filter="url(#blur)"/>
+      <ellipse cx="70" cy="115" rx="65" ry="38" fill="#e8c547" filter="url(#blur)"/>
+    </svg>
+
+    <div class="header-content">
+      <a href="https://mariannletnes.github.io/Gauldals-DigSkole/" class="back-link" target="_blank">
+        <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 2 L4 6 L8 10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        DigSkole Gauldal — reisen 2022–2027
+      </a>
+
+      <div class="kicker">Kickoff · 11. februar 2022 · DigSkole Trøndelag sørvest</div>
+
+      <h1>Grunnmuren legges —<br><em>DigSkole starter</em></h1>
+      <p class="subtitle">Ressursside etter kickoffen</p>
+
+      <div class="header-meta">
+        <span class="meta-chip highlight">TPACK · PfDK</span>
+        <span class="meta-chip">Samskapingsprosjekt</span>
+        <span class="meta-chip">Design for læring</span>
+        <span class="meta-chip">Letnes (2021)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── INTRO QUOTE ── -->
+  <div class="framing-quote animate delay-1">
+    <blockquote>
+      «Tiden hvor læreren fungerer som den allvitende er forbi — konsekvensen av dette blir omveltende.»
+    </blockquote>
+    <cite>— Tema for Kickoff · DigSkole Trøndelag sørvest 11. februar 2022</cite>
+  </div>
+
+  <!-- ── TEORI ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-2">
+    <span class="dot" style="background:var(--teal)"></span>
+    Teoretisk grunnlag
+  </div>
+
+  <div class="theory-grid animate delay-2">
+
+    <!-- Digitalisering -->
+    <div class="theory-card game">
+      <svg class="card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="18" cy="18" r="15" stroke="var(--teal)" stroke-width="1.1" stroke-opacity="0.4"/>
+        <path d="M10 26 L10 18 L18 10 L26 18 L26 26" stroke="var(--teal)" stroke-width="1.2" stroke-linejoin="round" fill="rgba(122,179,176,0.08)"/>
+        <circle cx="18" cy="16" r="3" fill="rgba(122,179,176,0.2)" stroke="var(--teal)" stroke-width="1.1"/>
+        <path d="M8 22 Q18 14 28 22" stroke="var(--teal)" stroke-width="0.9" stroke-linecap="round" fill="none" opacity="0.5"/>
+      </svg>
+      <h3>Digitalisering — en game changer</h3>
+      <p>Fremvekst av digital teknologi har endret alle samfunnssektorer og er i ferd med å endre måten vi arbeider, lever, lærer, kommuniserer og samhandler.</p>
+      <ul>
+        <li>OECD (2015): «Digitalt kyndig» blir helt nødvendig — digital teknologi er det 21. århundre bør beherske <em>flytende</em></li>
+        <li>Castells (2010): Nettverkssamfunnets fremvekst endrer maktstrukturer og kunnskapsforhold</li>
+        <li>Konsekvens for skolen: Læreren er ikke lenger alene om å «eie» kunnskapen</li>
+      </ul>
+    </div>
+
+    <!-- Kunnskap og danning -->
+    <div class="theory-card danning">
+      <svg class="card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="18" cy="12" r="6" stroke="var(--warm)" stroke-width="1.2" fill="rgba(196,147,90,0.1)"/>
+        <path d="M10 28 C10 22 26 22 26 28" stroke="var(--warm)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        <path d="M18 18 L18 22" stroke="var(--warm)" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+        <path d="M14 24 L18 22 L22 24" stroke="var(--warm)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.5"/>
+      </svg>
+      <h3>Utvikling, læring og danning</h3>
+      <p>Kunnskap skapes av mennesker for å håndtere spørsmål og problemer i relasjon til verden de lever i. Informasjon må bearbeides og omdannes av individet for å bli til kunnskap.</p>
+      <ul>
+        <li>Læring = stadig økende kapasitet til å bearbeide, transformere og bruke informasjon</li>
+        <li>Utvikle et handlingsrepertoar — ikke bare tilegne seg fakta</li>
+        <li>Kunnskapstradisjoner er uunngåelige — og kan forblinde</li>
+        <li>Forståelse for disse prosessene gir grunnlag for <strong>dybdelæring</strong></li>
+      </ul>
+    </div>
+
+    <!-- Design for læring — full width -->
+    <div class="theory-card selander full">
+      <svg class="card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="4" y="8" width="10" height="20" rx="2" stroke="var(--purple)" stroke-width="1.1" fill="rgba(155,143,173,0.08)"/>
+        <rect x="22" y="8" width="10" height="20" rx="2" stroke="var(--purple)" stroke-width="1.1" fill="rgba(155,143,173,0.05)"/>
+        <path d="M14 18 Q18 14 22 18" stroke="var(--purple)" stroke-width="1.1" stroke-linecap="round" fill="none"/>
+        <path d="M14 20 Q18 24 22 20" stroke="var(--purple)" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0.6"/>
+        <circle cx="18" cy="18" r="2" fill="var(--purple)" opacity="0.7"/>
+      </svg>
+      <h3>Design av en formell lærsekvens — Selander &amp; Kress (2010)</h3>
+      <p style="margin-bottom:16px;">Selander og Kress beskriver læring som to transformasjonssykluser der eleven aktivt skaper tegn på kunnskap. Læreren iscenesetter — eleven transformerer og former. Sentralt: det finnes ikke én riktig representasjon av kunnskap, men mange mulige tegn på forståelse.</p>
+
+      <div class="flow-label">Første transformasjonssyklusen</div>
+      <div class="selander-flow">
+        <div class="flow-step">Iscenesetting</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Transformering</div>
+        <div class="flow-arrow">↔</div>
+        <div class="flow-step" style="background:rgba(155,143,173,0.18); border-color:rgba(155,143,173,0.3);">Anvendte ressurser</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Formering</div>
+      </div>
+
+      <div style="margin-top:10px;">
+        <div class="flow-label">Andre transformasjonssyklusen</div>
+        <div class="selander-flow">
+          <div class="flow-step">Representasjon</div>
+          <div class="flow-arrow">↔</div>
+          <div class="flow-step" style="color:var(--warm); background:rgba(196,147,90,0.08); border-color:rgba(196,147,90,0.2);">Metarefleksjon</div>
+          <div class="flow-arrow">↔</div>
+          <div class="flow-step" style="color:var(--warm); background:rgba(196,147,90,0.08); border-color:rgba(196,147,90,0.2);">Diskusjon</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Karakter</div>
+        </div>
+      </div>
+
+      <p style="margin-top:14px; font-size:0.78rem; color:var(--muted); line-height:1.55; border-top:1px solid var(--border); padding-top:12px;">
+        <strong style="color:var(--text)">Didaktikk handler om HVORDAN</strong> — vi utvikler intellektuelle redskaper, konstruerer miljøer og ressurser, utvikler repertoar av aktiviteter og vurderingspraksiser som støtter læring. Didaktikk går utover det å formidle faginnhold. <em style="color:var(--text)">(Selander, 2017)</em>
+      </p>
+    </div>
+
+    <!-- TPACK — full width -->
+    <div class="theory-card tpack full" style="background:rgba(232,197,71,0.05); border-color:rgba(232,197,71,0.2);">
+      <svg class="card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="15" cy="14" r="9" stroke="var(--teal)" stroke-width="1.1" fill="rgba(122,179,176,0.08)"/>
+        <circle cx="24" cy="14" r="9" stroke="var(--purple)" stroke-width="1.1" fill="rgba(155,143,173,0.08)"/>
+        <circle cx="19.5" cy="23" r="9" stroke="var(--gold)" stroke-width="1.1" fill="rgba(232,197,71,0.08)"/>
+        <text x="19.5" y="19" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="5" font-weight="700" fill="#c4a028">TPACK</text>
+      </svg>
+      <h3 style="color:#b8962a;">TPACK — Tre overlappende kunnskapsfelt</h3>
+      <p style="font-size:0.82rem; color:var(--muted); line-height:1.6; margin-bottom:16px;">Profesjonsfaglig digital kompetanse handler om samspillet mellom tre kunnskapsfelt. Det er ikke nok å kunne teknologien — den må kombineres med fagkunnskap og pedagogisk kunnskap, situert i en konkret kontekst. <em style="color:var(--text)">(Mishra &amp; Koehler, 2006; Shulman, 1986, 1987)</em></p>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
+        <div style="background:rgba(122,179,176,0.1); border-radius:8px; padding:12px 14px;">
+          <div style="font-size:0.62rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--teal); font-weight:500; margin-bottom:4px;">TK</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:0.95rem; font-weight:600; color:var(--teal); margin-bottom:4px;">Teknologisk kunnskap</div>
+          <div style="font-size:0.74rem; color:var(--teal); opacity:0.8; line-height:1.5;">Å ha kunnskap om verktøyene — og å bruke dem i praksis</div>
+        </div>
+        <div style="background:rgba(155,143,173,0.1); border-radius:8px; padding:12px 14px;">
+          <div style="font-size:0.62rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--purple); font-weight:500; margin-bottom:4px;">PK</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:0.95rem; font-weight:600; color:var(--purple); margin-bottom:4px;">Pedagogisk kunnskap</div>
+          <div style="font-size:0.74rem; color:var(--purple); opacity:0.8; line-height:1.5;">Kunnskap om læring, undervisningsdesign og elev-lærer-relasjonen</div>
+        </div>
+        <div style="background:rgba(232,197,71,0.08); border-radius:8px; padding:12px 14px;">
+          <div style="font-size:0.62rem; text-transform:uppercase; letter-spacing:0.1em; color:#b8962a; font-weight:500; margin-bottom:4px;">CK</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:0.95rem; font-weight:600; color:#b8962a; margin-bottom:4px;">Fagkunnskap</div>
+          <div style="font-size:0.74rem; color:#b8962a; opacity:0.8; line-height:1.5;">Kunnskap om fag og innhold — hva som skal læres</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── LETNES MATRISE ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background:var(--purple)"></span>
+    Letnes (2021) — lærers kunnskap om digital teknologi
+  </div>
+
+  <div class="letnes-wrap animate delay-3">
+    <p class="letnes-intro">Lærerens pedagogiske digitale praksis er knyttet til to dimensjoner: kunnskap om <strong style="color:var(--text)">hvordan</strong> teknologien kan brukes, og kunnskap om <strong style="color:var(--text)">hvorfor</strong> digital teknologi velges eller ikke velges i ulike undervisningssammenhenger. Kombinasjonen av disse to gir fire mulige posisjoner:</p>
+    <div class="letnes-matrix">
+      <div class="letnes-q lq1">
+        <div class="q-num">1</div>
+        <div class="q-role">Den reflekterte brukeren</div>
+        <div class="q-desc">Høy kunnskap om <em>hvordan</em> + Høy kunnskap om <em>hvorfor</em> → Underviser som tar bevisste valg. Målet for DigSkole-reisen.</div>
+      </div>
+      <div class="letnes-q lq2">
+        <div class="q-num">2</div>
+        <div class="q-role">Den teknisk dyktige</div>
+        <div class="q-desc">Høy kunnskap om <em>hvordan</em> + Lav kunnskap om <em>hvorfor</em> → Bruker mye teknologi, men mangler det didaktiske begrunnelsesgrunnlaget.</div>
+      </div>
+      <div class="letnes-q lq3">
+        <div class="q-num">3</div>
+        <div class="q-role">Startpunktet</div>
+        <div class="q-desc">Lav kunnskap om <em>hvordan</em> + Lav kunnskap om <em>hvorfor</em> → Bruker lite digital teknologi. Trenger støtte på begge dimensjoner.</div>
+      </div>
+      <div class="letnes-q lq4">
+        <div class="q-num">4</div>
+        <div class="q-role">Den motiverte</div>
+        <div class="q-desc">Lav kunnskap om <em>hvordan</em> + Høy kunnskap om <em>hvorfor</em> → Forstår behovet, men trenger trening i å bruke verktøyene i praksis.</div>
+      </div>
+    </div>
+    <div class="letnes-axes">
+      <div class="axis-label">← Lav — Høy kunnskap om HVORFOR →</div>
+      <div class="axis-label">← Lav — Høy kunnskap om HVORFOR →</div>
+    </div>
+    <p style="font-size:0.74rem; color:var(--muted); margin-top:10px; font-style:italic;">Letnes, M.-A. (2021). Digitalt mangfold – digitale skiller. I Postholm m.fl. (Red.), <em>Elev i skolen 1–7</em>. Cappelen Damm.</p>
+  </div>
+
+  <!-- ── DE 5 MODULENE ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background:var(--warm)"></span>
+    DigSkole — fem moduler · en reise
+  </div>
+
+  <p style="font-size:0.82rem; color:var(--muted); line-height:1.65; margin-bottom:20px;" class="animate delay-3">
+    Formålet med DigSkole er <strong style="color:var(--text)">«å legge til rette for en utstrakt inkludering av profesjonsfaglig digital kompetanse (PfDK) på tvers av skolenes praksis i regionen»</strong>. DigSkole er et <em style="color:var(--text)">samskapingsprosjekt</em> — bygget på erfaring fra DigGiLU og NOTELEB. Reisen er strukturert i fem moduler med elevmedvirkning og multimodale logger som gjennomgående tråder.
+  </p>
+
+  <div class="modul-list animate delay-3">
+
+    <div class="modul-item m1">
+      <div class="modul-num">1</div>
+      <div class="modul-body">
+        <div class="modul-tag">Klar ferdig gå!</div>
+        <h4>Grunnmuren — lokal forankring og prosjektstart</h4>
+        <p>Gjøre klar for endring. Ståstedsanalyse: spørreundersøkelse blant lærere og elever. Utvikling av lokal prosjektskisse. Ressursgruppe på skolen. Lederstøtte.</p>
+      </div>
+    </div>
+
+    <div class="modul-item m2">
+      <div class="modul-num">2</div>
+      <div class="modul-body">
+        <div class="modul-tag">Elevens digitale verden</div>
+        <h4>Elevmedvirkning — eleven som ressurs og lærer</h4>
+        <p>Eksempler fra elevers digitale verden. Omvendt klasserom. Eleven som lærer. Hva vet elevene om digital teknologi som læreren ikke vet?</p>
+      </div>
+    </div>
+
+    <div class="modul-item m3">
+      <div class="modul-num">3</div>
+      <div class="modul-body">
+        <div class="modul-tag">Legge til rette for læring</div>
+        <h4>Digital didaktikk i det enkelte fag</h4>
+        <p>Ledelse av læring i teknologitette klasserom. Digitale didaktikk: å prøve ut med egne elever. Kollegaveiledning.</p>
+      </div>
+    </div>
+
+    <div class="modul-item m4">
+      <div class="modul-num">4</div>
+      <div class="modul-body">
+        <div class="modul-tag">Elevers multimodale produksjon</div>
+        <h4>Digitale verktøy for undervisning og læring</h4>
+        <p>Eleven som produsent. Digitale verktøy i praksis. Å prøve ut med egne elever. Kollegaveiledning.</p>
+      </div>
+    </div>
+
+    <div class="modul-item m5">
+      <div class="modul-num">5</div>
+      <div class="modul-body">
+        <div class="modul-tag">Rammeverk for digital kompetanse</div>
+        <h4>Fagfornyelsen, PfDK og skolens eget rammeverk</h4>
+        <p>Rammeverk for profesjonsfaglig digital kompetanse. Profesjonsengasjement. Inkludering. Design av et rammeverk for PfDK ved vår skole.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── NØKKELBEGREPER ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-4">
+    <span class="dot" style="background:var(--gold)"></span>
+    Nøkkelbegreper — ta disse med tilbake til skolen
+  </div>
+
+  <div class="concepts-grid animate delay-4">
+
+    <div class="concept-card">
+      <div class="concept-term">
+        <span class="indicator" style="background:var(--teal)"></span>
+        Digitalisering
+      </div>
+      <p class="concept-def">Mer enn å ta i bruk digitale verktøy — en grunnleggende endring i samfunnets kunnskapsstrukturer, maktforhold og kommunikasjonsformer.</p>
+    </div>
+
+    <div class="concept-card">
+      <div class="concept-term">
+        <span class="indicator" style="background:var(--warm)"></span>
+        PfDK
+      </div>
+      <p class="concept-def">Profesjonsfaglig digital kompetanse — læreres evne til å bruke digital teknologi faglig og didaktisk, og å begrunne valg av teknologi i undervisning.</p>
+    </div>
+
+    <div class="concept-card">
+      <div class="concept-term">
+        <span class="indicator" style="background:var(--gold)"></span>
+        TPACK
+      </div>
+      <p class="concept-def">Teknologi-pedagogisk fagkunnskap — samspillet mellom teknologisk, pedagogisk og faglig kunnskap, situert i kontekst. <em>(Mishra &amp; Koehler, 2006)</em></p>
+    </div>
+
+    <div class="concept-card">
+      <div class="concept-term">
+        <span class="indicator" style="background:var(--purple)"></span>
+        Design for læring
+      </div>
+      <p class="concept-def">Læreren designer læringsmiljøet, oppgavene og ressursene — ikke bare formidler. Eleven transformerer informasjon til kunnskap i to sykluser. <em>(Selander &amp; Kress, 2010)</em></p>
+    </div>
+
+    <div class="concept-card">
+      <div class="concept-term">
+        <span class="indicator" style="background:var(--teal)"></span>
+        Samskapingsprosjekt
+      </div>
+      <p class="concept-def">DigSkole er bygget på gjensidig kunnskapsutvikling mellom NTNU og skolene. Lærerne er ikke mottakere — de er medskapere av prosjektet.</p>
+    </div>
+
+    <div class="concept-card">
+      <div class="concept-term">
+        <span class="indicator" style="background:var(--warm)"></span>
+        Kunnskapstradisjoner
+      </div>
+      <p class="concept-def">Rutiner, vaner og normer former hvordan vi forstår informasjon. Disse tradisjonene er uunngåelige — men kan også forblinde. Bevissthet om dem er nøkkelen.</p>
+    </div>
+
+    <div class="concept-card">
+      <div class="concept-term">
+        <span class="indicator" style="background:var(--purple)"></span>
+        Multimodal logg
+      </div>
+      <p class="concept-def">En løpende dokumentasjon av læringsarbeidet i ulike modaliteter (tekst, bilde, lyd). Er en gjennomgående tråd gjennom alle fem moduler i DigSkole.</p>
+    </div>
+
+    <div class="concept-card">
+      <div class="concept-term">
+        <span class="indicator" style="background:var(--green)"></span>
+        Dybdelæring
+      </div>
+      <p class="concept-def">Å utvikle stadig økende kapasitet til å bearbeide, transformere og bruke informasjon — og å forstå prosessene som gjør dette mulig.</p>
+    </div>
+
+  </div>
+
+  <!-- ── RESSURSER ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-5">
+    <span class="dot" style="background:var(--green)"></span>
+    Ressurser og rammeverk
+  </div>
+
+  <div class="resource-list animate delay-5">
+
+    <a href="https://www.udir.no/kvalitet-og-kompetanse/digitalisering-skole/rammeverk-larerens-profesjonsfaglige-digitale-komp/" target="_blank" rel="noopener" class="resource-item">
+      <div class="resource-icon" style="background:rgba(196,147,90,0.12);">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="9" cy="9" r="7" stroke="var(--warm)" stroke-width="1.2"/>
+          <path d="M9 5 L9 9 L12 11" stroke="var(--warm)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="resource-text">
+        <div class="resource-title">PfDK — Profesjonsfaglig digital kompetanse · Udir</div>
+        <div class="resource-desc">Det nasjonale rammeverket for læreres digitale kompetanse. Grunnlaget for hele DigSkole-reisen og TPACK-arbeidet.</div>
+      </div>
+    </a>
+
+    <a href="https://www.udir.no/lk20/overordnet-del/?lang=nob" target="_blank" rel="noopener" class="resource-item">
+      <div class="resource-icon" style="background:rgba(122,179,176,0.12);">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="3" width="14" height="12" rx="1.5" stroke="var(--teal)" stroke-width="1.2"/>
+          <line x1="6" y1="3" x2="6" y2="15" stroke="var(--teal)" stroke-width="1" stroke-opacity="0.5"/>
+          <line x1="2" y1="8" x2="16" y2="8" stroke="var(--teal)" stroke-width="1" stroke-opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="resource-text">
+        <div class="resource-title">Overordnet del — Fagfornyelsen · Udir</div>
+        <div class="resource-desc">Fagfornyelsens ramme for digitale ferdigheter som grunnleggende ferdighet i alle fag. Bakgrunn for TPACK og PfDK-arbeidet.</div>
+      </div>
+    </a>
+
+    <a href="https://mariannletnes.github.io/Gauldals-DigSkole/" target="_blank" rel="noopener" class="resource-item">
+      <div class="resource-icon" style="background:rgba(232,197,71,0.12);">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 16 L4 7 L9 4 L14 7 L14 16" stroke="#b8962a" stroke-width="1.2" stroke-linejoin="round"/>
+          <rect x="7" y="11" width="4" height="5" rx="0.5" stroke="#b8962a" stroke-width="1.1"/>
+          <path d="M3 7 L9 4 L15 7" stroke="#b8962a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="resource-text">
+        <div class="resource-title">DigSkole Gauldal — reisen 2022–2027</div>
+        <div class="resource-desc">Se hele reisen vi har vært på sammen — fra grunnmuren i 2022 til vendepunktet i 2026.</div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ── REFERANSER ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-5">
+    <span class="dot" style="background:var(--muted)"></span>
+    Sentrale referanser
+  </div>
+
+  <div style="background:var(--surface); border-radius:12px; padding:24px 28px; border:1px solid var(--border); box-shadow:0 2px 10px rgba(0,0,0,0.25);" class="animate delay-5">
+    <ul style="list-style:none; display:flex; flex-direction:column; gap:12px;">
+      <li style="font-size:0.79rem; color:var(--muted); line-height:1.7; padding-bottom:12px; border-bottom:1px solid var(--border);">
+        <strong style="color:var(--text);">Castells, M. (2010).</strong> <em>The rise of the network society: with a new preface</em> (2. utg.). Chichester: Wiley-Blackwell. — Nettverkssamfunnets fremvekst og digitalisering.
+      </li>
+      <li style="font-size:0.79rem; color:var(--muted); line-height:1.7; padding-bottom:12px; border-bottom:1px solid var(--border);">
+        <strong style="color:var(--text);">Letnes, M.-A. (2021).</strong> Digitalt mangfold – digitale skiller. I M. B. Postholm, P. Haug, R. J. Krumsvik &amp; E. Munthe (Red.), <em>Elev i skolen 1–7 Mangfold og mestring</em> (s. 231–253). Cappelen Damm. — Letnes-matrisen: hvordan/hvorfor.
+      </li>
+      <li style="font-size:0.79rem; color:var(--muted); line-height:1.7; padding-bottom:12px; border-bottom:1px solid var(--border);">
+        <strong style="color:var(--text);">Mishra, P. &amp; Koehler, M. J. (2006).</strong> Technological Pedagogical Content Knowledge: A Framework for Teacher Knowledge. <em>Teachers College Record, 108</em>(6), 1017–1054. — TPACK-rammeverket.
+      </li>
+      <li style="font-size:0.79rem; color:var(--muted); line-height:1.7; padding-bottom:12px; border-bottom:1px solid var(--border);">
+        <strong style="color:var(--text);">OECD (2015).</strong> <em>Students, Computers and Learning: Making The Connection.</em> PISA. — Digital literacy som nødvendig ferdighet i det 21. århundre.
+      </li>
+      <li style="font-size:0.79rem; color:var(--muted); line-height:1.7; padding-bottom:12px; border-bottom:1px solid var(--border);">
+        <strong style="color:var(--text);">Selander, S. (2017).</strong> <em>Didaktiken efter Vygotskij: design för lärande.</em> Liber. — Didaktikk som design, utover fagformidling.
+      </li>
+      <li style="font-size:0.79rem; color:var(--muted); line-height:1.7;">
+        <strong style="color:var(--text);">Selander, S. &amp; Kress, G. (2010).</strong> <em>Design för lärande — ett multimodalt perspektiv.</em> Norstedts. — De to transformasjonssyklusene og den formelle lærsekvensen.
+      </li>
+    </ul>
+  </div>
+
+  <!-- ── VERDIDISKUSJONER ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-5">
+    <span class="dot" style="background:var(--gold)"></span>
+    Verdidiskusjoner — kom tilbake til disse
+  </div>
+
+  <div class="verdi-section animate delay-5">
+    <p class="verdi-intro">Disse spørsmålene retter blikket mot kultur, ansvar og ledelse — ikke enkeltlæreres bruk av teknologi. De er ment for profesjonsfellesskapet og kan skape reell diskusjon. Kom tilbake til dem underveis i reisen.</p>
+    <div class="verdi-list">
+
+      <div class="verdi-item">
+        <div class="verdi-num">1</div>
+        <div>
+          <div class="verdi-q">Hva betyr det i praksis at utvikling av profesjonsfaglig digital kompetanse er et <em>kollektivt</em> ansvar — og ikke et individuelt prosjekt?</div>
+        </div>
+      </div>
+
+      <div class="verdi-item">
+        <div class="verdi-num">2</div>
+        <div>
+          <div class="verdi-q">Hvordan vet vi at <em>hele</em> personalet faktisk lærer — og ikke bare de mest interesserte?</div>
+        </div>
+      </div>
+
+      <div class="verdi-item">
+        <div class="verdi-num">3</div>
+        <div>
+          <div class="verdi-q">Skal alle bevege seg i samme tempo i digital utvikling — eller må vi akseptere ulik progresjon?</div>
+        </div>
+      </div>
+
+      <div class="verdi-item">
+        <div class="verdi-num">4</div>
+        <div>
+          <div class="verdi-q">Hva gjør vi når noen ansatte ikke ønsker å endre praksis?</div>
+        </div>
+      </div>
+
+      <div class="verdi-item">
+        <div class="verdi-num">5</div>
+        <div>
+          <div class="verdi-q">Hvordan kan vi sikre at digitalisering forankres i <em>pedagogiske mål</em> — og ikke i teknologiinteresse?</div>
+        </div>
+      </div>
+
+      <div class="verdi-item">
+        <div class="verdi-num">6</div>
+        <div>
+          <div class="verdi-q">Hvem <em>eier</em> utviklingsprosessen — ledelsen, IKT-ressursen eller profesjonsfellesskapet samlet?</div>
+        </div>
+      </div>
+
+      <div class="verdi-item">
+        <div class="verdi-num">7</div>
+        <div>
+          <div class="verdi-q">Hvordan skaper vi rom for <em>kritisk refleksjon</em> — ikke bare deling av tips og verktøy?</div>
+        </div>
+      </div>
+
+      <div class="verdi-item">
+        <div class="verdi-num">8</div>
+        <div>
+          <div class="verdi-q">Hva slags strukturer må være på plass for at kollektiv læring faktisk skjer over tid?</div>
+        </div>
+      </div>
+
+      <div class="verdi-item">
+        <div class="verdi-num">9</div>
+        <div>
+          <div class="verdi-q">Hvordan kan vi bruke <em>observasjon og felles analyse av praksis</em> som motor i utviklingsarbeidet?</div>
+        </div>
+      </div>
+
+      <div class="verdi-item">
+        <div class="verdi-num">10</div>
+        <div>
+          <div class="verdi-q">Når vet vi at digital utvikling har blitt en del av skolens <em>kultur</em> — og ikke bare et prosjekt?</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <a href="https://mariannletnes.github.io/Gauldals-DigSkole/" class="footer-brand" target="_blank">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="14" cy="14" r="13" stroke="rgba(232,197,71,0.3)" stroke-width="1"/>
+        <rect x="8" y="14" width="12" height="8" rx="0.8" stroke="var(--gold)" stroke-width="1" stroke-opacity="0.6"/>
+        <path d="M6 14 L14 8 L22 14" stroke="var(--gold)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.6"/>
+        <path d="M11.5 11 Q14 8.5 16.5 11" stroke="var(--teal)" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0.7"/>
+        <circle cx="14" cy="10" r="1" fill="var(--teal)" opacity="0.8"/>
+      </svg>
+      <span class="brand-text">DigSkole <span>Gauldal</span> · 2022–2027</span>
+    </a>
+    <div class="footer-note">
+      Ressursside for Kickoff · 11. februar 2022<br>
+      DigSkole Trøndelag sørvest · NTNU<br>
+      Mari-Ann Letnes &amp; Cecilie Skaalvik
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
