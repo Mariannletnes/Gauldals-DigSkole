@@ -103,10 +103,21 @@
 
   /* ── DIGITALE SKILLER ── */
   .divide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .divide-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+  .divide-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; position: relative; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+  .divide-card:hover { border-color: rgba(255,255,255,0.12); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+  .divide-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; border-radius: 12px 12px 0 0; }
+  .divide-card.d1::before { background: var(--teal); }
+  .divide-card.d2::before { background: var(--purple); }
+  .divide-card.d3::before { background: var(--warm); }
   .divide-num { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; color: rgba(255,255,255,0.05); line-height: 1; margin-bottom: 6px; }
   .divide-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--text); margin-bottom: 8px; }
-  .divide-card p { font-size: 0.77rem; color: var(--muted); line-height: 1.7; }
+  .divide-card p { font-size: 0.77rem; color: var(--muted); line-height: 1.7; margin-bottom: 10px; }
+  .divide-card p:last-child { margin-bottom: 0; }
+  .divide-card p strong { color: var(--text); }
+  .divide-tag { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 10px; display: block; font-weight: 500; }
+  .divide-tag.risk { color: var(--warm); }
+  .ai-act-note { margin-top: 14px; padding: 10px 14px; border-radius: 8px; background: rgba(196,147,90,0.07); border-left: 2px solid var(--warm); font-size: 0.73rem; color: var(--muted); line-height: 1.6; }
+  .ai-act-note strong { color: var(--warm); }
 
   /* ── REFLECTION ── */
   .reflection-box { background: rgba(122,179,176,0.03); border: 1px solid rgba(122,179,176,0.15); border-radius: 16px; padding: 40px; }
@@ -144,8 +155,18 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
+  /* ── ETIKK KORT ── */
+  .ethics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .ethics-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; position: relative; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+  .ethics-card:hover { border-color: rgba(255,255,255,0.12); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+  .ethics-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; border-radius: 12px 12px 0 0; background: var(--pink); }
+  .ethics-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .ethics-tag { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--pink); margin-bottom: 10px; display: block; font-weight: 500; }
+  .ethics-card p { font-size: 0.77rem; color: var(--muted); line-height: 1.7; }
+  .ethics-card p strong { color: var(--text); }
+
   @media (max-width: 900px) { .category-grid { grid-template-columns: 1fr 1fr; } .divide-grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 600px) { .category-grid, .divide-grid, .intro-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) { .category-grid, .divide-grid, .intro-grid, .ethics-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -284,6 +305,40 @@
 
   </div>
 
+  <!-- GDPR OG ETIKK -->
+  <div class="section-label animate delay-4">
+    <span class="dot" style="background:var(--pink)"></span>
+    GDPR og etikk — kunnskap som forebygger skiller
+  </div>
+
+  <div class="ethics-grid animate delay-4">
+
+    <div class="ethics-card">
+      <span class="ethics-tag">Personvern · GDPR</span>
+      <h4>Persondata i KI-verktøy</h4>
+      <p>Hva kan lærere dele med KI-systemer — og hva er forbudt? <strong>Navn, alder og sensitive opplysninger</strong> om elever er persondata og skal aldri tastes inn i kommersielle KI-tjenester. Å kjenne disse grensene er en del av lærerprofesjonaliteten.</p>
+    </div>
+
+    <div class="ethics-card">
+      <span class="ethics-tag">Kritisk tenkning · Bias</span>
+      <h4>Algoritmisk bias</h4>
+      <p>KI er trent på data som i stor grad reflekterer <strong>vestlige, engelskspråklige og historisk dominerende perspektiver</strong>. Hvem er usynlig i datagrunnlaget? Å lese KI-svar kritisk er ikke valgfritt — det er digital danning.</p>
+    </div>
+
+    <div class="ethics-card">
+      <span class="ethics-tag">Samtykke · Transparens</span>
+      <h4>Samtykke og gjennomsiktighet</h4>
+      <p>Vet elevene hva som skjer med dataene de deler? <strong>Informert samtykke</strong> er ikke bare et juridisk krav — det er en demokratisk rett. Skolen har et ansvar for å gi elever reell forståelse av vilkårene for de tjenestene de bruker.</p>
+    </div>
+
+    <div class="ethics-card">
+      <span class="ethics-tag">Makt · Økonomi</span>
+      <h4>Kommersielle interesser og makt</h4>
+      <p>KI-verktøy i skolen er produkter laget av private selskaper. <strong>Hvem tjener på at skolen bruker disse?</strong> Å stille slike spørsmål er ikke teknofobisk — det er en nødvendig del av å navigere i et digitalt samfunn med åpne øyne.</p>
+    </div>
+
+  </div>
+
   <!-- DIGITALE SKILLER -->
   <div class="section-label animate delay-4">
     <span class="dot" style="background:var(--warm)"></span>
@@ -291,21 +346,31 @@
   </div>
 
   <div class="divide-grid animate delay-4">
-    <div class="divide-card">
+
+    <div class="divide-card d1">
       <div class="divide-num">1</div>
+      <span class="divide-tag">Infrastruktur · Ressurser</span>
       <h4>Tilgang</h4>
-      <p>Handler om fysisk tilgang til maskinvare, programvare og internett. Med KI oppstår et nytt skille mellom de som har tilgang til de mest avanserte (betalte) modellene og de som må bruke enklere gratistjenester.</p>
+      <p>Handler om fysisk tilgang til maskinvare, programvare og internett. Med KI oppstår et nytt skille mellom skoler og kommuner som har råd til avanserte, godkjente KI-løsninger — og de som må klare seg med enklere gratistjenester uten tilstrekkelig personvern.</p>
+      <div class="ai-act-note"><strong>EU AI Act · Høy risiko:</strong> KI-systemer brukt i utdanning er klassifisert som <strong>høy risiko</strong> (Vedlegg III). Kommuner må gjennomføre risikovurderinger og sikre GDPR-etterlevelse — noe som krever ressurser og kompetanse ikke alle har likt tilgang til.</div>
     </div>
-    <div class="divide-card">
+
+    <div class="divide-card d2">
       <div class="divide-num">2</div>
+      <span class="divide-tag">Kompetanse · GDPR</span>
       <h4>Bruk</h4>
-      <p>Hvor ofte og på hvilken måte teknologien brukes. I en KI-kontekst handler dette om evnen til å «prompte» effektivt — å vite hvordan man styrer maskinen for å få gode pedagogiske svar.</p>
+      <p>Hvor ofte og på hvilken måte teknologien brukes. I en KI-kontekst handler dette om evnen til å «prompte» effektivt <em>og</em> forstå hva som skjer med data underveis.</p>
+      <div class="ai-act-note"><strong>GDPR · Personvern:</strong> Lærere som mangler kunnskap om personvern kan enten unngå KI av frykt — eller bruke det på måter som bryter regelverket. <strong>Begge utfall er problematiske</strong>, og begge skaper skiller mellom elever.</div>
     </div>
-    <div class="divide-card">
+
+    <div class="divide-card d3">
       <div class="divide-num">3</div>
+      <span class="divide-tag risk">Danning · AI Act</span>
       <h4>Utbytte</h4>
-      <p>Det viktigste nivået: Hvem klarer å transformere bruken til faktisk læring og livskvalitet? Skillet går mellom de som lar KI tenke for seg, og de som bruker KI som katalysator for dypere forståelse.</p>
+      <p>Det viktigste nivået: Hvem klarer å transformere bruken til faktisk læring? Skillet går mellom de som lar KI tenke for seg, og de som bruker KI som katalysator for dypere forståelse.</p>
+      <div class="ai-act-note"><strong>AI Act · Menneskelig kontroll:</strong> Loven krever at <strong>menneskelig tilsyn</strong> ivaretas i høy-risiko systemer. Elever i skoler med bevisst KI-pedagogikk og etikk-opplæring er bedre rustet — og det er nettopp her ulikhetene i utbytte forsterkes.</div>
     </div>
+
   </div>
 
   <!-- REFLEKSJON -->
@@ -364,6 +429,35 @@
       <div class="res-text">
         <div class="res-title">PfDK — Profesjonsfaglig digital kompetanse · Udir</div>
         <div class="res-desc">Det nasjonale rammeverket for læreres digitale kompetanse. Custer D2 (kunnskap om hvorfor) og D4 (makt/etikk) — rammen for dette seminaret.</div>
+      </div>
+    </a>
+
+    <a href="https://www.datatilsynet.no/personvern-pa-ulike-omrader/skole-barn-unge/" target="_blank" rel="noopener" class="resource-item">
+      <div class="res-icon" style="background:rgba(212,129,154,0.12);">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 2 L14 5 L14 10 C14 13 11.5 15.5 9 16.5 C6.5 15.5 4 13 4 10 L4 5 Z" stroke="var(--pink)" stroke-width="1.2" stroke-linejoin="round"/>
+          <path d="M7 9 L8.5 10.5 L11.5 7.5" stroke="var(--pink)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="res-text">
+        <div class="res-title">Personvern i skole og barnehage · Datatilsynet</div>
+        <div class="res-desc">Datatilsynets veiledning om GDPR i skolen — hva som er persondata, hva lærere kan dele, og hvilke plikter skolen har som behandlingsansvarlig.</div>
+      </div>
+    </a>
+
+    <a href="https://www.datatilsynet.no/aktuelt/aktuelle-nyheter-2024/ki-forordningen-pa-1-2-30-minutter/" target="_blank" rel="noopener" class="resource-item">
+      <div class="res-icon" style="background:rgba(196,147,90,0.12);">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="3" width="14" height="12" rx="2" stroke="var(--warm)" stroke-width="1.2"/>
+          <line x1="6" y1="7" x2="12" y2="7" stroke="var(--warm)" stroke-width="0.9" stroke-linecap="round"/>
+          <line x1="6" y1="10" x2="10" y2="10" stroke="var(--warm)" stroke-width="0.9" stroke-linecap="round"/>
+          <circle cx="14" cy="4" r="2.5" fill="var(--warm)" opacity="0.9"/>
+          <text x="13" y="5.5" font-size="3.5" fill="#0f0f12" font-weight="bold" text-anchor="middle">!</text>
+        </svg>
+      </div>
+      <div class="res-text">
+        <div class="res-title">KI-forordningen på 1-2-30 minutter · Datatilsynet</div>
+        <div class="res-desc">Datatilsynets innføring i EU AI Act — risikoklassifisering, krav til høy-risiko systemer (inkl. utdanning) og hva forordningen betyr i norsk kontekst. Video + artikkel.</div>
       </div>
     </a>
 
