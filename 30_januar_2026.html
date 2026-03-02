@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>30. januar 2026 — Workshop: Hva nå? · DigSkole Gauldal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #0f0f12;
+    --surface: #1a1a20;
+    --text:    #e8e4dc;
+    --muted:   #7a7670;
+    --border:  rgba(255,255,255,0.07);
+    --warm:    #c4935a;
+    --teal:    #7ab3b0;
+    --purple:  #9b8fad;
+    --gold:    #e8c547;
+    --green:   #82a87d;
+    --pink:    #d4819a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); font-family: 'DM Sans', sans-serif; color: var(--text); min-height: 100vh; line-height: 1.6; }
+
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+
+  .page { max-width: 1000px; margin: 0 auto; padding: 56px 32px 80px; position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  .site-header { margin-bottom: 64px; position: relative; }
+  .watercolor-blob { position: absolute; top: -24px; left: -16px; width: 440px; height: 200px; pointer-events: none; opacity: 0.15; z-index: 0; }
+  .header-content { position: relative; z-index: 1; }
+
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); text-decoration: none; margin-bottom: 28px; transition: color 0.2s; }
+  .back-link:hover { color: var(--gold); }
+  .back-link svg { width: 12px; height: 12px; }
+
+  .kicker { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; font-weight: 500; }
+
+  .site-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; line-height: 1.15; color: var(--text); margin-bottom: 6px; }
+  .site-header h1 em { font-style: italic; color: var(--gold); }
+  .site-header .subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 300; font-style: italic; color: var(--muted); margin-bottom: 20px; }
+
+  .header-meta { display: flex; gap: 10px; flex-wrap: wrap; }
+  .meta-chip { font-size: 0.72rem; padding: 4px 12px; border-radius: 20px; background: var(--surface); border: 1px solid var(--border); color: var(--muted); letter-spacing: 0.04em; }
+  .meta-chip.highlight { background: rgba(232,197,71,0.1); border-color: rgba(232,197,71,0.3); color: var(--gold); }
+
+  /* ── SECTION LABELS ── */
+  .section-label { display: flex; align-items: center; gap: 10px; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.16em; color: #a09890; margin: 56px 0 24px; font-weight: 500; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .section-label .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── FRAMING QUOTE ── */
+  .framing-quote { padding: 28px 32px; background: rgba(232,197,71,0.05); border-left: 3px solid var(--gold); border-radius: 0 12px 12px 0; margin-bottom: 48px; }
+  .framing-quote blockquote { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; font-style: italic; color: var(--text); line-height: 1.6; margin-bottom: 12px; }
+  .framing-quote cite { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; font-style: normal; }
+
+  /* ── PROSESS ── */
+  .prosess-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px 36px; }
+  .prosess-intro { font-size: 0.83rem; color: var(--muted); line-height: 1.7; margin-bottom: 28px; }
+  .prosess-intro strong { color: var(--text); }
+
+  .vote-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .vote-item { display: flex; align-items: center; gap: 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; }
+  .vote-bar-wrap { flex: 1; }
+  .vote-label { font-size: 0.82rem; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+  .vote-bar { height: 4px; border-radius: 2px; background: var(--border); overflow: hidden; }
+  .vote-fill { height: 100%; border-radius: 2px; }
+  .vote-count { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; color: var(--muted); line-height: 1; flex-shrink: 0; width: 28px; text-align: right; }
+
+  /* ── PRIORITERINGER ── */
+  .prio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .prio-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; position: relative; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+  .prio-card:hover { border-color: rgba(255,255,255,0.12); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+  .prio-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; border-radius: 12px 12px 0 0; }
+  .prio-card.p1::before { background: var(--teal); }
+  .prio-card.p2::before { background: var(--warm); }
+  .prio-card.p3::before { background: var(--gold); }
+  .prio-card.p4::before { background: var(--purple); }
+  .prio-num { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; color: rgba(255,255,255,0.04); line-height: 1; margin-bottom: 4px; }
+  .prio-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; margin-bottom: 8px; }
+  .prio-card.p1 h3 { color: var(--teal); }
+  .prio-card.p2 h3 { color: var(--warm); }
+  .prio-card.p3 h3 { color: var(--gold); }
+  .prio-card.p4 h3 { color: var(--purple); }
+  .prio-card p { font-size: 0.77rem; color: var(--muted); line-height: 1.7; }
+  .prio-tag { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 8px; display: block; font-weight: 500; }
+
+  /* ── TEKNOLOGI-INNSIKT ── */
+  .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .tech-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+  .tech-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--gold); margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .tech-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .tech-list li { font-size: 0.79rem; color: var(--muted); line-height: 1.6; padding-left: 16px; position: relative; }
+  .tech-list li::before { content: '·'; position: absolute; left: 2px; color: var(--gold); font-size: 1rem; line-height: 1.4; }
+  .tech-list li strong { color: var(--text); }
+
+  /* ── CUSTER-INNSIKT ── */
+  .custer-insight { background: rgba(232,197,71,0.03); border: 1px solid rgba(232,197,71,0.15); border-radius: 16px; padding: 32px 36px; }
+  .custer-intro { font-size: 0.83rem; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
+  .custer-intro strong { color: var(--text); }
+  .custer-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .c-dim { padding: 16px; border-radius: 10px; position: relative; }
+  .c-dim .dim-label { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 4px; font-weight: 500; }
+  .c-dim h4 { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
+  .c-dim p { font-size: 0.73rem; line-height: 1.55; }
+  .c-dim.d1 { background: rgba(122,179,176,0.08); }
+  .c-dim.d1 .dim-label, .c-dim.d1 h4, .c-dim.d1 p { color: var(--teal); }
+  .c-dim.d2 { background: rgba(155,143,173,0.08); }
+  .c-dim.d2 .dim-label, .c-dim.d2 h4, .c-dim.d2 p { color: var(--purple); }
+  .c-dim.missing { background: rgba(232,197,71,0.1); border: 1px solid rgba(232,197,71,0.25); }
+  .c-dim.missing .dim-label, .c-dim.missing h4, .c-dim.missing p { color: var(--gold); }
+  .c-dim.d4 { background: rgba(130,168,125,0.08); }
+  .c-dim.d4 .dim-label, .c-dim.d4 h4, .c-dim.d4 p { color: var(--green); }
+  .missing-badge { display: inline-block; font-size: 0.56rem; padding: 2px 7px; background: rgba(232,197,71,0.15); color: var(--gold); border-radius: 10px; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 6px; }
+
+  /* ── PRODUSENT/KONSUMENT ── */
+  .pk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .pk-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 24px 22px; position: relative; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+  .pk-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .pk-card.konsument { border-color: rgba(212,129,154,0.25); }
+  .pk-card.konsument::before { background: var(--pink); }
+  .pk-card.konsument:hover { border-color: rgba(212,129,154,0.4); box-shadow: 0 4px 20px rgba(212,129,154,0.06); }
+  .pk-card.produsent { border-color: rgba(130,168,125,0.25); }
+  .pk-card.produsent::before { background: var(--green); }
+  .pk-card.produsent:hover { border-color: rgba(130,168,125,0.4); box-shadow: 0 4px 20px rgba(130,168,125,0.06); }
+  .pk-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; margin-bottom: 10px; }
+  .pk-card.konsument h4 { color: var(--pink); }
+  .pk-card.produsent h4 { color: var(--green); }
+  .pk-card p { font-size: 0.77rem; color: var(--muted); line-height: 1.75; }
+  .pk-card p strong { color: var(--text); }
+  .pk-tag { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; display: block; font-weight: 500; }
+  .pk-card.konsument .pk-tag { color: var(--pink); }
+  .pk-card.produsent .pk-tag { color: var(--green); }
+  .pk-divider { height: 1px; background: var(--border); margin: 14px 0; }
+  .pk-custer-note { font-size: 0.68rem; letter-spacing: 0.04em; line-height: 1.6; }
+  .pk-card.konsument .pk-custer-note { color: rgba(212,129,154,0.55); }
+  .pk-card.produsent .pk-custer-note { color: rgba(130,168,125,0.6); }
+
+  /* ── VEIEN VIDERE ── */
+  .next-box { background: rgba(232,197,71,0.04); border: 1px solid rgba(232,197,71,0.2); border-radius: 16px; padding: 32px 36px; display: flex; gap: 32px; align-items: flex-start; }
+  .next-arrow { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--gold); opacity: 0.4; line-height: 1; flex-shrink: 0; }
+  .next-content h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: var(--gold); margin-bottom: 8px; }
+  .next-content p { font-size: 0.81rem; color: var(--muted); line-height: 1.7; margin-bottom: 14px; }
+  .next-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--gold); text-decoration: none; font-weight: 500; letter-spacing: 0.04em; border: 1px solid rgba(232,197,71,0.3); padding: 6px 14px; border-radius: 20px; transition: background 0.2s; }
+  .next-link:hover { background: rgba(232,197,71,0.08); }
+
+  /* ── FOOTER ── */
+  .site-footer { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .footer-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .brand-text { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; }
+  .brand-text span { color: var(--gold); }
+  .footer-note { font-size: 0.72rem; color: rgba(122,102,112,0.6); text-align: right; line-height: 1.6; }
+
+  /* ── ANIMATIONS ── */
+  .animate { animation: fadeUp 0.5s ease both; }
+  .delay-1 { animation-delay: 0.05s; }
+  .delay-2 { animation-delay: 0.12s; }
+  .delay-3 { animation-delay: 0.2s; }
+  .delay-4 { animation-delay: 0.28s; }
+  .delay-5 { animation-delay: 0.36s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 900px) { .custer-row { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .prio-grid, .tech-grid, .pk-grid, .vote-grid, .custer-row { grid-template-columns: 1fr; } .next-box { flex-direction: column; gap: 16px; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="site-header animate delay-1">
+    <svg class="watercolor-blob" viewBox="0 0 340 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="170" cy="80" rx="160" ry="68" fill="var(--gold)"/>
+      <ellipse cx="120" cy="60" rx="100" ry="55" fill="var(--warm)"/>
+      <ellipse cx="220" cy="100" rx="80" ry="45" fill="var(--teal)"/>
+    </svg>
+    <div class="header-content">
+      <a href="index.html" class="back-link">
+        <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 2L3 6L7 10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Tilbake til reisen
+      </a>
+      <div class="kicker">Workshop · Gauldal · 30. januar 2026</div>
+      <h1>Hva nå? — <em>erkjennelsen</em><br>om T-en i TPACK</h1>
+      <p class="subtitle">Kartlegging av behov · Lærerne setter kursen videre</p>
+      <div class="header-meta">
+        <span class="meta-chip highlight">Vendepunktet · 2026</span>
+        <span class="meta-chip">30. januar 2026</span>
+        <span class="meta-chip">NTNU · Mari-Ann Letnes</span>
+        <span class="meta-chip">Custer D1 · D3 mangler</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- FRAMING QUOTE -->
+  <div class="framing-quote animate delay-2">
+    <blockquote>
+      Vi har jobbet godt med kunnskap om hvorfor og makt — men vi har glemt å faktisk bruke verktøyene selv.
+    </blockquote>
+    <cite>Erkjennelsen fra workshopen · 30. januar 2026 · DigSkole Gauldal</cite>
+  </div>
+
+  <!-- PROSESSEN -->
+  <div class="section-label animate delay-2">
+    <span class="dot" style="background:var(--gold)"></span>
+    Prosessen — hva løftet lærerne frem?
+  </div>
+
+  <div class="prosess-box animate delay-2">
+    <p class="prosess-intro">I workshopen arbeidet vi med spørsmålet: <strong>Hva trenger vi mer av?</strong> Lærerne stemte på de faglige og pedagogiske temaene de opplever som viktigst å jobbe videre med i DigSkole. Resultatet ga et tydelig bilde av behovene — og av hva som hadde manglet.</p>
+    <div class="vote-grid">
+      <div class="vote-item">
+        <div class="vote-bar-wrap">
+          <div class="vote-label">Motivasjon og utholdenhet</div>
+          <div class="vote-bar"><div class="vote-fill" style="width:100%; background:var(--warm);"></div></div>
+        </div>
+        <div class="vote-count" style="color:var(--warm);">↑</div>
+      </div>
+      <div class="vote-item">
+        <div class="vote-bar-wrap">
+          <div class="vote-label">KI i undervisning</div>
+          <div class="vote-bar"><div class="vote-fill" style="width:75%; background:var(--gold);"></div></div>
+        </div>
+        <div class="vote-count" style="color:var(--gold);">3</div>
+      </div>
+      <div class="vote-item">
+        <div class="vote-bar-wrap">
+          <div class="vote-label">Vurdering</div>
+          <div class="vote-bar"><div class="vote-fill" style="width:75%; background:var(--purple);"></div></div>
+        </div>
+        <div class="vote-count" style="color:var(--purple);">3</div>
+      </div>
+      <div class="vote-item">
+        <div class="vote-bar-wrap">
+          <div class="vote-label">Inkludering</div>
+          <div class="vote-bar"><div class="vote-fill" style="width:50%; background:var(--teal);"></div></div>
+        </div>
+        <div class="vote-count" style="color:var(--teal);">2</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRIORITERINGER -->
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background:var(--teal)"></span>
+    Fire prioriterte områder for veien videre
+  </div>
+
+  <div class="prio-grid animate delay-3">
+
+    <div class="prio-card p1">
+      <div class="prio-num">1</div>
+      <span class="prio-tag">Høyest prioritet</span>
+      <h3>Inkludering</h3>
+      <p>Universell utforming, tilpasset opplæring og teknologi som inkluderingsverktøy. Hvordan kan digitale verktøy brukes slik at <strong>alle</strong> elever er med — ikke bare de som mestrer tradisjonell skolepraksis?</p>
+    </div>
+
+    <div class="prio-card p2">
+      <div class="prio-num">2</div>
+      <span class="prio-tag">Sterk prioritet</span>
+      <h3>Motivasjon</h3>
+      <p>Hva motiverer elever til å stå i faglig arbeid over tid — og hvilken rolle spiller teknologi og skapende prosesser? Utholdenhet og indre motivasjon som pedagogisk utfordring.</p>
+    </div>
+
+    <div class="prio-card p3">
+      <div class="prio-num">3</div>
+      <span class="prio-tag">Prioritet</span>
+      <h3>KI</h3>
+      <p>Kunstig intelligens i undervisning og læring — ikke bare som tema, men som <strong>verktøy lærerne faktisk bruker</strong>. Skiftet fra å snakke om KI til å jobbe med KI i faget.</p>
+    </div>
+
+    <div class="prio-card p4">
+      <div class="prio-num">4</div>
+      <span class="prio-tag">Prioritet</span>
+      <h3>Vurdering</h3>
+      <p>Vurdering i en digital og skapende kontekst — hvordan vurderer vi prosess og produkt? Digitale vurderingsverktøy og nye praksiser som støtter læring fremfor bare å måle den.</p>
+    </div>
+
+  </div>
+
+  <!-- TEKNOLOGI-INNSIKT -->
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background:var(--warm)"></span>
+    Teknologi som begrep — tre innganger
+  </div>
+
+  <div class="tech-grid animate delay-3">
+    <div class="tech-card">
+      <h4>Teknologi er ikke bare ett ting</h4>
+      <ul class="tech-list">
+        <li><strong>Verktøy</strong> — konkrete apper og programvare læreren og eleven bruker</li>
+        <li><strong>Programvare</strong> — systemer og plattformer skolen investerer i</li>
+        <li><strong>Løsninger</strong> — måten teknologi settes sammen for å løse pedagogiske utfordringer</li>
+      </ul>
+    </div>
+    <div class="tech-card">
+      <h4>Nivåer for teknologibruk</h4>
+      <ul class="tech-list">
+        <li><strong>Lokalt</strong> — i den enkelte klasse og skole</li>
+        <li><strong>Kommunalt</strong> — felles løsninger og innkjøp i kommunen</li>
+        <li><strong>Regionalt</strong> — samarbeid og deling på tvers av kommuner</li>
+        <li><strong>Læreplannivå</strong> — teknologi som del av fagfornyelsens digitale kompetansemål</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PRODUSENT / KONSUMENT -->
+  <div class="section-label animate delay-4">
+    <span class="dot" style="background:var(--green)"></span>
+    Skiftet — fra konsument til produsent
+  </div>
+
+  <div class="pk-grid animate delay-4">
+    <div class="pk-card konsument">
+      <span class="pk-tag">Slik har det vært</span>
+      <h4>Konsumentmodus</h4>
+      <p>Teknologien leverer innhold — læreren og eleven mottar, leser, ser og lytter. Verktøyene brukes som informasjonskilder og formidlingskanaler. <strong>Vi snakker om teknologi</strong>, men erfarer den ikke på kroppen.</p>
+      <div class="pk-divider"></div>
+      <p class="pk-custer-note">Custer D2 (kunnskap om teknologi) og D4 (teknologi som sosial kraft) — godt dekket i DigSkole. D1 og D3 manglet.</p>
+    </div>
+    <div class="pk-card produsent">
+      <span class="pk-tag">Dit vi skal</span>
+      <h4>Produsentmodus</h4>
+      <p>Læreren erfarer verktøyet selv — og iscenesetter eleven som skaper. Teknologi som uttrykksverktøy: man lager, produserer, publiserer og deler. <strong>T-en i TPACK</strong> er ikke noe man leser seg til, men noe man gjør.</p>
+      <div class="pk-divider"></div>
+      <p class="pk-custer-note">Custer D1 (artefakt/verktøy i bruk) og D3 (skapende prosess) — dette er neste steg for DigSkole Gauldal.</p>
+    </div>
+  </div>
+
+  <!-- CUSTER-ERKJENNELSEN -->
+  <div class="section-label animate delay-4">
+    <span class="dot" style="background:var(--gold)"></span>
+    Erkjennelsen — hva manglet i DigSkole-reisen?
+  </div>
+
+  <div class="custer-insight animate delay-4">
+    <p class="custer-intro">Gjennom hele DigSkole-reisen har vi jobbet godt med <strong>kunnskap om teknologi</strong> og <strong>teknologi som sosial kraft</strong>. Men workshopen avdekket at vi nesten ikke hadde jobbet med <strong>å faktisk bruke teknologien skapende</strong> — verken som lærere eller i iscenesettelse av elevenes arbeid.</p>
+    <div class="custer-row">
+      <div class="c-dim d1">
+        <div class="dim-label">D1 · Artefakt</div>
+        <h4>Verktøyet</h4>
+        <p>Konkret bruk av apper og programvare. Læreren erfarer verktøyet på kroppen.</p>
+      </div>
+      <div class="c-dim d2">
+        <div class="dim-label">D2 · Kunnskap</div>
+        <h4>Hvorfor og hva</h4>
+        <p>Kunnskap om hvorfor teknologi i undervisning. Didaktisk begrunnelse. Godt dekket.</p>
+      </div>
+      <div class="c-dim missing">
+        <div class="dim-label">D3 · Prosess</div>
+        <h4>Skapende prosess</h4>
+        <p>Produksjon, innovasjon og skapende arbeid med teknologi. Nesten ikke berørt.</p>
+        <span class="missing-badge">→ Nå tar vi tak</span>
+      </div>
+      <div class="c-dim d4">
+        <div class="dim-label">D4 · Makt/kraft</div>
+        <h4>Sosial kraft</h4>
+        <p>Teknologi som sosial konstruksjon og maktforhold. Godt dekket gjennom KI-seminar og policy.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- VEIEN VIDERE -->
+  <div class="section-label animate delay-5">
+    <span class="dot" style="background:var(--teal)"></span>
+    Veien videre
+  </div>
+
+  <div class="next-box animate delay-5">
+    <div class="next-arrow">→</div>
+    <div class="next-content">
+      <h3>Samling 22 · 6. mars 2026</h3>
+      <p>Workshopen la grunnlaget for en ny retning: T-en i TPACK skal inn. Første svar er Samling 22 om <strong>sanselig og estetisk inngang til læring</strong> — der lærerne selv erfarer teknologien gjennom akvarell og Book Creator, slik at de kan iscenesette eleven som produsent. Custer D1 og D3 i praksis.</p>
+      <a href="samling7-ressurs.html" class="next-link">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1" y="1" width="8" height="10" rx="1" stroke="currentColor" stroke-width="1.1"/>
+          <line x1="3" y1="4" x2="7" y2="4" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+          <line x1="3" y1="6" x2="7" y2="6" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+          <line x1="3" y1="8" x2="5.5" y2="8" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+        </svg>
+        Ressursside for Samling 22 →
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <a href="index.html" class="footer-brand">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="14" cy="14" r="13" stroke="rgba(232,197,71,0.3)" stroke-width="1"/>
+        <rect x="8" y="14" width="12" height="8" rx="0.8" stroke="var(--gold)" stroke-width="1" stroke-opacity="0.6"/>
+        <path d="M6 14 L14 8 L22 14" stroke="var(--gold)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.6"/>
+        <path d="M11.5 11 Q14 8.5 16.5 11" stroke="var(--teal)" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0.7"/>
+        <circle cx="14" cy="10" r="1" fill="var(--teal)" opacity="0.8"/>
+      </svg>
+      <span class="brand-text">DigSkole <span>Gauldal</span> · 2022–2027</span>
+    </a>
+    <div class="footer-note">
+      Ressursside for Workshop 30. januar 2026<br>
+      DigSkole Gauldal · NTNU · Mari-Ann Letnes
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
