@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samling 22 — Sanselig og estetisk inngang · DigSkole Gauldal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #0f0f12;
+    --surface: #1a1a20;
+    --text:    #e8e4dc;
+    --muted:   #7a7670;
+    --border:  rgba(255,255,255,0.07);
+    --warm:    #c4935a;   /* samme som phase1 */
+    --teal:    #7ab3b0;   /* samme som phase2 */
+    --purple:  #9b8fad;   /* samme som phase3 */
+    --gold:    #e8c547;   /* samme som now */
+    --green:   #82a87d;   /* samme som future */
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── WATERCOLOR GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 56px 32px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    margin-bottom: 64px;
+    position: relative;
+  }
+
+  /* Watercolor blob behind header text */
+  .watercolor-blob {
+    position: absolute;
+    top: -24px;
+    left: -16px;
+    width: 340px;
+    height: 160px;
+    pointer-events: none;
+    opacity: 0.25;
+    z-index: 0;
+  }
+
+  .header-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 28px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: var(--warm); }
+
+  .back-link svg { width: 12px; height: 12px; }
+
+  .kicker {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .site-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .site-header h1 em {
+    font-style: italic;
+    color: var(--warm);
+  }
+
+  .site-header .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .meta-chip {
+    font-size: 0.72rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .meta-chip.highlight {
+    background: rgba(196,147,90,0.1);
+    border-color: rgba(196,147,90,0.3);
+    color: var(--warm);
+  }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  /* ── SECTION TITLES ── */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #a09890;
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section-label .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── INTRO / FRAMING QUOTE ── */
+  .framing-quote {
+    padding: 28px 32px;
+    background: rgba(196,147,90,0.07);
+    border-left: 3px solid var(--warm);
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 48px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+  }
+
+  .framing-quote blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .framing-quote cite {
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    font-style: normal;
+  }
+
+  /* ── THEORY CARDS ── */
+  .theory-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 640px) {
+    .theory-grid { grid-template-columns: 1fr; }
+    .site-header h1 { font-size: 2.2rem; }
+    .page { padding: 32px 20px 64px; }
+  }
+
+  .theory-card {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .theory-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .theory-card.klafki::before    { background: var(--warm); }
+  .theory-card.tpack::before     { background: var(--gold); }
+  .theory-card.custer::before    { background: var(--teal); }
+  .theory-card.icils::before     { background: var(--purple); }
+
+  .theory-card .card-icon {
+    width: 36px; height: 36px;
+    margin-bottom: 14px;
+  }
+
+  .theory-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .theory-card.klafki h3  { color: var(--warm); }
+  .theory-card.tpack h3   { color: #c4a028; }
+  .theory-card.custer h3  { color: var(--teal); }
+  .theory-card.icils h3   { color: var(--purple); }
+
+  .theory-card p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .theory-card ul {
+    margin-top: 12px;
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+
+  .theory-card ul li {
+    font-size: 0.82rem;
+    color: var(--text);
+    line-height: 1.6;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .theory-card ul li::before {
+    content: '·';
+    position: absolute;
+    left: 2px;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  /* Full-width theory card */
+  .theory-card.full {
+    grid-column: 1 / -1;
+  }
+
+  /* ── KLAFKI DIDACTIC ANALYSIS GRID ── */
+  .klafki-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 4px;
+  }
+
+  @media (max-width: 580px) {
+    .klafki-grid { grid-template-columns: 1fr; }
+    .klafki-q[style] { grid-column: 1 !important; }
+  }
+
+  .klafki-q {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: rgba(196,147,90,0.06);
+    border: 1px solid rgba(196,147,90,0.15);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .klafki-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--warm);
+    opacity: 0.6;
+    flex-shrink: 0;
+    line-height: 1;
+    width: 22px;
+    text-align: center;
+  }
+
+  .klafki-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--warm);
+    margin-bottom: 4px;
+    letter-spacing: 0.02em;
+  }
+
+  .klafki-q p {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .klafki-q p em {
+    color: var(--text);
+    font-style: italic;
+  }
+
+  /* ── WORKSHOP SECTION ── */
+  .workshops {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 4px;
+  }
+
+  .workshop-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 20px;
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    align-items: start;
+    transition: box-shadow 0.2s;
+  }
+
+  .workshop-item:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  .workshop-num {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .workshop-num span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .workshop-num small {
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .w1 .workshop-num { background: rgba(196,147,90,0.12); }
+  .w1 .workshop-num span, .w1 .workshop-num small { color: var(--warm); }
+
+  .w2 .workshop-num { background: rgba(122,179,176,0.12); }
+  .w2 .workshop-num span, .w2 .workshop-num small { color: var(--teal); }
+
+  .w3 .workshop-num { background: rgba(155,143,173,0.12); }
+  .w3 .workshop-num span, .w3 .workshop-num small { color: var(--purple); }
+
+  .workshop-body h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+
+  .workshop-body .tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+
+  .tag {
+    font-size: 0.62rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .tag.warm   { background: rgba(196,147,90,0.12); color: var(--warm); }
+  .tag.teal   { background: rgba(122,179,176,0.12); color: var(--teal); }
+  .tag.purple { background: rgba(155,143,173,0.12); color: var(--purple); }
+  .tag.gold   { background: rgba(232,197,71,0.12);  color: #b8962a; }
+  .tag.green  { background: rgba(130,168,125,0.12); color: var(--green); }
+
+  .workshop-body p {
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 10px;
+  }
+
+  .workshop-body .reflection {
+    font-size: 0.8rem;
+    padding: 10px 14px;
+    background: var(--bg);
+    border-radius: 8px;
+    border-left: 2px solid var(--border);
+    color: var(--text);
+    font-style: italic;
+    line-height: 1.55;
+  }
+
+  /* ── CONCEPTS GRID ── */
+  .concepts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 14px;
+    margin-top: 4px;
+  }
+
+  .concept-card {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 18px 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+  }
+
+  .concept-card .concept-term {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .concept-card .concept-term .indicator {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .concept-card .concept-def {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── CUSTER VISUAL ── */
+  .custer-visual {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 32px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    margin-top: 4px;
+  }
+
+  .custer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  @media (max-width: 500px) {
+    .custer-grid { grid-template-columns: 1fr; }
+    .workshop-item { grid-template-columns: 1fr; }
+    .workshop-num { width: 100%; height: 56px; flex-direction: row; gap: 10px; }
+  }
+
+  .custer-dim {
+    padding: 16px 18px;
+    border-radius: 10px;
+    position: relative;
+  }
+
+  .custer-dim .dim-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+
+  .custer-dim h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .custer-dim p {
+    font-size: 0.76rem;
+    line-height: 1.55;
+  }
+
+  .custer-dim.d1 { background: rgba(122,179,176,0.1); }
+  .custer-dim.d1 .dim-label, .custer-dim.d1 h4 { color: var(--teal); }
+  .custer-dim.d1 p { color: var(--teal); opacity: 0.8; }
+
+  .custer-dim.d2 { background: rgba(155,143,173,0.1); }
+  .custer-dim.d2 .dim-label, .custer-dim.d2 h4 { color: var(--purple); }
+  .custer-dim.d2 p { color: var(--purple); opacity: 0.8; }
+
+  .custer-dim.d3 { background: rgba(196,147,90,0.1); border: 2px solid rgba(196,147,90,0.35); }
+  .custer-dim.d3 .dim-label, .custer-dim.d3 h4 { color: var(--warm); }
+  .custer-dim.d3 p { color: var(--warm); opacity: 0.8; }
+
+  .custer-dim.d3 .focus-badge {
+    position: absolute;
+    top: 10px; right: 10px;
+    font-size: 0.56rem;
+    padding: 2px 7px;
+    background: rgba(196,147,90,0.2);
+    color: var(--warm);
+    border-radius: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .custer-dim.d4 { background: rgba(130,168,125,0.1); }
+  .custer-dim.d4 .dim-label, .custer-dim.d4 h4 { color: var(--green); }
+  .custer-dim.d4 p { color: var(--green); opacity: 0.8; }
+
+  .custer-dim.d1-active { background: rgba(122,179,176,0.1); border: 2px solid rgba(122,179,176,0.35); }
+  .custer-dim.d1-active .dim-label, .custer-dim.d1-active h4 { color: var(--teal); }
+  .custer-dim.d1-active p { color: var(--teal); opacity: 0.8; }
+  .custer-dim.d1-active .focus-badge {
+    position: absolute;
+    top: 10px; right: 10px;
+    font-size: 0.56rem;
+    padding: 2px 7px;
+    background: rgba(122,179,176,0.2);
+    color: var(--teal);
+    border-radius: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── RESOURCES / LINKS ── */
+  .resource-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .resource-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 18px;
+    background: var(--surface);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .resource-item:hover {
+    border-color: rgba(122,179,176,0.4);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+
+  .resource-item .resource-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.9rem;
+  }
+
+  .resource-item .resource-text .resource-title {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .resource-item .resource-text .resource-desc {
+    font-size: 0.74rem;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: gap;
+    gap: 16px;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .footer-brand .brand-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--muted);
+  }
+
+  .footer-brand .brand-text span {
+    color: var(--gold);
+  }
+
+  .footer-note {
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate { animation: fadeUp 0.5s ease both; }
+  .delay-1 { animation-delay: 0.05s; }
+  .delay-2 { animation-delay: 0.15s; }
+  .delay-3 { animation-delay: 0.25s; }
+  .delay-4 { animation-delay: 0.35s; }
+  .delay-5 { animation-delay: 0.45s; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HEADER ── -->
+  <header class="site-header animate">
+
+    <!-- Watercolor blob (SVG, soft warm tones) -->
+    <svg class="watercolor-blob" viewBox="0 0 340 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <filter id="blur"><feGaussianBlur stdDeviation="18"/></filter>
+      </defs>
+      <ellipse cx="130" cy="80" rx="140" ry="75" fill="#c4935a" filter="url(#blur)"/>
+      <ellipse cx="260" cy="60" rx="90" ry="55" fill="#7ab3b0" filter="url(#blur)"/>
+      <ellipse cx="80" cy="110" rx="70" ry="40" fill="#9b8fad" filter="url(#blur)"/>
+    </svg>
+
+    <div class="header-content">
+      <a href="https://mariannletnes.github.io/Gauldals-DigSkole/" class="back-link" target="_blank">
+        <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 2 L4 6 L8 10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        DigSkole Gauldal — reisen 2022–2027
+      </a>
+
+      <div class="kicker">Samling 22 · 6. mars 2026 · DigSkole Trøndelag sørvest</div>
+
+      <h1>Sanselig og <em>estetisk inngang</em><br>til lek, erfaring og læring</h1>
+      <p class="subtitle">Ressursside etter samlingen</p>
+
+      <div class="header-meta">
+        <span class="meta-chip highlight">Custer D1 · D3</span>
+        <span class="meta-chip">T i TPACK</span>
+        <span class="meta-chip">Eleven som produsent</span>
+        <span class="meta-chip">Klafki · Danning</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── INTRO QUOTE ── -->
+  <div class="framing-quote animate delay-1">
+    <blockquote>
+      «Danning handler om å utvikle emosjonalitet og handlekraft.»
+    </blockquote>
+    <cite>— Wolfgang Klafki · Tema for Samling 22 · DigSkole Trøndelag sørvest 2026</cite>
+  </div>
+
+  <!-- ── TEORI ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-2">
+    <span class="dot" style="background:var(--warm)"></span>
+    Teoretisk grunnlag
+  </div>
+
+  <div class="theory-grid animate delay-2">
+
+    <!-- Klafki -->
+    <div class="theory-card klafki">
+      <svg class="card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="18" cy="18" r="16" stroke="var(--warm)" stroke-width="1.2" stroke-opacity="0.4"/>
+        <!-- Open book -->
+        <path d="M8 25 L8 12 Q18 9 18 12 L18 25" fill="rgba(196,147,90,0.12)" stroke="var(--warm)" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M28 25 L28 12 Q18 9 18 12 L18 25" fill="rgba(196,147,90,0.08)" stroke="var(--warm)" stroke-width="1.2" stroke-linejoin="round"/>
+        <line x1="18" y1="12" x2="18" y2="25" stroke="var(--warm)" stroke-width="0.8" stroke-opacity="0.5"/>
+        <!-- Arrows pointing both ways = den doble åpningen -->
+        <path d="M13 20 L11 18 L13 16" stroke="var(--warm)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+        <path d="M23 16 L25 18 L23 20" stroke="var(--warm)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+      </svg>
+      <h3>Wolfgang Klafki — Kategorial danning</h3>
+      <p>Klafki's pedagogikk handler om at virkelig læring skjer i møtet mellom eleven og verden. Han kaller det <strong>«den doble åpningen»</strong>:</p>
+      <ul>
+        <li>Eleven åpner seg for verden og dens innhold</li>
+        <li>Verden åpner seg for eleven — viser nye sider av seg selv</li>
+        <li>Tre grunnleggende evner: <strong>selvbestemmelse</strong>, <strong>medbestemmelse</strong> og <strong>solidaritet</strong></li>
+        <li>Estetikk og sanselig erfaring er en sentral vei inn til slik danning</li>
+      </ul>
+    </div>
+
+    <!-- Estetisk inngang -->
+    <div class="theory-card icils">
+      <svg class="card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Paintbrush / creative tool -->
+        <path d="M10 28 Q8 30 10 32 Q12 30 14 28 L24 14 L22 12 Z" fill="rgba(155,143,173,0.15)" stroke="var(--purple)" stroke-width="1.2" stroke-linejoin="round"/>
+        <rect x="22" y="8" width="6" height="6" rx="1" transform="rotate(45 25 11)" stroke="var(--purple)" stroke-width="1.2" fill="rgba(155,143,173,0.1)"/>
+        <!-- Color dots = multimodalitet -->
+        <circle cx="8" cy="14" r="2.5" fill="var(--warm)" opacity="0.5"/>
+        <circle cx="14" cy="8" r="2" fill="var(--teal)" opacity="0.5"/>
+        <circle cx="20" cy="6" r="1.5" fill="var(--gold)" opacity="0.5"/>
+      </svg>
+      <h3>Estetiske læreprosesser og meningsskaping</h3>
+      <p>Estetisk inngang er ikke bare kunst — det er en <strong>måte å tenke og lære på</strong>. Sanselige erfaringer gir mening og gjør kunnskap til noe levd og konkret:</p>
+      <ul>
+        <li>Multimodalitet: mening skapes gjennom mange kanaler (bilder, lyd, tekst, bevegelse)</li>
+        <li>Meningsskaping (<em>meaning-making</em>) — eleven konstruerer kunnskap aktivt</li>
+        <li>Kunnskaping (<em>knowledge creation</em>) — fellesskapet bygger forståelse sammen</li>
+        <li>Læreren som <strong>iscenesetter</strong>: designer rammer som muliggjør erfaring</li>
+      </ul>
+    </div>
+
+    <!-- Klafki didaktisk analyse — full width -->
+    <div class="theory-card klafki full">
+      <svg class="card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Five petals / questions radiating from center -->
+        <circle cx="18" cy="18" r="3.5" fill="var(--warm)" opacity="0.8"/>
+        <ellipse cx="18" cy="9" rx="3" ry="5" fill="none" stroke="var(--warm)" stroke-width="1.1" opacity="0.7"/>
+        <ellipse cx="18" cy="27" rx="3" ry="5" fill="none" stroke="var(--warm)" stroke-width="1.1" opacity="0.7"/>
+        <ellipse cx="9" cy="18" rx="5" ry="3" fill="none" stroke="var(--warm)" stroke-width="1.1" opacity="0.7"/>
+        <ellipse cx="27" cy="18" rx="5" ry="3" fill="none" stroke="var(--warm)" stroke-width="1.1" opacity="0.7"/>
+        <ellipse cx="11" cy="11" rx="3" ry="5" transform="rotate(-45 11 11)" fill="none" stroke="var(--warm)" stroke-width="1.1" opacity="0.4"/>
+      </svg>
+      <h3>Klafkis didaktiske analyse — fem kjernespørsmål</h3>
+      <p style="margin-bottom:16px;">Klafkis didaktiske analyse (1958) er et verktøy for å planlegge undervisning med dybde. Fem spørsmål som hjelper læreren å tenke gjennom <em>hva</em> som skal læres og <em>hvorfor</em> det er verdt å lære:</p>
+      <div class="klafki-grid">
+        <div class="klafki-q">
+          <div class="klafki-num">1</div>
+          <div>
+            <div class="klafki-label">Eksemplarisk betydning</div>
+            <p>Hva er det ved dette innholdet eller denne aktiviteten som kan åpne noe allment og viktig for barn og elever? Hvilken større idé, forståelse eller erfaring blir tilgjengelig gjennom akkurat dette eksemplet?</p>
+          </div>
+        </div>
+        <div class="klafki-q">
+          <div class="klafki-num">2</div>
+          <div>
+            <div class="klafki-label">Nåtidsbetydning</div>
+            <p>Hvorfor er dette meningsfullt for barn og elever nå? Hvordan knytter det an til deres interesser, uttrykksmåter, erfaringer eller behov her og nå?</p>
+          </div>
+        </div>
+        <div class="klafki-q">
+          <div class="klafki-num">3</div>
+          <div>
+            <div class="klafki-label">Fremtidsbetydning</div>
+            <p>Hvordan kan dette innholdet eller denne erfaringen være av verdi senere, i møte med nye situasjoner, nye materialer, nye tekster eller nye fagområder? Hvordan kan det støtte barns og elevers videre utvikling og deltakelse?</p>
+          </div>
+        </div>
+        <div class="klafki-q">
+          <div class="klafki-num">4</div>
+          <div>
+            <div class="klafki-label">Innholdets struktur</div>
+            <p>Hva er de sentrale elementene i dette innholdet? Hvilke begreper, sammenhenger, estetiske kvaliteter eller digitale uttrykksformer må vi gripe for å forstå hva aktiviteten faktisk rommer?</p>
+          </div>
+        </div>
+        <div class="klafki-q" style="grid-column: 1 / -1;">
+          <div class="klafki-num">5</div>
+          <div>
+            <div class="klafki-label">Tilrettelegging og arbeidsmåter</div>
+            <p>Hvordan kan vi legge til rette for at barn og elever får utforske, uttrykke og erfare dette innholdet på en måte som er trygg, åpen og meningsfull? Hva må vi gjøre, og hva må vi være oppmerksomme på, for at arbeidet skal bli tilgjengelig og relevant?</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TPACK / Custer intro — full width, compact -->
+    <div class="theory-card tpack full" style="background:rgba(232,197,71,0.05); border-color:rgba(232,197,71,0.2);">
+      <svg class="card-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="15" cy="14" r="9" stroke="var(--teal)" stroke-width="1.1" fill="rgba(122,179,176,0.08)"/>
+        <circle cx="24" cy="14" r="9" stroke="var(--purple)" stroke-width="1.1" fill="rgba(155,143,173,0.08)"/>
+        <circle cx="19.5" cy="23" r="9" stroke="var(--gold)" stroke-width="1.1" fill="rgba(232,197,71,0.08)"/>
+        <text x="19.5" y="19" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="5" font-weight="700" fill="#c4a028">TPACK</text>
+      </svg>
+      <h3 style="color:#b8962a;">Denne samlingen i TPACK — «T-en er turen»</h3>
+      <p style="font-size:0.82rem; color:var(--muted); line-height:1.6;">Vi har jobbet godt med <strong style="color:var(--teal)">PK (Pedagogical Knowledge)</strong> og <strong style="color:var(--purple)">CK (Content Knowledge)</strong> gjennom hele DigSkole. Nå er det <strong style="color:#b8962a">TK (Technological Knowledge)</strong> sin tur — ikke kunnskap <em>om</em> teknologi, men å faktisk <em>bruke</em> verktøyene selv og <em>skape</em> med dem. Samling 22 er første steg: læreren erfarer verktøyet på kroppen, slik at hen kan iscenesette eleven som produsent.</p>
+    </div>
+
+  </div>
+
+  <!-- ── CUSTER DIMENSJONER ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background:var(--teal)"></span>
+    Custers fire dimensjoner — fokus i dag
+  </div>
+
+  <div class="custer-visual animate delay-3">
+    <p style="font-size:0.82rem; color:var(--muted); line-height:1.6; margin-bottom:4px;">Custer (2016) deler digital kompetanse i fire dimensjoner. I Samling 22 løfter vi frem <strong>D1 og D3</strong> — de som har vært underrepresentert i DigSkole-reisen så langt.</p>
+    <div class="custer-grid">
+      <div class="custer-dim d1-active">
+        <div class="focus-badge">↑ I fokus i dag</div>
+        <div class="dim-label">D1 — Artefakt</div>
+        <h4>Verktøyet</h4>
+        <p>Læreren bruker verktøyet selv — akvarell med hender, Book Creator med fingre. Vi erfarer materialet på kroppen før vi ber elever om å gjøre det.</p>
+      </div>
+      <div class="custer-dim d2">
+        <div class="dim-label">D2 — Kunnskap</div>
+        <h4>Hvorfor og hva</h4>
+        <p>Kunnskap om hva estetisk inngang betyr didaktisk — Klafki, meningsskaping og den doble åpningen. Forståelse for <em>hva</em> og <em>hvorfor</em>.</p>
+      </div>
+      <div class="custer-dim d3">
+        <div class="focus-badge">↑ I fokus i dag</div>
+        <div class="dim-label">D3 — Prosess</div>
+        <h4>Skapende prosess</h4>
+        <p>Vi er i gang med å skape — akvarellbilder, multimodal inngang, digitale bøker. Prosessen er målet, ikke bare produktet. Eleven som produsent.</p>
+      </div>
+      <div class="custer-dim d4">
+        <div class="dim-label">D4 — Makt/kraft</div>
+        <h4>Sosial kraft</h4>
+        <p>Teknologi og estetikk som sosial konstruksjon — hvem definerer hva som er «bra»? Inkludering og mangfold i estetisk uttrykk.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WORKSHOPS ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background:var(--purple)"></span>
+    Tre aktiviteter fra samlingen
+  </div>
+
+  <div class="workshops animate delay-3">
+
+    <!-- Workshop 1: Akvarell -->
+    <div class="workshop-item w1">
+      <div class="workshop-num">
+        <span>1</span>
+        <small>Verksted</small>
+      </div>
+      <div class="workshop-body">
+        <h3>Akvarell — sanselig erfaring med analoge materialer</h3>
+        <div class="tags">
+          <span class="tag warm">D1 — Artefakt</span>
+          <span class="tag warm">Sanselig</span>
+          <span class="tag teal">Estetikk</span>
+        </div>
+        <p>Vi startet med hender i vann og pigment — analoge materialer som gir umiddelbar, sanselig tilbakemelding. Akvarell er flyktig, den kan ikke kontrolleres fullstendig. Det krever tilstedeværelse og aksept for det uforutsigbare.</p>
+        <p>Denne erfaringen er selve grunnlaget for det som kommer digitalt: å ha kjent på noe med kroppen gjør at vi forstår det på en annen måte. <strong>Læreren erfarer det eleven skal erfare.</strong></p>
+        <div class="reflection">Refleksjon: Hva skjedde i deg da fargen beveget seg av seg selv? Hva kan dette åpne for i klassen din?</div>
+      </div>
+    </div>
+
+    <!-- Workshop 2: Multimodal / estetisk inngang -->
+    <div class="workshop-item w2">
+      <div class="workshop-num">
+        <span>2</span>
+        <small>Verksted</small>
+      </div>
+      <div class="workshop-body">
+        <h3>Multimodal og estetisk inngang til faginnhold</h3>
+        <div class="tags">
+          <span class="tag teal">D3 — Prosess</span>
+          <span class="tag teal">Multimodalitet</span>
+          <span class="tag purple">Meningsskaping</span>
+        </div>
+        <p>Estetisk inngang betyr å la sanselige opplevelser åpne faginnholdet. Vi kombinerte bilde, tekst, lyd og bevegelse som innganger til læring — ikke som pynt, men som <strong>bærere av mening</strong>.</p>
+        <p>Multimodalitet handler om at mening skapes gjennom mange uttrykksmåter, og at elever som strever med skrift kan skinne gjennom bilde eller lyd. Det sømløse klasserommet lar disse modalitetene flyte naturlig over i hverandre.</p>
+        <div class="reflection">Refleksjon: Hvilke modaliteter dominerer i din undervisning nå? Hva ville skje om du åpnet for én til?</div>
+      </div>
+    </div>
+
+    <!-- Workshop 3: Book Creator -->
+    <div class="workshop-item w3">
+      <div class="workshop-num">
+        <span>3</span>
+        <small>Verksted</small>
+      </div>
+      <div class="workshop-body">
+        <h3>Book Creator — digital bok som skapende prosess</h3>
+        <div class="tags">
+          <span class="tag purple">D1 — Verktøy</span>
+          <span class="tag warm">D3 — Produksjon</span>
+          <span class="tag gold">T i TPACK</span>
+        </div>
+        <p><strong>Book Creator</strong> er en app der elever (og lærere!) kan lage digitale bøker med tekst, bilder, tegning, lyd og video. Det er verktøyet som gjør eleven til <em>produsent</em> fremfor konsument.</p>
+        <p>I Samling 22 brukte vi Book Creator til å samle akvarellopplevelsen og refleksjonene i en liten digital bok — en multimodal logg av dagen. Slik flettes D1 (verktøyet), D3 (prosessen) og estetikk naturlig sammen.</p>
+        <div class="reflection">Prøv selv: Lag én side i Book Creator om en faglig opplevelse du vil at elevene skal ha. Del med en kollega.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── NØKKELBEGREPER ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-4">
+    <span class="dot" style="background:var(--gold)"></span>
+    Nøkkelbegreper — ta disse med tilbake til skolen
+  </div>
+
+  <div class="concepts-grid animate delay-4">
+
+    <div class="concept-card">
+      <div class="concept-term">
+        <span class="indicator" style="background:var(--warm)"></span>
+        Den doble åpningen
+      </div>
+      <p class="concept-def">Klafkis begrep: eleven åpner seg for verden <em>og</em> verden åpner seg for eleven. Ekte danning skjer i dette møtet — ikke gjennom enveisformidling.</p>
+    </div>
+
+    <div class="concept-card">
+      <div class="concept-term">
+        <span class="indicator" style="background:var(--purple)"></span>
+        Meningsskaping
+      </div>
+      <p class="concept-def">Elevens aktive konstruksjon av mening gjennom handling og uttrykk. Skjer best når eleven <em>produserer</em> noe — ikke bare mottar informasjon.</p>
+    </div>
+
+    <div class="concept-card">
+      <div class="concept-term">
+        <span class="indicator" style="background:var(--teal)"></span>
+        Kunnskaping
+      </div>
+      <p class="concept-def"><em>Knowledge creation</em> — kunnskap som bygges i et fellesskap. Klassen skaper forståelse sammen, ikke bare individuelt. Sosial og dialogisk prosess.</p>
+    </div>
+
+    <div class="concept-card">
+      <div class="concept-term">
+        <span class="indicator" style="background:var(--warm)"></span>
+        Danning
+      </div>
+      <p class="concept-def">Mer enn kunnskap og ferdigheter — danning (<em>Bildung</em>) handler om å bli et helhetlig, reflekterende menneske. Klafkis mål for all pedagogikk.</p>
+    </div>
+
+    <div class="concept-card">
+      <div class="concept-term">
+        <span class="indicator" style="background:var(--teal)"></span>
+        Det sømløse klasserommet
+      </div>
+      <p class="concept-def">Digitalt og analogt smelter sømløst sammen. Grensene mellom skjerm og papir, inne og ute, individuelt og kollektivt er ikke kunstige barrierer.</p>
+    </div>
+
+    <div class="concept-card">
+      <div class="concept-term">
+        <span class="indicator" style="background:var(--purple)"></span>
+        Læreren som iscenesetter
+      </div>
+      <p class="concept-def">Læreren designer rommet, oppgavene og stemmingen — ikke svar. Iscenesettelsen legger til rette for at elevens erfaring og danning kan skje.</p>
+    </div>
+
+    <div class="concept-card">
+      <div class="concept-term">
+        <span class="indicator" style="background:var(--gold)"></span>
+        Eleven som produsent
+      </div>
+      <p class="concept-def">Skiftet fra konsument til produsent er kjernen i T-en i TPACK. Eleven lager noe — en bok, et bilde, en lyd — og tilegner seg kunnskap gjennom skapingen.</p>
+    </div>
+
+    <div class="concept-card">
+      <div class="concept-term">
+        <span class="indicator" style="background:var(--green)"></span>
+        Estetiske læreprosesser
+      </div>
+      <p class="concept-def">Læring som involverer sansene, følelsene og kroppen — ikke bare intellektet. Gir dypere forståelse fordi mer av mennesket er med i prosessen.</p>
+    </div>
+
+  </div>
+
+  <!-- ── LENKER OG RESSURSER ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-5">
+    <span class="dot" style="background:var(--green)"></span>
+    Ressurser og verktøy
+  </div>
+
+  <div class="resource-list animate delay-5">
+
+    <a href="https://www.bookcreator.com" target="_blank" rel="noopener" class="resource-item">
+      <div class="resource-icon" style="background:rgba(155,143,173,0.12);">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="2" width="10" height="14" rx="1.5" stroke="var(--purple)" stroke-width="1.2"/>
+          <line x1="5.5" y1="5.5" x2="10.5" y2="5.5" stroke="var(--purple)" stroke-width="1" stroke-linecap="round"/>
+          <line x1="5.5" y1="8" x2="10.5" y2="8" stroke="var(--purple)" stroke-width="1" stroke-linecap="round"/>
+          <line x1="5.5" y1="10.5" x2="8.5" y2="10.5" stroke="var(--purple)" stroke-width="1" stroke-linecap="round"/>
+          <circle cx="13" cy="13" r="3.5" fill="var(--purple)" fill-opacity="0.15" stroke="var(--purple)" stroke-width="1.2"/>
+          <line x1="13" y1="11.5" x2="13" y2="14.5" stroke="var(--purple)" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="11.5" y1="13" x2="14.5" y2="13" stroke="var(--purple)" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="resource-text">
+        <div class="resource-title">Book Creator — bookcreator.com</div>
+        <div class="resource-desc">Lag digitale bøker med tekst, bilder, tegning, lyd og video. Gratis konto for lærere. Prøv å lage en multimodal logg fra en undervisningsøkt.</div>
+      </div>
+    </a>
+
+    <a href="https://www.udir.no/lk20/overordnet-del/?lang=nob" target="_blank" rel="noopener" class="resource-item">
+      <div class="resource-icon" style="background:rgba(122,179,176,0.12);">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="3" width="14" height="12" rx="1.5" stroke="var(--teal)" stroke-width="1.2"/>
+          <line x1="6" y1="3" x2="6" y2="15" stroke="var(--teal)" stroke-width="1" stroke-opacity="0.5"/>
+          <line x1="2" y1="8" x2="16" y2="8" stroke="var(--teal)" stroke-width="1" stroke-opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="resource-text">
+        <div class="resource-title">Overordnet del — grunnleggende ferdigheter · Udir</div>
+        <div class="resource-desc">Fagfornyelsens ramme for digitale ferdigheter som grunnleggende ferdighet i alle fag. Bakgrunn for TPACK og Custer-dimensjonene.</div>
+      </div>
+    </a>
+
+    <a href="https://www.udir.no/kvalitet-og-kompetanse/digitalisering-skole/rammeverk-larerens-profesjonsfaglige-digitale-komp/" target="_blank" rel="noopener" class="resource-item">
+      <div class="resource-icon" style="background:rgba(196,147,90,0.12);">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="9" cy="9" r="7" stroke="var(--warm)" stroke-width="1.2"/>
+          <path d="M9 5 L9 9 L12 11" stroke="var(--warm)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="resource-text">
+        <div class="resource-title">PfDK — Profesjonsfaglig digital kompetanse · Udir</div>
+        <div class="resource-desc">Det nasjonale rammeverket for læreres digitale kompetanse. Grunnlaget for hele DigSkole-reisen og TPACK-arbeidet.</div>
+      </div>
+    </a>
+
+    <a href="https://mariannletnes.github.io/Gauldals-DigSkole/" target="_blank" rel="noopener" class="resource-item">
+      <div class="resource-icon" style="background:rgba(232,197,71,0.12);">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 16 L4 7 L9 4 L14 7 L14 16" stroke="#b8962a" stroke-width="1.2" stroke-linejoin="round"/>
+          <rect x="7" y="11" width="4" height="5" rx="0.5" stroke="#b8962a" stroke-width="1.1"/>
+          <path d="M3 7 L9 4 L15 7" stroke="#b8962a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="resource-text">
+        <div class="resource-title">DigSkole Gauldal — reisen 2022–2027</div>
+        <div class="resource-desc">Se hele reisen vi har vært på sammen — fra grunnmuren i 2022 via utforsking og deling til dette vendepunktet der T-en i TPACK endelig tar plass.</div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ── REFERANSER ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-5">
+    <span class="dot" style="background:var(--muted)"></span>
+    Sentrale referanser
+  </div>
+
+  <div style="background:var(--surface); border-radius:12px; padding:24px 28px; border:1px solid var(--border); box-shadow:0 2px 10px rgba(0,0,0,0.04);" class="animate delay-5">
+    <ul style="list-style:none; display:flex; flex-direction:column; gap:12px;">
+      <li style="font-size:0.79rem; color:var(--muted); line-height:1.7; padding-bottom:12px; border-bottom:1px solid var(--border);">
+        <strong style="color:var(--text);">Klafki, W. (1996).</strong> <em>Dannelsesteori og didaktik — nye studier.</em> Klim. [Orig. Neue Studien zur Bildungstheorie und Didaktik, 1985] — Om kategorial danning, den doble åpningen og de tre grunnleggende evnene.
+      </li>
+      <li style="font-size:0.79rem; color:var(--muted); line-height:1.7; padding-bottom:12px; border-bottom:1px solid var(--border);">
+        <strong style="color:var(--text);">Custer, R. L. (2016).</strong> <em>Technology Literacy Assessment.</em> I J. M. Ritz & S. C. Fan (Red.), Technology and Engineering Literacy. — Custers fire dimensjoner for teknologisk kompetanse.
+      </li>
+      <li style="font-size:0.79rem; color:var(--muted); line-height:1.7; padding-bottom:12px; border-bottom:1px solid var(--border);">
+        <strong style="color:var(--text);">Mishra, P. & Koehler, M. J. (2006).</strong> Technological Pedagogical Content Knowledge: A Framework for Teacher Knowledge. <em>Teachers College Record, 108</em>(6), 1017–1054. — TPACK-rammeverket.
+      </li>
+      <li style="font-size:0.79rem; color:var(--muted); line-height:1.7; padding-bottom:12px; border-bottom:1px solid var(--border);">
+        <strong style="color:var(--text);">Kress, G. (2010).</strong> <em>Multimodality: A Social Semiotic Approach to Contemporary Communication.</em> Routledge. — Multimodalitet og meningsskaping.
+      </li>
+      <li style="font-size:0.79rem; color:var(--muted); line-height:1.7;">
+        <strong style="color:var(--text);">Utdanningsdirektoratet (2017).</strong> <em>Rammeverk for grunnleggende ferdigheter.</em> Udir. — Digitale ferdigheter som grunnleggende ferdighet i fagfornyelsen.
+      </li>
+    </ul>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <a href="https://mariannletnes.github.io/Gauldals-DigSkole/" class="footer-brand" target="_blank">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="14" cy="14" r="13" stroke="rgba(232,197,71,0.3)" stroke-width="1"/>
+        <rect x="8" y="14" width="12" height="8" rx="0.8" stroke="var(--gold)" stroke-width="1" stroke-opacity="0.6"/>
+        <path d="M6 14 L14 8 L22 14" stroke="var(--gold)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.6"/>
+        <path d="M11.5 11 Q14 8.5 16.5 11" stroke="var(--teal)" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0.7"/>
+        <circle cx="14" cy="10" r="1" fill="var(--teal)" opacity="0.8"/>
+      </svg>
+      <span class="brand-text">DigSkole <span>Gauldal</span> · 2022–2027</span>
+    </a>
+    <div class="footer-note">
+      Ressursside for Samling 22 · 6. mars 2026<br>
+      DigSkole Trøndelag sørvest · NTNU
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
