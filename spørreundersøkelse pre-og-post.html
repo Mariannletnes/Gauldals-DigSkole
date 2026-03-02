@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modul 1 · Klar, ferdig, gå — DigSkole Gauldal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #0f0f12;
+    --surface: #1a1a20;
+    --text:    #e8e4dc;
+    --muted:   #7a7670;
+    --border:  rgba(255,255,255,0.07);
+    --warm:    #c4935a;
+    --teal:    #7ab3b0;
+    --purple:  #9b8fad;
+    --gold:    #e8c547;
+    --green:   #82a87d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 56px 32px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    margin-bottom: 64px;
+    position: relative;
+  }
+
+  .watercolor-blob {
+    position: absolute;
+    top: -24px;
+    left: -16px;
+    width: 340px;
+    height: 160px;
+    pointer-events: none;
+    opacity: 0.22;
+    z-index: 0;
+  }
+
+  .header-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 28px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--teal); }
+  .back-link svg { width: 12px; height: 12px; }
+
+  .kicker {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .site-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .site-header h1 em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .site-header .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .meta-chip {
+    font-size: 0.72rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .meta-chip.highlight {
+    background: rgba(122,179,176,0.1);
+    border-color: rgba(122,179,176,0.3);
+    color: var(--teal);
+  }
+
+  /* ── SECTION LABELS ── */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #a09890;
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section-label .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  /* ── INTRO QUOTE ── */
+  .framing-quote {
+    padding: 28px 32px;
+    background: rgba(122,179,176,0.07);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 48px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+  }
+
+  .framing-quote blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .framing-quote cite {
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    font-style: normal;
+  }
+
+  /* ── SURVEY CARDS GRID ── */
+  .survey-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 4px;
+  }
+
+  .survey-card {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 32px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .survey-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .survey-card.ansatte::before { background: var(--warm); }
+  .survey-card.elever::before  { background: var(--teal); }
+
+  .card-target {
+    font-size: 0.62rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 10px;
+  }
+
+  .survey-card.ansatte .card-target { color: var(--warm); }
+  .survey-card.elever  .card-target { color: var(--teal); }
+
+  .survey-card h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 22px;
+    color: var(--text);
+  }
+
+  .content-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .content-list li {
+    font-size: 0.84rem;
+    color: var(--muted);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.55;
+  }
+
+  .content-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 1px;
+  }
+
+  .survey-card.ansatte .content-list li::before { background: var(--warm); }
+  .survey-card.elever  .content-list li::before { background: var(--teal); }
+
+  .content-list li strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* ── METHOD SECTION ── */
+  .method-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 4px;
+  }
+
+  .method-box {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 24px 26px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  }
+
+  .method-box.pre  { border-top: 3px solid var(--purple); }
+  .method-box.post { border-top: 3px solid var(--gold); }
+
+  .method-box h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .method-box.pre  h4 { color: var(--purple); }
+  .method-box.post h4 { color: #b8962a; }
+
+  .method-box p {
+    font-size: 0.84rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ── DATA NOTE ── */
+  .data-note {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 18px 22px;
+    border: 1px solid var(--border);
+    font-size: 0.79rem;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-top: 4px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .data-note svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    opacity: 0.5;
+  }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .footer-brand .brand-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--muted);
+  }
+
+  .footer-brand .brand-text span { color: var(--gold); }
+
+  .footer-note {
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate { animation: fadeUp 0.5s ease both; }
+  .delay-1 { animation-delay: 0.05s; }
+  .delay-2 { animation-delay: 0.15s; }
+  .delay-3 { animation-delay: 0.25s; }
+  .delay-4 { animation-delay: 0.35s; }
+  .delay-5 { animation-delay: 0.45s; }
+
+  @media (max-width: 640px) {
+    .survey-grid, .method-grid { grid-template-columns: 1fr; }
+    .site-header h1 { font-size: 2.2rem; }
+    .page { padding: 32px 20px 64px; }
+    .footer-note { text-align: left; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HEADER ── -->
+  <header class="site-header animate">
+
+    <svg class="watercolor-blob" viewBox="0 0 340 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <filter id="blur"><feGaussianBlur stdDeviation="18"/></filter>
+      </defs>
+      <ellipse cx="120" cy="80" rx="130" ry="70" fill="#7ab3b0" filter="url(#blur)"/>
+      <ellipse cx="260" cy="55" rx="85" ry="50" fill="#9b8fad" filter="url(#blur)"/>
+      <ellipse cx="70"  cy="115" rx="65" ry="38" fill="#e8c547" filter="url(#blur)"/>
+    </svg>
+
+    <div class="header-content">
+      <a href="index.html" class="back-link">
+        <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 2 L4 6 L8 10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        DigSkole Gauldal — reisen 2022–2027
+      </a>
+
+      <div class="kicker">Modul 1 · Klar, ferdig, gå · DigSkole Gauldal</div>
+
+      <h1>Ståstedsanalyse —<br><em>klar, ferdig, gå</em></h1>
+      <p class="subtitle">Rigge skolen for utvikling og endring</p>
+
+      <div class="header-meta">
+        <span class="meta-chip highlight">Modul 1</span>
+        <span class="meta-chip">Ståstedsanalyse</span>
+        <span class="meta-chip">Lokal forankring</span>
+        <span class="meta-chip">Pre 2022 · Post 2026</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── INTRO QUOTE ── -->
+  <div class="framing-quote animate delay-1">
+    <blockquote>
+      «En ståstedsanalyse gir skolen muligheten til å forstå sitt nåværende digitale ståsted og identifisere mål for utvikling som er forankret i reelle behov — samtidig som det gir aktørene mulighet for medbestemmelse.»
+    </blockquote>
+    <cite>— Modul 1: Klar, ferdig, gå · DigSkole Gauldal</cite>
+  </div>
+
+  <!-- ── HVA GJØR VELLYKKEDE PROSJEKTER ── -->
+  <div class="section-label animate delay-1">
+    <span class="dot" style="background:var(--gold)"></span>
+    Hva kjennetegner vellykkede digitaliseringsprosjekter?
+  </div>
+
+  <div style="background:var(--surface); border-radius:12px; padding:24px 28px; border:1px solid var(--border); box-shadow:0 2px 10px rgba(0,0,0,0.25); margin-bottom:4px;" class="animate delay-1">
+    <p style="font-size:0.8rem; color:var(--muted); line-height:1.65; margin-bottom:16px;">Ifølge Det europeiske skoleprosjektet (EUN) kan vellykkede digitaliseringsprosjekter deles inn i fem kategorier. Ståstedsanalysen hjelper oss å kartlegge hvor vi er på hver av disse:</p>
+    <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:10px;">
+      <div style="text-align:center; padding:12px 8px; background:rgba(232,197,71,0.07); border-radius:8px; border:1px solid rgba(232,197,71,0.12);">
+        <div style="font-size:0.62rem; font-weight:500; text-transform:uppercase; letter-spacing:0.1em; color:#b8962a; margin-bottom:4px;">01</div>
+        <div style="font-size:0.74rem; color:var(--text); line-height:1.4;">Forbedring av læringsprosesser</div>
+      </div>
+      <div style="text-align:center; padding:12px 8px; background:rgba(232,197,71,0.07); border-radius:8px; border:1px solid rgba(232,197,71,0.12);">
+        <div style="font-size:0.62rem; font-weight:500; text-transform:uppercase; letter-spacing:0.1em; color:#b8962a; margin-bottom:4px;">02</div>
+        <div style="font-size:0.74rem; color:var(--text); line-height:1.4;">Økt elevdeltakelse</div>
+      </div>
+      <div style="text-align:center; padding:12px 8px; background:rgba(232,197,71,0.07); border-radius:8px; border:1px solid rgba(232,197,71,0.12);">
+        <div style="font-size:0.62rem; font-weight:500; text-transform:uppercase; letter-spacing:0.1em; color:#b8962a; margin-bottom:4px;">03</div>
+        <div style="font-size:0.74rem; color:var(--text); line-height:1.4;">Styrket læringsutbytte</div>
+      </div>
+      <div style="text-align:center; padding:12px 8px; background:rgba(232,197,71,0.07); border-radius:8px; border:1px solid rgba(232,197,71,0.12);">
+        <div style="font-size:0.62rem; font-weight:500; text-transform:uppercase; letter-spacing:0.1em; color:#b8962a; margin-bottom:4px;">04</div>
+        <div style="font-size:0.74rem; color:var(--text); line-height:1.4;">Endring av læringsmiljøet</div>
+      </div>
+      <div style="text-align:center; padding:12px 8px; background:rgba(232,197,71,0.07); border-radius:8px; border:1px solid rgba(232,197,71,0.12);">
+        <div style="font-size:0.62rem; font-weight:500; text-transform:uppercase; letter-spacing:0.1em; color:#b8962a; margin-bottom:4px;">05</div>
+        <div style="font-size:0.74rem; color:var(--text); line-height:1.4;">Endring av organisasjonskulturen</div>
+      </div>
+    </div>
+    <p style="font-size:0.74rem; color:var(--muted); line-height:1.6; margin-top:14px; font-style:italic;">De mest vellykkede prosjektene tar hensyn til pedagogisk planlegging og lærerutvikling, og bruker teknologien til å støtte læringen — ikke erstatte den. (EUN; OECD)</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ── SURVEY CARDS ── -->
+  <div class="section-label animate delay-2">
+    <span class="dot" style="background:var(--warm)"></span>
+    Ståstedsanalyse — hva kartlegger vi?
+  </div>
+
+  <div class="survey-grid animate delay-2">
+
+    <div class="survey-card ansatte">
+      <div class="card-target">Målgruppe: Ansatte</div>
+      <h2>Profesjonsfaglig digital kompetanse</h2>
+      <ul class="content-list">
+        <li><strong>Didaktisk trygghet:</strong> Hvordan læreren bruker teknologi for å fremme læring i spesifikke fag.</li>
+        <li><strong>Teknisk mestring:</strong> Opplevelse av støtte og egen evne til å bruke digitale verktøy.</li>
+        <li><strong>Engasjement vs. utmattelse:</strong> Måling av arbeidsglede og motivasjon i en digital omstillingsprosess.</li>
+        <li><strong>Samarbeidskultur:</strong> I hvilken grad det deles erfaringer og ressurser mellom kolleger.</li>
+      </ul>
+    </div>
+
+    <div class="survey-card elever">
+      <div class="card-target">Målgruppe: Elever</div>
+      <h2>Læringsglede og produsentrolle</h2>
+      <ul class="content-list">
+        <li><strong>Mestringstro:</strong> Elevens tro på egne evner når de løser oppgaver digitalt.</li>
+        <li><strong>Fra konsument til produsent:</strong> Brukes teknologien til å skape noe nytt, eller bare til å motta informasjon?</li>
+        <li><strong>Digital dannelse:</strong> Holdninger til nettvett, medborgerskap og digital samhandling.</li>
+        <li><strong>Skole vs. fritid:</strong> Kartlegging av hvordan digital kompetanse overføres mellom livsarenaer.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- ── LOKAL FORANKRING ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background:var(--warm)"></span>
+    Lokal forankring
+  </div>
+
+  <div style="margin-bottom:20px;" class="animate delay-3">
+    <div style="font-family:'Cormorant Garamond',serif; font-size:1.7rem; font-weight:300; line-height:1.2; margin-bottom:12px;">Fra ståstedsanalyse til lokal eierskap</div>
+    <p style="font-size:0.9rem; color:var(--muted); max-width:680px; line-height:1.65;">Ståstedsanalysen er ikke et mål i seg selv — den er inngangen til lokal planlegging. Funnene brukes til å utarbeide en prosjektbeskrivelse som fungerer som veikart: den definerer mål, identifiserer ressurser og gir klarhet rundt hva vi faktisk skal jobbe med hos akkurat oss.</p>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:4px;" class="animate delay-3">
+
+    <div style="background:var(--surface); border-radius:12px; padding:22px 24px; border:1px solid var(--border); border-top:3px solid var(--warm); box-shadow:0 2px 10px rgba(0,0,0,0.25);">
+      <div style="font-size:0.62rem; font-weight:500; text-transform:uppercase; letter-spacing:0.12em; color:var(--warm); margin-bottom:8px;">Steg 1</div>
+      <div style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600; margin-bottom:8px; color:var(--text);">Nullpunktsmåling</div>
+      <p style="font-size:0.8rem; color:var(--muted); line-height:1.6;">Surveyen gjennomføres med alle ansatte og alle elever fra 5. trinn og opp. For de yngste elevene (1.–4. trinn) gjennomfører klasselærerne samtaler i klasserommet i stedet for spørreskjema.</p>
+    </div>
+
+    <div style="background:var(--surface); border-radius:12px; padding:22px 24px; border:1px solid var(--border); border-top:3px solid var(--teal); box-shadow:0 2px 10px rgba(0,0,0,0.25);">
+      <div style="font-size:0.62rem; font-weight:500; text-transform:uppercase; letter-spacing:0.12em; color:var(--teal); margin-bottom:8px;">Steg 2</div>
+      <div style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600; margin-bottom:8px; color:var(--text);">Bruk av data lokalt</div>
+      <p style="font-size:0.8rem; color:var(--muted); line-height:1.6;">Resultatene deles med skolens ledelse og ressurspersoner. Sammen analyseres funnene — hva ser vi hos oss, hva er styrker, og hva trenger ekstra innsats?</p>
+    </div>
+
+    <div style="background:var(--surface); border-radius:12px; padding:22px 24px; border:1px solid var(--border); border-top:3px solid var(--purple); box-shadow:0 2px 10px rgba(0,0,0,0.25);">
+      <div style="font-size:0.62rem; font-weight:500; text-transform:uppercase; letter-spacing:0.12em; color:var(--purple); margin-bottom:8px;">Steg 3</div>
+      <div style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600; margin-bottom:8px; color:var(--text);">Lokal prosjektbeskrivelse</div>
+      <p style="font-size:0.8rem; color:var(--muted); line-height:1.6;">Med dataene som grunnlag utarbeider hver skole sin lokale prosjektbeskrivelse — et veikart som definerer mål, prioriteringer og ansvar for utviklingsarbeidet.</p>
+    </div>
+
+  </div>
+
+  <!-- ── METODE ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-4">
+    <span class="dot" style="background:var(--purple)"></span>
+    Metodikken bak
+  </div>
+
+  <div style="margin-bottom:24px;" class="animate delay-4">
+    <div style="font-family:'Cormorant Garamond',serif; font-size:1.7rem; font-weight:300; line-height:1.2; margin-bottom:12px;">Hvorfor to ståstedsanalyser?</div>
+    <p style="font-size:0.9rem; color:var(--muted); max-width:680px; line-height:1.65;">To tidspunkter gir oss muligheten til å dokumentere faktisk endring — ikke bare opplevd endring. Vi kartlegger det samme, med de samme spørsmålene, med fire års mellomrom. Slik kan vi se om de fem suksessfaktorene (EUN) faktisk er styrket gjennom prosjektet.</p>
+  </div>
+
+  <div class="method-grid animate delay-4">
+
+    <div class="method-box pre">
+      <h4>Ståstedsanalyse 1 · Vår 2022</h4>
+      <p>Gjennomføres før modulene starter. Kartlegger styrker, svakheter og endringsvilje i organisasjonen. Danner grunnlaget for den lokale prosjektbeskrivelsen og fungerer som kompass for veien videre.</p>
+    </div>
+
+    <div class="method-box post">
+      <h4>Ståstedsanalyse 2 · 2026</h4>
+      <p>Gjennomføres ved prosjektslutt med de samme spørsmålene. Dokumenterer den faktiske endringen: har lærernes trygghet og elevenes skaperglede økt — og hva har faktisk beveget seg?</p>
+    </div>
+
+  </div>
+
+  <!-- ── DATA NOTE ── -->
+  <hr class="section-divider">
+  <div class="section-label animate delay-5">
+    <span class="dot" style="background:var(--green)"></span>
+    Personvern og anonymitet
+  </div>
+
+  <div class="data-note animate delay-5">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="9" cy="9" r="8" stroke="var(--green)" stroke-width="1.1"/>
+      <path d="M9 8v5" stroke="var(--green)" stroke-width="1.3" stroke-linecap="round"/>
+      <circle cx="9" cy="5.5" r="0.8" fill="var(--green)"/>
+    </svg>
+    <span>Datainnsamlingen er anonymisert og utføres i samarbeid med NTNU / Nettskjema. Ingen enkeltpersoner vil kunne identifiseres i rapporteringen. Deltakelse er frivillig.</span>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <a href="index.html" class="footer-brand">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="14" cy="14" r="13" stroke="rgba(232,197,71,0.3)" stroke-width="1"/>
+        <rect x="8" y="14" width="12" height="8" rx="0.8" stroke="var(--gold)" stroke-width="1" stroke-opacity="0.6"/>
+        <path d="M6 14 L14 8 L22 14" stroke="var(--gold)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.6"/>
+        <path d="M11.5 11 Q14 8.5 16.5 11" stroke="var(--teal)" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0.7"/>
+        <circle cx="14" cy="10" r="1" fill="var(--teal)" opacity="0.8"/>
+      </svg>
+      <span class="brand-text">DigSkole <span>Gauldal</span> · 2022–2027</span>
+    </a>
+    <div class="footer-note">
+      Modul 1 · Klar, ferdig, gå · DigSkole Gauldal<br>
+      Ståstedsanalyse · NTNU / Nettskjema<br>
+      Mari-Ann Letnes
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
