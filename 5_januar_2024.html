@@ -3,227 +3,403 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>6. januar 2024 — KI i skolen</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>5. januar 2024 — KI i skolen · DigSkole Gauldal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0f0f12;
+    --bg:      #0f0f12;
     --surface: #1a1a20;
-    --border: rgba(255,255,255,0.07);
-    --text: #e8e4dc;
-    --muted: #7a7670;
-    --accent: #c4935a; 
+    --text:    #e8e4dc;
+    --muted:   #7a7670;
+    --border:  rgba(255,255,255,0.07);
+    --warm:    #c4935a;
+    --teal:    #7ab3b0;
+    --purple:  #9b8fad;
+    --gold:    #e8c547;
+    --green:   #82a87d;
+    --pink:    #d4819a;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; line-height: 1.6; overflow-x: hidden; }
-  
+  body { background: var(--bg); font-family: 'DM Sans', sans-serif; color: var(--text); min-height: 100vh; line-height: 1.6; }
+
   body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 100;
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
   }
 
-  .container { max-width: 1200px; margin: 0 auto; padding: 60px 40px; position: relative; z-index: 10; }
-  
-  .nav-back { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 40px; transition: color 0.3s ease; }
-  .nav-back:hover { color: var(--text); }
-  
-  header { margin-bottom: 80px; text-align: center; }
-  h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 300; line-height: 1.1; margin-bottom: 15px; }
-  
-  .intro-section { max-width: 800px; margin: 0 auto 60px; text-align: left; border-left: 1px solid var(--accent); padding-left: 30px; }
-  .intro-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 15px; font-weight: 400; color: var(--accent); }
-  .intro-section p { font-size: 1.05rem; color: var(--text); opacity: 0.9; margin-bottom: 20px; font-style: italic; }
-  .intro-section blockquote { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--muted); line-height: 1.8; position: relative; }
+  .page { max-width: 1000px; margin: 0 auto; padding: 56px 32px 80px; position: relative; z-index: 1; }
 
-  .grid-header { text-align: center; margin-bottom: 40px; }
-  .grid-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 300; color: var(--text); }
+  /* ── HEADER ── */
+  .site-header { margin-bottom: 64px; position: relative; }
+  .watercolor-blob { position: absolute; top: -24px; left: -16px; width: 440px; height: 200px; pointer-events: none; opacity: 0.15; z-index: 0; }
+  .header-content { position: relative; z-index: 1; }
 
-  .category-grid { 
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 25px; 
-    margin-bottom: 80px;
-  }
-  
-  .card { 
-    background: var(--surface); 
-    border: 1px solid var(--border); 
-    padding: 35px; 
-    display: flex;
-    flex-direction: column;
-    min-height: 480px;
-    border-top: 1px solid var(--accent);
-    transition: transform 0.3s ease;
-  }
-  .card:hover { transform: translateY(-5px); }
-  
-  .card-icon { width: 32px; height: 32px; margin-bottom: 20px; color: var(--accent); opacity: 0.8; }
-  .card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; margin-bottom: 15px; font-weight: 400; color: var(--text); border-bottom: 1px solid var(--border); padding-bottom: 12px; }
-  
-  .section-title { font-size: 0.65rem; text-transform: uppercase; color: var(--accent); letter-spacing: 0.1em; margin-top: 15px; margin-bottom: 6px; font-weight: 600; }
-  .description { font-size: 0.85rem; color: var(--muted); margin-bottom: 10px; line-height: 1.5; }
-  .highlight { color: var(--accent); font-weight: 500; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); text-decoration: none; margin-bottom: 28px; transition: color 0.2s; }
+  .back-link:hover { color: var(--teal); }
+  .back-link svg { width: 12px; height: 12px; }
 
-  /* Digitale skiller seksjon */
-  .digital-divide { 
-    background: rgba(196, 147, 90, 0.03); 
-    border: 1px solid var(--border); 
-    padding: 60px; 
-    margin-top: 40px;
-  }
-  .digital-divide h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 300; margin-bottom: 30px; text-align: center; color: var(--accent); }
-  
-  .divide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 40px; }
-  .divide-item h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--text); margin-bottom: 10px; }
-  .divide-item p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+  .kicker { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; font-weight: 500; }
 
-  @media (max-width: 1100px) { 
-    .category-grid, .divide-grid { grid-template-columns: repeat(2, 1fr); } 
+  .site-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; line-height: 1.15; color: var(--text); margin-bottom: 6px; }
+  .site-header h1 em { font-style: italic; color: var(--teal); }
+  .site-header .subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 300; font-style: italic; color: var(--muted); margin-bottom: 20px; }
+
+  .header-meta { display: flex; gap: 10px; flex-wrap: wrap; }
+  .meta-chip { font-size: 0.72rem; padding: 4px 12px; border-radius: 20px; background: var(--surface); border: 1px solid var(--border); color: var(--muted); letter-spacing: 0.04em; }
+  .meta-chip.highlight { background: rgba(122,179,176,0.1); border-color: rgba(122,179,176,0.3); color: var(--teal); }
+
+  /* ── SECTION LABELS ── */
+  .section-label { display: flex; align-items: center; gap: 10px; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.16em; color: #a09890; margin: 56px 0 24px; font-weight: 500; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .section-label .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── FRAMING QUOTE ── */
+  .framing-quote { padding: 28px 32px; background: rgba(122,179,176,0.07); border-left: 3px solid var(--teal); border-radius: 0 12px 12px 0; margin-bottom: 48px; }
+  .framing-quote blockquote { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; font-style: italic; color: var(--text); line-height: 1.6; margin-bottom: 12px; }
+  .framing-quote cite { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; font-style: normal; }
+
+  /* ── INTRO CARDS ── */
+  .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .intro-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; }
+  .intro-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--teal); margin-bottom: 10px; }
+  .intro-card p { font-size: 0.81rem; color: var(--muted); line-height: 1.7; }
+  .intro-card p strong { color: var(--text); }
+
+  /* ── CATEGORY CARDS ── */
+  .category-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+  .cat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; position: relative; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+  .cat-card:hover { border-color: rgba(255,255,255,0.12); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+  .cat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; border-radius: 12px 12px 0 0; }
+
+  .cat-card.c1::before { background: var(--teal); }
+  .cat-card.c2::before { background: var(--purple); }
+  .cat-card.c3::before { background: var(--pink); }
+  .cat-card.c4::before { background: var(--warm); }
+  .cat-card.c5::before { background: var(--gold); }
+  .cat-card.c6::before { background: var(--green); }
+
+  .cat-icon { width: 26px; height: 26px; margin-bottom: 14px; opacity: 0.8; }
+  .cat-card.c1 .cat-icon { color: var(--teal); }
+  .cat-card.c2 .cat-icon { color: var(--purple); }
+  .cat-card.c3 .cat-icon { color: var(--pink); }
+  .cat-card.c4 .cat-icon { color: var(--warm); }
+  .cat-card.c5 .cat-icon { color: var(--gold); }
+  .cat-card.c6 .cat-icon { color: var(--green); }
+
+  .cat-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .cat-card.c1 h3 { color: var(--teal); }
+  .cat-card.c2 h3 { color: var(--purple); }
+  .cat-card.c3 h3 { color: var(--pink); }
+  .cat-card.c4 h3 { color: var(--warm); }
+  .cat-card.c5 h3 { color: var(--gold); }
+  .cat-card.c6 h3 { color: var(--green); }
+
+  .cat-sub { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin: 12px 0 4px; font-weight: 500; }
+  .cat-desc { font-size: 0.77rem; color: var(--muted); line-height: 1.6; }
+  .cat-highlight { color: var(--text); font-weight: 500; }
+
+  /* ── DIGITALE SKILLER ── */
+  .divide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .divide-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+  .divide-num { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; color: rgba(255,255,255,0.05); line-height: 1; margin-bottom: 6px; }
+  .divide-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .divide-card p { font-size: 0.77rem; color: var(--muted); line-height: 1.7; }
+
+  /* ── REFLECTION ── */
+  .reflection-box { background: rgba(122,179,176,0.03); border: 1px solid rgba(122,179,176,0.15); border-radius: 16px; padding: 40px; }
+  .reflection-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--teal); margin-bottom: 32px; text-align: center; font-style: italic; }
+  .q-item { display: flex; gap: 24px; margin-bottom: 28px; align-items: flex-start; }
+  .q-item:last-child { margin-bottom: 0; }
+  .q-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: rgba(122,179,176,0.15); line-height: 1; flex-shrink: 0; }
+  .q-text { font-size: 0.9rem; font-style: italic; font-weight: 300; line-height: 1.7; padding-top: 4px; }
+
+  /* ── RESOURCE LIST ── */
+  .resource-item { display: flex; align-items: flex-start; gap: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; text-decoration: none; margin-bottom: 10px; transition: border-color 0.2s, background 0.2s; }
+  .resource-item:hover { border-color: rgba(255,255,255,0.12); background: rgba(255,255,255,0.02); }
+  .res-icon { width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .res-text { flex: 1; }
+  .res-title { font-size: 0.83rem; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+  .res-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.55; }
+
+  /* ── FOOTER ── */
+  .site-footer { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .footer-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .brand-text { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; }
+  .brand-text span { color: var(--gold); }
+  .footer-note { font-size: 0.72rem; color: rgba(122,102,112,0.6); text-align: right; line-height: 1.6; }
+
+  /* ── ANIMATIONS ── */
+  .animate { animation: fadeUp 0.5s ease both; }
+  .delay-1 { animation-delay: 0.05s; }
+  .delay-2 { animation-delay: 0.12s; }
+  .delay-3 { animation-delay: 0.2s; }
+  .delay-4 { animation-delay: 0.28s; }
+  .delay-5 { animation-delay: 0.36s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
-  @media (max-width: 750px) { 
-    .category-grid, .divide-grid { grid-template-columns: 1fr; } 
-    .digital-divide { padding: 30px; }
-  }
+
+  @media (max-width: 900px) { .category-grid { grid-template-columns: 1fr 1fr; } .divide-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .category-grid, .divide-grid, .intro-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
+<div class="page">
 
-<div class="container">
-  <a href="index.html" class="nav-back">← Tilbake til reisen</a>
-  
-  <header>
-    <h1>KI i undervisnings- og læringsprosesser</h1>
+  <!-- HEADER -->
+  <header class="site-header animate delay-1">
+    <svg class="watercolor-blob" viewBox="0 0 340 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="170" cy="80" rx="160" ry="68" fill="var(--teal)"/>
+      <ellipse cx="120" cy="60" rx="100" ry="55" fill="var(--purple)"/>
+      <ellipse cx="220" cy="100" rx="80" ry="45" fill="var(--pink)"/>
+    </svg>
+    <div class="header-content">
+      <a href="index.html" class="back-link">
+        <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 2L3 6L7 10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Tilbake til reisen
+      </a>
+      <div class="kicker">Seminar · Gauldal · 5. januar 2024</div>
+      <h1>KI i undervisnings-<br>og <em>læringsprosesser</em></h1>
+      <p class="subtitle">Teknologi som sosial konstruksjon · Policy og etikk</p>
+      <div class="header-meta">
+        <span class="meta-chip highlight">KI · Kunstig intelligens</span>
+        <span class="meta-chip">5. januar 2024</span>
+        <span class="meta-chip">NTNU · Mari-Ann Letnes</span>
+        <span class="meta-chip">Custer D2 · D4</span>
+      </div>
+    </div>
   </header>
 
-  <div class="intro-section">
-    <h2>Hva er Generativ KI?</h2>
-    <p>Teknologi som skaper nytt innhold basert på mønstre i enorme datamengder.</p>
-    <blockquote>I motsetning til tradisjonelle verktøy, fungerer generativ KI som en kreativ motor. Dette endrer premissene for hvordan vi produserer kunnskap og kommuniserer.</blockquote>
-  </div>
-
-  <div class="intro-section">
-    <h2>Hvorfor skal vi jobbe med KI?</h2>
-    <p>Skolen skal bidra til å "opne dører mot verda og framtida" (Opplæringsloven).</p>
+  <!-- FRAMING QUOTE -->
+  <div class="framing-quote animate delay-2">
     <blockquote>
-      KI er en viktig del av fremtiden elevene møter. Når demokrati og ytringsfrihet utfordres av "fake news" og algoritmer, må skolen gi elevene kunnskapen de trenger for å manøvrere trygt.
+      Skolen skal bidra til å «opne dører mot verda og framtida» — og KI er en viktig del av den fremtiden elevene møter.
     </blockquote>
+    <cite>Opplæringsloven · Ramme for seminaret 5. januar 2024</cite>
   </div>
 
-  <div class="grid-header">
-    <h2>6 kategorier for bruk av KI i undervisnings, - og læringsprosesser</h2>
+  <!-- INTRO -->
+  <div class="section-label animate delay-2">
+    <span class="dot" style="background:var(--teal)"></span>
+    Bakgrunn og utgangspunkt
   </div>
 
-  <div class="category-grid">
-    <div class="card">
-      <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+  <div class="intro-grid animate delay-2">
+    <div class="intro-card">
+      <h3>Hva er generativ KI?</h3>
+      <p>Teknologi som skaper nytt innhold basert på mønstre i enorme datamengder. I motsetning til tradisjonelle verktøy, fungerer generativ KI som en <strong>kreativ motor</strong> — dette endrer premissene for hvordan vi produserer kunnskap og kommuniserer.</p>
+    </div>
+    <div class="intro-card">
+      <h3>Hvorfor jobbe med KI?</h3>
+      <p>Skolen skal bidra til å «opne dører mot verda og framtida». Når demokrati og ytringsfrihet utfordres av «fake news» og algoritmer, må skolen gi elevene kunnskapen de trenger for å <strong>manøvrere trygt</strong> i en KI-formet verden.</p>
+    </div>
+  </div>
+
+  <!-- 6 KATEGORIER -->
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background:var(--purple)"></span>
+    6 kategorier for bruk av KI i undervisnings- og læringsprosesser
+  </div>
+
+  <div class="category-grid animate delay-3">
+
+    <div class="cat-card c1">
+      <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+      </svg>
       <h3>Læringsanalyse</h3>
-      <div class="section-title">Mulighet</div>
-      <p class="description">Forstå elevens ståsted og behov for progresjon gjennom KI-generert data.</p>
-      <div class="section-title">Prosess</div>
-      <p class="description">Analysere mønstre for å gi læreren grunnlag for presis tilpasset opplæring.</p>
+      <div class="cat-sub">Mulighet</div>
+      <p class="cat-desc">Forstå elevens ståsted og behov for progresjon gjennom KI-generert data.</p>
+      <div class="cat-sub">Prosess</div>
+      <p class="cat-desc">Analysere mønstre for å gi læreren grunnlag for presis tilpasset opplæring.</p>
     </div>
 
-    <div class="card">
-      <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    <div class="cat-card c2">
+      <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
       <h3>Interaksjon</h3>
-      <div class="section-title">Fra orakel til partner</div>
-      <p class="description">KI gir umiddelbar respons på elevens tankerekker og handlinger.</p>
-      <div class="section-title">Mulighet</div>
-      <p class="description">Eleven må ta eierskap og forklare egne faglige valg i dialog med teknologien.</p>
-      <div class="section-title">Utfordring</div>
-      <p class="description">Krever at brukeren velger å <span class="highlight">være i møtet</span> med fagstoffet.</p>
+      <div class="cat-sub">Fra orakel til partner</div>
+      <p class="cat-desc">KI gir umiddelbar respons på elevens tankerekker og handlinger.</p>
+      <div class="cat-sub">Mulighet</div>
+      <p class="cat-desc">Eleven må ta eierskap og forklare egne faglige valg i dialog med teknologien.</p>
+      <div class="cat-sub">Utfordring</div>
+      <p class="cat-desc">Krever at brukeren velger å <span class="cat-highlight">være i møtet</span> med fagstoffet.</p>
     </div>
 
-    <div class="card">
-      <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+    <div class="cat-card c3">
+      <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+      </svg>
       <h3>Kommunikasjon</h3>
-      <div class="section-title">Formidling av forståelse</div>
-      <p class="description">KI som støtte for eleven til å formidle innsikt gjennom tekst, lyd, bilde og video.</p>
-      <div class="section-title">Mulighet</div>
-      <p class="description">Styrke evnen til å formulere meningsfylte faglige ytringer.</p>
-      <div class="section-title">Utfordring</div>
-      <p class="description"><span class="highlight">Autentisitet:</span> Reflekterer innholdet elevens egentlige forståelse?</p>
+      <div class="cat-sub">Formidling av forståelse</div>
+      <p class="cat-desc">KI som støtte for eleven til å formidle innsikt gjennom tekst, lyd, bilde og video.</p>
+      <div class="cat-sub">Mulighet</div>
+      <p class="cat-desc">Styrke evnen til å formulere meningsfylte faglige ytringer.</p>
+      <div class="cat-sub">Utfordring</div>
+      <p class="cat-desc"><span class="cat-highlight">Autentisitet:</span> Reflekterer innholdet elevens egentlige forståelse?</p>
     </div>
 
-    <div class="card">
-      <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
+    <div class="cat-card c4">
+      <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/><line x1="14.31" y1="8" x2="20.05" y2="17.94"/><line x1="9.69" y1="8" x2="21.17" y2="8"/>
+        <line x1="7.38" y1="12" x2="13.12" y2="2.06"/><line x1="9.69" y1="16" x2="3.95" y2="6.06"/>
+        <line x1="14.31" y1="16" x2="2.83" y2="16"/><line x1="16.62" y1="12" x2="10.88" y2="21.94"/>
+      </svg>
       <h3>Visualisering</h3>
-      <div class="section-title">Mulighet</div>
-      <p class="description">Konkretisere abstrakte teorier gjennom KI-generert grafikk.</p>
-      <div class="section-title">Iscenesettelse</div>
-      <p class="description">Skape en estetisk inngang til læring gjennom visuelle representasjoner.</p>
+      <div class="cat-sub">Mulighet</div>
+      <p class="cat-desc">Konkretisere abstrakte teorier gjennom KI-generert grafikk.</p>
+      <div class="cat-sub">Iscenesettelse</div>
+      <p class="cat-desc">Skape en estetisk inngang til læring gjennom visuelle representasjoner.</p>
     </div>
 
-    <div class="card">
-      <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+    <div class="cat-card c5">
+      <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
+      </svg>
       <h3>Simulering</h3>
-      <div class="section-title">Mulighet</div>
-      <p class="description">Eksperimentere i trygge, KI-styrte miljøer som etterligner virkeligheten.</p>
-      <div class="section-title">Prosess</div>
-      <p class="description">Utvikle kritisk tenkning ved å se konsekvenser av ulike variabler.</p>
+      <div class="cat-sub">Mulighet</div>
+      <p class="cat-desc">Eksperimentere i trygge, KI-styrte miljøer som etterligner virkeligheten.</p>
+      <div class="cat-sub">Prosess</div>
+      <p class="cat-desc">Utvikle kritisk tenkning ved å se konsekvenser av ulike variabler.</p>
     </div>
 
-    <div class="card">
-      <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+    <div class="cat-card c6">
+      <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+      </svg>
       <h3>Vurdering</h3>
-      <div class="section-title">Mulighet</div>
-      <p class="description">Flytte fokus fra sluttprodukt til veiledning av elevens tenkeprosess.</p>
-      <div class="section-title">Fokus</div>
-      <p class="description">Bruke KI for umiddelbar respons som støtter refleksjon underveis.</p>
+      <div class="cat-sub">Mulighet</div>
+      <p class="cat-desc">Flytte fokus fra sluttprodukt til veiledning av elevens tenkeprosess.</p>
+      <div class="cat-sub">Fokus</div>
+      <p class="cat-desc">Bruke KI for umiddelbar respons som støtter refleksjon underveis.</p>
+    </div>
+
+  </div>
+
+  <!-- DIGITALE SKILLER -->
+  <div class="section-label animate delay-4">
+    <span class="dot" style="background:var(--warm)"></span>
+    Tre nivåer av digitale skiller · van Deursen og Helsper (2015)
+  </div>
+
+  <div class="divide-grid animate delay-4">
+    <div class="divide-card">
+      <div class="divide-num">1</div>
+      <h4>Tilgang</h4>
+      <p>Handler om fysisk tilgang til maskinvare, programvare og internett. Med KI oppstår et nytt skille mellom de som har tilgang til de mest avanserte (betalte) modellene og de som må bruke enklere gratistjenester.</p>
+    </div>
+    <div class="divide-card">
+      <div class="divide-num">2</div>
+      <h4>Bruk</h4>
+      <p>Hvor ofte og på hvilken måte teknologien brukes. I en KI-kontekst handler dette om evnen til å «prompte» effektivt — å vite hvordan man styrer maskinen for å få gode pedagogiske svar.</p>
+    </div>
+    <div class="divide-card">
+      <div class="divide-num">3</div>
+      <h4>Utbytte</h4>
+      <p>Det viktigste nivået: Hvem klarer å transformere bruken til faktisk læring og livskvalitet? Skillet går mellom de som lar KI tenke for seg, og de som bruker KI som katalysator for dypere forståelse.</p>
     </div>
   </div>
 
-  <div class="digital-divide">
-    <h2>Tre nivåer av digitale skiller</h2>
-    <p style="text-align: center; color: var(--muted); margin-top: -20px; font-size: 0.85rem;">van Deursen og Helsper (2015)</p>
-    
-    <div class="divide-grid">
-      <div class="divide-item">
-        <h4>1. Tilgang</h4>
-        <p>Handler om fysisk tilgang til maskinvare, programvare og internett. Med KI oppstår et nytt skille mellom de som har tilgang til de mest avanserte (betalte) modellene og de som må bruke enklere gratistjenester.</p>
-      </div>
-      <div class="divide-item">
-        <h4>2. Bruk</h4>
-        <p>Hvor ofte og på hvilken måte teknologien brukes. I en KI-kontekst handler dette om evnen til å "prompte" effektivt – å vite hvordan man styrer maskinen for å få gode pedagogiske svar.</p>
-      </div>
-      <div class="divide-item">
-        <h4>3. Utbytte</h4>
-        <p>Det viktigste nivået: Hvem klarer å transformere bruken til faktisk læring og livskvalitet? Skillet går her mellom de som lar KI tenke for seg, og de som bruker KI som en katalysator for dypere forståelse.</p>
-      </div>
+  <!-- REFLEKSJON -->
+  <div class="section-label animate delay-5">
+    <span class="dot" style="background:var(--teal)"></span>
+    Til refleksjon i personalet
+  </div>
+
+  <div class="reflection-box animate delay-5">
+    <div class="reflection-title">Spørsmål å vende tilbake til</div>
+    <div class="q-item">
+      <div class="q-num">1</div>
+      <div class="q-text">Med tanke på interaksjon og kommunikasjon: Hvordan kan vi iscenesette bruk av KI slik at det støtter elevens egen formuleringsevne og forståelse, fremfor at maskinen tar over eierskapet til teksten?</div>
+    </div>
+    <div class="q-item">
+      <div class="q-num">2</div>
+      <div class="q-text">Når vi ser på de tre nivåene for digitale skiller (tilgang, bruk og utbytte): Hvilke grep kan vi ta i våre klasserom for å sikre at KI utjevner forskjeller fremfor å skape nye klasseskiller i elevenes læringsutbytte?</div>
+    </div>
+    <div class="q-item">
+      <div class="q-num">3</div>
+      <div class="q-text">Hvis KI skal gå fra å være et «orakel» til en «dialogpartner»: Hvordan endrer dette vår rolle som lærere når vi skal vurdere elevenes prosess og kritiske refleksjon underveis i arbeidet?</div>
     </div>
   </div>
-<div style="margin-top: 60px; padding: 40px; background: var(--surface); border: 1px solid var(--accent); border-radius: 4px;">
-    <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: var(--accent); margin-bottom: 30px; text-align: center;">Til refleksjon i personalet</h2>
-    
-    <div style="display: grid; grid-template-columns: 1fr; gap: 25px;">
-      <div style="padding-left: 20px; border-left: 2px solid var(--accent);">
-        <p style="font-size: 1.1rem; color: var(--text); font-style: italic;">
-          1. Med tanke på interaksjon og kommunikasjon: Hvordan kan vi iscenesette bruk av KI slik at det støtter elevens egen formuleringsevne og forståelse, fremfor at maskinen tar over eierskapet til teksten?
-        </p>
-      </div>
 
-      <div style="padding-left: 20px; border-left: 2px solid var(--accent);">
-        <p style="font-size: 1.1rem; color: var(--text); font-style: italic;">
-          2. Når vi ser på de tre nivåene for digitale skiller (tilgang, bruk og utbytte): Hvilke grep kan vi ta i våre klasserom for å sikre at KI utjevner forskjeller fremfor å skape nye klasseskiller i elevenes læringsutbytte?
-        </p>
-      </div>
-
-      <div style="padding-left: 20px; border-left: 2px solid var(--accent);">
-        <p style="font-size: 1.1rem; color: var(--text); font-style: italic;">
-          3. Hvis KI skal gå fra å være et "orakel" til en "dialogpartner": Hvordan endrer dette vår rolle som lærere når vi skal vurdere elevenes prosess og kritiske refleksjon underveis i arbeidet?
-        </p>
-      </div>
-    </div>
+  <!-- RESSURSER -->
+  <div class="section-label animate delay-5">
+    <span class="dot" style="background:var(--green)"></span>
+    Ressurser og lenker
   </div>
-  <footer style="margin-top: 80px; text-align: center; color: var(--muted); font-size: 0.75rem; border-top: 1px solid var(--border); padding-top: 25px;">
-    Kilde: Mari-Ann Letnes (2024) & van Deursen/Helsper (2015)
+
+  <div class="animate delay-5">
+    <a href="https://www.udir.no/kvalitet-og-kompetanse/digitalisering-skole/kunstig-intelligens-ki-i-skolen/" target="_blank" rel="noopener" class="resource-item">
+      <div class="res-icon" style="background:rgba(122,179,176,0.12);">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="2" width="12" height="14" rx="1.5" stroke="var(--teal)" stroke-width="1.2"/>
+          <line x1="5.5" y1="6" x2="12.5" y2="6" stroke="var(--teal)" stroke-width="0.9" stroke-linecap="round"/>
+          <line x1="5.5" y1="9" x2="12.5" y2="9" stroke="var(--teal)" stroke-width="0.9" stroke-linecap="round"/>
+          <line x1="5.5" y1="12" x2="9.5" y2="12" stroke="var(--teal)" stroke-width="0.9" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="res-text">
+        <div class="res-title">Kunstig intelligens (KI) i skolen · Udir</div>
+        <div class="res-desc">Udirs veiledning og ressurser om KI i skolen — muligheter, risiko, etikk og pedagogisk bruk. Grunnlag for policy- og etikk-diskusjonen i seminaret (Custer D4).</div>
+      </div>
+    </a>
+
+    <a href="https://www.udir.no/kvalitet-og-kompetanse/digitalisering-skole/rammeverk-larerens-profesjonsfaglige-digitale-komp/" target="_blank" rel="noopener" class="resource-item">
+      <div class="res-icon" style="background:rgba(155,143,173,0.12);">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="9" cy="9" r="7" stroke="var(--purple)" stroke-width="1.2"/>
+          <circle cx="9" cy="9" r="3.5" stroke="var(--purple)" stroke-width="1" stroke-opacity="0.5"/>
+          <line x1="9" y1="2" x2="9" y2="16" stroke="var(--purple)" stroke-width="0.8" stroke-opacity="0.3"/>
+          <line x1="2" y1="9" x2="16" y2="9" stroke="var(--purple)" stroke-width="0.8" stroke-opacity="0.3"/>
+        </svg>
+      </div>
+      <div class="res-text">
+        <div class="res-title">PfDK — Profesjonsfaglig digital kompetanse · Udir</div>
+        <div class="res-desc">Det nasjonale rammeverket for læreres digitale kompetanse. Custer D2 (kunnskap om hvorfor) og D4 (makt/etikk) — rammen for dette seminaret.</div>
+      </div>
+    </a>
+
+    <a href="index.html" class="resource-item">
+      <div class="res-icon" style="background:rgba(232,197,71,0.12);">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 16 L4 7 L9 4 L14 7 L14 16" stroke="#b8962a" stroke-width="1.2" stroke-linejoin="round"/>
+          <rect x="7" y="11" width="4" height="5" rx="0.5" stroke="#b8962a" stroke-width="1.1"/>
+          <path d="M3 7 L9 4 L15 7" stroke="#b8962a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="res-text">
+        <div class="res-title">DigSkole Gauldal — reisen 2022–2027</div>
+        <div class="res-desc">Se hele reisen vi har vært på sammen — fra grunnmuren i 2022 til vendepunktet der T-en i TPACK tar plass.</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <a href="index.html" class="footer-brand">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="14" cy="14" r="13" stroke="rgba(232,197,71,0.3)" stroke-width="1"/>
+        <rect x="8" y="14" width="12" height="8" rx="0.8" stroke="var(--gold)" stroke-width="1" stroke-opacity="0.6"/>
+        <path d="M6 14 L14 8 L22 14" stroke="var(--gold)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.6"/>
+        <path d="M11.5 11 Q14 8.5 16.5 11" stroke="var(--teal)" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0.7"/>
+        <circle cx="14" cy="10" r="1" fill="var(--teal)" opacity="0.8"/>
+      </svg>
+      <span class="brand-text">DigSkole <span>Gauldal</span> · 2022–2027</span>
+    </a>
+    <div class="footer-note">
+      Ressursside for Seminar 5. januar 2024<br>
+      Kilde: Mari-Ann Letnes (2024) · van Deursen &amp; Helsper (2015)
+    </div>
   </footer>
-</div>
 
+</div>
 </body>
 </html>
