@@ -706,6 +706,244 @@
     color: var(--muted);
     line-height: 1.4;
   }
+
+  /* ── SELANDER-KRESS MODAL ── */
+  .model-trigger-btn {
+    margin-top: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.71rem;
+    background: rgba(122,179,176,0.08);
+    border: 1px solid rgba(122,179,176,0.22);
+    border-radius: 6px;
+    color: var(--teal);
+    padding: 5px 12px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.04em;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .model-trigger-btn:hover {
+    background: rgba(122,179,176,0.15);
+    border-color: rgba(122,179,176,0.38);
+  }
+  .laer-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    backdrop-filter: blur(6px);
+    z-index: 9999;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 24px 16px;
+    overflow-y: auto;
+  }
+  .laer-modal-overlay.open { display: flex; }
+  .laer-modal-box {
+    background: var(--bg);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 700px;
+    padding: 36px 32px;
+    position: relative;
+    margin: auto 0;
+  }
+  .laer-close-btn {
+    position: absolute;
+    top: 18px; right: 18px;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--muted);
+    padding: 5px 12px;
+    cursor: pointer;
+    font-size: 0.7rem;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .laer-close-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.18); }
+  .laer-modal-kicker {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+  .laer-modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem;
+    font-weight: 300;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .laer-modal-lead {
+    font-size: 0.79rem;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 28px;
+  }
+  .laer-diagram {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .laer-ctx-bar {
+    padding: 9px 18px;
+    font-size: 0.67rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+  }
+  .laer-ctx-bar.top {
+    background: rgba(122,179,176,0.07);
+    border-bottom: 1px solid rgba(122,179,176,0.13);
+    color: var(--teal);
+  }
+  .laer-ctx-bar.bottom {
+    background: rgba(196,147,90,0.07);
+    border-top: 1px solid rgba(196,147,90,0.13);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 9px 18px;
+  }
+  .bottom-assess {
+    font-size: 0.66rem;
+    color: var(--warm);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .bottom-mid {
+    font-size: 0.64rem;
+    color: var(--muted);
+    text-align: center;
+    flex: 1;
+  }
+  .laer-body { display: flex; align-items: stretch; }
+  .laer-col-inputs {
+    width: 88px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--border);
+    padding: 18px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .inp-label {
+    font-size: 0.61rem;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.4;
+  }
+  .inp-arrow {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.15);
+    align-self: flex-end;
+    margin-right: -4px;
+  }
+  .laer-col-c1 {
+    flex: 1;
+    padding: 14px 16px 10px;
+    border-right: 1px dashed rgba(255,255,255,0.1);
+    min-width: 0;
+  }
+  .laer-col-c2 {
+    width: 155px;
+    flex-shrink: 0;
+    padding: 14px 14px 10px;
+  }
+  .cycle-lbl {
+    font-size: 0.59rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.18);
+    margin-bottom: 12px;
+  }
+  .c1-steps {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .d-step {
+    font-size: 0.68rem;
+    font-weight: 500;
+    padding: 5px 9px;
+    border-radius: 5px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .d-step.s-teal   { border-color: rgba(122,179,176,0.32); color: var(--teal); }
+  .d-step.s-purple { border-color: rgba(155,143,173,0.32); color: var(--purple); }
+  .d-step.s-warm   { border-color: rgba(196,147,90,0.32);  color: var(--warm); }
+  .d-step.s-gold   { border-color: rgba(232,197,71,0.38);  color: var(--gold); }
+  .d-step.s-pink   { border-color: rgba(212,129,154,0.32); color: var(--pink); }
+  .d-step.s-green  { border-color: rgba(130,168,125,0.32); color: var(--green); }
+  .d-arr {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.15);
+    line-height: 1;
+    padding: 0 1px;
+  }
+  .c1-loop { margin-top: 4px; }
+  .c1-loop svg { width: 100%; height: 22px; }
+  .c2-from {
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.15);
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+  .c2-steps { display: flex; flex-direction: column; gap: 7px; }
+  .laer-footnotes {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 0.62rem;
+    color: rgba(122,102,112,0.55);
+    margin-bottom: 24px;
+  }
+  .laer-explain-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 24px;
+  }
+  .explain-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 14px 15px;
+  }
+  .explain-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 7px;
+  }
+  .explain-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .explain-name { font-size: 0.77rem; font-weight: 500; color: var(--text); }
+  .explain-def { font-size: 0.73rem; color: var(--muted); line-height: 1.6; }
+  @media (max-width: 520px) {
+    .laer-modal-box { padding: 24px 16px; }
+    .laer-col-inputs { display: none; }
+    .laer-col-c1 { border-right: none; }
+    .laer-col-c2 { width: 100%; border-top: 1px solid var(--border); }
+    .laer-body { flex-direction: column; }
+    .laer-explain-grid { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -889,6 +1127,16 @@
         Formell lærsekvens (Selander &amp; Kress)
       </div>
       <p class="concept-def">Iscenesetting → transformering → formering → representasjon. Læreren designer rommet; eleven gjør sine erfaringer. Begge transformasjonssyklusene henger sammen.</p>
+      <button class="model-trigger-btn" onclick="openLaerModal()">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1" y="1" width="4" height="3" rx="0.6" stroke="currentColor" stroke-width="1"/>
+          <rect x="8" y="1" width="4" height="3" rx="0.6" stroke="currentColor" stroke-width="1"/>
+          <rect x="4.5" y="9" width="4" height="3" rx="0.6" stroke="currentColor" stroke-width="1"/>
+          <line x1="5" y1="2.5" x2="8" y2="2.5" stroke="currentColor" stroke-width="0.9"/>
+          <line x1="6.5" y1="4" x2="6.5" y2="9" stroke="currentColor" stroke-width="0.9"/>
+        </svg>
+        Se modellen →
+      </button>
     </div>
 
     <div class="concept-card">
@@ -1171,5 +1419,202 @@
   </footer>
 
 </div>
+
+<!-- ── SELANDER & KRESS MODAL ── -->
+<div id="laer-modal" class="laer-modal-overlay" onclick="closeLaerModal(event)">
+  <div class="laer-modal-box">
+    <button class="laer-close-btn" onclick="closeLaerModal()">✕ Lukk</button>
+
+    <div class="laer-modal-kicker">Selander &amp; Kress (2010) · Design för lärande</div>
+    <h2 class="laer-modal-title">Design av en formell lærsekvens</h2>
+    <p class="laer-modal-lead">Modellen viser hvordan undervisning er organisert i to transformasjonssykluser. Læreren iscenesetter læringsrommet; eleven transformerer ressurser og skaper representasjoner av det lærte. Representasjonen er grensepunktet som binder de to syklusene sammen.</p>
+
+    <!-- DIAGRAM -->
+    <div class="laer-diagram">
+      <svg viewBox="0 0 820 304" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+
+
+        <!-- ── TOPP-BÅND ── -->
+        <rect width="820" height="26" fill="rgba(122,179,176,0.07)"/>
+        <line x2="820" y1="26" y2="26" stroke="rgba(122,179,176,0.13)" stroke-width="0.8"/>
+
+        <!-- ── LÆRERS BÅND ── -->
+        <rect y="258" width="820" height="20" fill="rgba(155,143,173,0.04)"/>
+        <line x2="820" y1="258" y2="258" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
+        <line x2="820" y1="278" y2="278" stroke="rgba(196,147,90,0.1)" stroke-width="0.8"/>
+
+        <!-- ── VURDERINGSBÅND ── -->
+        <rect y="278" width="820" height="26" fill="rgba(196,147,90,0.07)"/>
+
+        <!-- ── BÅNDTEKST ── -->
+        <text x="410" y="17.5" text-anchor="middle" fill="#7ab3b0" font-family="DM Sans,sans-serif" font-size="8" letter-spacing="1.2">ELEVENS POSISJONERING, INTERESSER OG SOSIAL INTERAKSJON</text>
+        <text x="410" y="271" text-anchor="middle" fill="#7a7670" font-family="DM Sans,sans-serif" font-size="7.5" letter-spacing="0.8">LÆRENS POSISJONERING OG INTERVENSJON</text>
+        <text x="24"  y="295" fill="#c4935a" font-family="DM Sans,sans-serif" font-size="7.5" letter-spacing="0.6">FORMATIV VURDERING</text>
+        <text x="410" y="295" text-anchor="middle" fill="#4a4540" font-family="DM Sans,sans-serif" font-size="7.5">↔  hva som erkjennes som tegn på læring  ↔</text>
+        <text x="796" y="295" text-anchor="end" fill="#c4935a" font-family="DM Sans,sans-serif" font-size="7.5" letter-spacing="0.6">SUMMATIV VURDERING</text>
+
+        <!-- ── VERTIKALE SKILLELINJER ── -->
+        <line x1="106" y1="26" x2="106" y2="258" stroke="rgba(255,255,255,0.07)" stroke-width="0.8"/>
+        <line x1="490" y1="30" x2="490" y2="254" stroke="rgba(255,255,255,0.1)" stroke-width="0.8" stroke-dasharray="4 3"/>
+
+        <!-- ── SYKLUSETIKETTER ── -->
+        <text x="295" y="44" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-family="DM Sans,sans-serif" font-size="6.5" letter-spacing="1.5">FØRSTE TRANSFORMASJONSSYKLUS</text>
+        <text x="650" y="44" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-family="DM Sans,sans-serif" font-size="6.5" letter-spacing="1.5">ANDRE TRANSFORMASJONSSYKLUS</text>
+
+        <!-- ── VENSTREKOLONNE: INPUT ── -->
+        <text x="53" y="113" text-anchor="middle" fill="#444240" font-family="DM Sans,sans-serif" font-size="8.5">Potensielle</text>
+        <text x="53" y="124" text-anchor="middle" fill="#444240" font-family="DM Sans,sans-serif" font-size="8.5">ressurser*</text>
+        <text x="53" y="146" text-anchor="middle" fill="#444240" font-family="DM Sans,sans-serif" font-size="8.5">Formål</text>
+        <text x="53" y="168" text-anchor="middle" fill="#444240" font-family="DM Sans,sans-serif" font-size="8.5">Institusjonelle</text>
+        <text x="53" y="179" text-anchor="middle" fill="#444240" font-family="DM Sans,sans-serif" font-size="8.5">mønstre**</text>
+        <!-- Pil fra input -->
+        <line x1="98" y1="142" x2="112" y2="142" stroke="rgba(255,255,255,0.2)" stroke-width="1.2"/>
+        <polygon points="109,138 117,142 109,146" fill="rgba(255,255,255,0.2)"/>
+
+        <!-- ── ISCENESETTING ── -->
+        <text x="150" y="138" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="DM Sans,sans-serif" font-size="8.5" letter-spacing="0.8" font-weight="500">ISCENESETTING</text>
+        <!-- Pil → oval 1 -->
+        <line x1="184" y1="142" x2="193" y2="142" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        <polygon points="190,138.5 197,142 190,145.5" fill="rgba(255,255,255,0.15)"/>
+
+        <!-- ══════════════════════════════════════════
+             SYKLUS 1 — OVAL  cx=295 cy=142 rx=100 ry=80
+             Venstre:(195,142)  Topp:(295,62)
+             Høyre:(395,142)    Bunn:(295,222)
+             ══════════════════════════════════════════ -->
+        <path d="M 195 142 A 100 80 0 0 1 295 62"  stroke="rgba(122,179,176,0.55)" stroke-width="2.5" fill="none"/>
+        <path d="M 295 62  A 100 80 0 0 1 395 142" stroke="rgba(122,179,176,0.55)" stroke-width="2.5" fill="none"/>
+        <path d="M 395 142 A 100 80 0 0 1 295 222" stroke="rgba(122,179,176,0.55)" stroke-width="2.5" fill="none"/>
+        <path d="M 295 222 A 100 80 0 0 1 195 142" stroke="rgba(122,179,176,0.55)" stroke-width="2.5" fill="none"/>
+        <!-- Pilhoder (med klokka) -->
+        <polygon points="291,58  299,62  291,66"  fill="rgba(122,179,176,0.55)"/><!-- topp → høyre -->
+        <polygon points="391,138 395,146 399,138" fill="rgba(122,179,176,0.55)"/><!-- høyre → ned -->
+        <polygon points="299,218 291,222 299,226" fill="rgba(122,179,176,0.55)"/><!-- bunn → venstre -->
+        <polygon points="191,146 195,138 199,146" fill="rgba(122,179,176,0.55)"/><!-- venstre → opp -->
+        <!-- Tekst inne i oval 1 -->
+        <text x="295" y="87"  text-anchor="middle" fill="rgba(155,143,173,0.45)" font-family="DM Sans,sans-serif" font-size="8" letter-spacing="1">TRANSFORMERING</text>
+        <text x="295" y="139" text-anchor="middle" fill="rgba(212,129,154,0.72)" font-family="DM Sans,sans-serif" font-size="11.5" font-style="italic">brukte</text>
+        <text x="295" y="155" text-anchor="middle" fill="rgba(212,129,154,0.72)" font-family="DM Sans,sans-serif" font-size="11.5" font-style="italic">ressurser</text>
+
+        <!-- ── FORMERING ── -->
+        <!-- Pil ut fra oval 1 -->
+        <line x1="396" y1="142" x2="408" y2="142" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        <polygon points="405,138.5 412,142 405,145.5" fill="rgba(255,255,255,0.15)"/>
+        <text x="447" y="138" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="DM Sans,sans-serif" font-size="8.5" letter-spacing="0.8" font-weight="500">FORMERING</text>
+        <!-- Pil → syklusgrense / syklus 2 -->
+        <line x1="478" y1="142" x2="492" y2="142" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        <polygon points="489,138.5 496,142 489,145.5" fill="rgba(255,255,255,0.15)"/>
+
+        <!-- ── REPRESENTASJON ── -->
+        <text x="528" y="136" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="DM Sans,sans-serif" font-size="7.5" letter-spacing="0.8" font-weight="500">REPRESENTASJON</text>
+        <!-- Pil → oval 2 -->
+        <line x1="558" y1="142" x2="566" y2="142" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        <polygon points="563,138.5 570,142 563,145.5" fill="rgba(255,255,255,0.15)"/>
+
+        <!-- ══════════════════════════════════════════
+             SYKLUS 2 — OVAL  cx=650 cy=142 rx=82 ry=64
+             Venstre:(568,142)  Topp:(650,78)
+             Høyre:(732,142)    Bunn:(650,206)
+             ══════════════════════════════════════════ -->
+        <path d="M 568 142 A 82 64 0 0 1 650 78"  stroke="rgba(122,179,176,0.45)" stroke-width="2" fill="none"/>
+        <path d="M 650 78  A 82 64 0 0 1 732 142" stroke="rgba(122,179,176,0.45)" stroke-width="2" fill="none"/>
+        <path d="M 732 142 A 82 64 0 0 1 650 206" stroke="rgba(122,179,176,0.45)" stroke-width="2" fill="none"/>
+        <path d="M 650 206 A 82 64 0 0 1 568 142" stroke="rgba(122,179,176,0.45)" stroke-width="2" fill="none"/>
+        <!-- Pilhoder (med klokka) -->
+        <polygon points="646,74  654,78  646,82"  fill="rgba(122,179,176,0.45)"/><!-- topp → høyre -->
+        <polygon points="728,138 732,146 736,138" fill="rgba(122,179,176,0.45)"/><!-- høyre → ned -->
+        <polygon points="654,202 646,206 654,210" fill="rgba(122,179,176,0.45)"/><!-- bunn → venstre -->
+        <polygon points="564,146 568,138 572,146" fill="rgba(122,179,176,0.45)"/><!-- venstre → opp -->
+        <!-- Bueetiketter -->
+        <text x="650" y="67"  text-anchor="middle" fill="rgba(212,129,154,0.75)" font-family="DM Sans,sans-serif" font-size="10" font-style="italic">metarefleksjon</text>
+        <text x="650" y="222" text-anchor="middle" fill="rgba(212,129,154,0.75)" font-family="DM Sans,sans-serif" font-size="10" font-style="italic">diskusjon</text>
+
+        <!-- ── KARAKTER ── -->
+        <text x="742" y="138" fill="rgba(255,255,255,0.4)" font-family="DM Sans,sans-serif" font-size="8.5" letter-spacing="0.8" font-weight="500">KARAKTER</text>
+
+      </svg>
+    </div>
+    <!-- end diagram -->
+
+    <div class="laer-footnotes">
+      <span>* Tegnssystemer, medier, (rå-)materiale og verktøy</span>
+      <span>** Normer, rutiner, regler og sanksjoner</span>
+    </div>
+
+    <!-- STEP EXPLANATIONS -->
+    <div style="border-top:1px solid var(--border); padding-top:20px;">
+      <div style="font-size:0.63rem; text-transform:uppercase; letter-spacing:0.14em; color:rgba(160,152,144,0.55); margin-bottom:16px;">Hva betyr hvert steg?</div>
+      <div class="laer-explain-grid">
+
+        <div class="explain-card">
+          <div class="explain-head">
+            <div class="explain-dot" style="background:var(--teal)"></div>
+            <div class="explain-name">Iscenesetting</div>
+          </div>
+          <p class="explain-def">Læreren designer læringsrommet — velger oppgaver, materiale, verktøy og rammer. Den pedagogiske intensjonen omsettes til konkret handling.</p>
+        </div>
+
+        <div class="explain-card">
+          <div class="explain-head">
+            <div class="explain-dot" style="background:var(--purple)"></div>
+            <div class="explain-name">Transformering</div>
+          </div>
+          <p class="explain-def">Eleven møter materialet og gjør det til sitt eget — velger, bearbeider og omformer ved hjelp av tilgjengelige ressurser. En aktiv meningsskapingsprosess.</p>
+        </div>
+
+        <div class="explain-card">
+          <div class="explain-head">
+            <div class="explain-dot" style="background:var(--warm)"></div>
+            <div class="explain-name">Formering</div>
+          </div>
+          <p class="explain-def">Den bearbeidede kunnskapen gis form — eleven begynner å skape sin representasjon. Et tegn på at transformeringen er i gang og tar retning.</p>
+        </div>
+
+        <div class="explain-card">
+          <div class="explain-head">
+            <div class="explain-dot" style="background:var(--gold)"></div>
+            <div class="explain-name">Representasjon</div>
+          </div>
+          <p class="explain-def">Elevens lærte kunnskap gjøres synlig — som tekst, film, presentasjon eller annen multimodal ytring. Grensepunktet mellom de to syklusene.</p>
+        </div>
+
+        <div class="explain-card">
+          <div class="explain-head">
+            <div class="explain-dot" style="background:var(--pink)"></div>
+            <div class="explain-name">Metarefleksjon</div>
+          </div>
+          <p class="explain-def">Eleven (og læreren) ser tilbake på læringsarbeidet — hva ble lært, hva ble ikke lært, og hva kan gjøres annerledes neste gang?</p>
+        </div>
+
+        <div class="explain-card">
+          <div class="explain-head">
+            <div class="explain-dot" style="background:var(--green)"></div>
+            <div class="explain-name">Diskusjon</div>
+          </div>
+          <p class="explain-def">Representasjonen deles og diskuteres med andre — i klassen, med læreren eller i grupper. Sosial meningsskaping og felles kunnskapsbygging.</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function openLaerModal() {
+    document.getElementById('laer-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLaerModal(e) {
+    if (!e || e.target === document.getElementById('laer-modal')) {
+      document.getElementById('laer-modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLaerModal();
+  });
+</script>
+
 </body>
 </html>
