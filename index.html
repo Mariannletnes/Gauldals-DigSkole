@@ -88,6 +88,25 @@
     text-transform: uppercase;
   }
 
+  .header-link {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 12px;
+    padding: 5px 11px;
+    border-radius: 999px;
+    border: 1px solid rgba(232,197,71,0.35);
+    color: var(--now);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+
+  .header-link:hover {
+    background: rgba(232,197,71,0.12);
+  }
+
   .tpack-badge {
     display: flex;
     gap: 6px;
@@ -449,6 +468,7 @@
       <div class="header-text">
         <h1>DigSkole<br><span>Gauldal</span></h1>
         <p>Reisen 2022 – 2027 · NTNU</p>
+        <a class="header-link" href="Om_DigSkole_Gauldal.html">Om prosjektet</a>
       </div>
     </div>
 
