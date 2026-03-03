@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>miniNKUL 29. oktober 2025 · DigSkole Gauldal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #0f0f12;
+    --surface: #1a1a20;
+    --text:    #e8e4dc;
+    --muted:   #7a7670;
+    --border:  rgba(255,255,255,0.07);
+    --warm:    #c4935a;
+    --teal:    #7ab3b0;
+    --purple:  #9b8fad;
+    --gold:    #e8c547;
+    --green:   #82a87d;
+    --pink:    #d4819a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 56px 32px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── HEADER ── */
+  .site-header { margin-bottom: 64px; position: relative; }
+
+  .watercolor-blob {
+    position: absolute;
+    top: -24px; left: -16px;
+    width: 340px; height: 160px;
+    pointer-events: none;
+    opacity: 0.18; z-index: 0;
+  }
+
+  .header-content { position: relative; z-index: 1; }
+
+  .back-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--muted); text-decoration: none; margin-bottom: 28px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--gold); }
+  .back-link svg { width: 12px; height: 12px; }
+
+  .kicker {
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 10px; font-weight: 500;
+  }
+
+  .site-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 300; line-height: 1.15;
+    color: var(--text); margin-bottom: 6px;
+  }
+  .site-header h1 em { font-style: italic; color: var(--gold); }
+
+  .site-header .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-weight: 300; font-style: italic;
+    color: var(--muted); margin-bottom: 20px;
+  }
+
+  .header-meta { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .meta-chip {
+    font-size: 0.72rem; padding: 4px 12px; border-radius: 20px;
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--muted); letter-spacing: 0.04em;
+  }
+  .meta-chip.highlight {
+    background: rgba(232,197,71,0.1);
+    border-color: rgba(232,197,71,0.3);
+    color: var(--gold);
+  }
+
+  /* ── DIVIDER ── */
+  .section-divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+
+  /* ── SECTION LABELS ── */
+  .section-label {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.16em;
+    color: #a09890; margin-bottom: 24px; font-weight: 500;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .section-label .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── SECTION HEADINGS ── */
+  .section-h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 300; color: var(--text);
+    margin-bottom: 8px; line-height: 1.3;
+  }
+  .section-lead {
+    font-size: 0.83rem; color: var(--muted);
+    line-height: 1.7; margin-bottom: 24px;
+  }
+
+  /* ── FRAMING QUOTE ── */
+  .framing-quote {
+    padding: 28px 32px;
+    background: rgba(232,197,71,0.06);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 48px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+  }
+  .framing-quote blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-weight: 300; font-style: italic;
+    color: var(--text); line-height: 1.65; margin-bottom: 12px;
+  }
+  .framing-quote cite {
+    font-size: 0.72rem; color: var(--muted);
+    letter-spacing: 0.06em; text-transform: uppercase; font-style: normal;
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+  @media (max-width: 560px) { .stats-bar { grid-template-columns: 1fr; } }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px;
+    text-align: center;
+  }
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; font-weight: 300;
+    color: var(--gold); line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 0.72rem; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+
+  /* ── PROGRAM TABLE ── */
+  .program-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 8px;
+  }
+  .program-table tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  .program-table tr:hover { background: rgba(255,255,255,0.025); }
+  .program-table tr.hl { background: rgba(232,197,71,0.06); }
+  .program-table tr.lunsj { background: rgba(122,179,176,0.04); }
+
+  .program-table td {
+    padding: 14px 16px;
+    vertical-align: top;
+    font-size: 0.83rem;
+    line-height: 1.5;
+  }
+  .program-table td:first-child {
+    width: 110px; color: var(--muted); font-size: 0.75rem;
+    letter-spacing: 0.04em; white-space: nowrap; padding-top: 16px;
+  }
+  .prog-title { color: var(--text); font-weight: 500; margin-bottom: 2px; }
+  .prog-sub   { color: var(--muted); font-size: 0.76rem; }
+
+  .prog-tag {
+    display: inline-block; font-size: 0.62rem; padding: 2px 8px;
+    border-radius: 10px; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 4px;
+  }
+  .prog-tag.gold   { background: rgba(232,197,71,0.12);  color: var(--gold);   border: 1px solid rgba(232,197,71,0.2); }
+  .prog-tag.teal   { background: rgba(122,179,176,0.12); color: var(--teal);   border: 1px solid rgba(122,179,176,0.2); }
+  .prog-tag.warm   { background: rgba(196,147,90,0.12);  color: var(--warm);   border: 1px solid rgba(196,147,90,0.2); }
+
+  /* ── KEYNOTE SECTION ── */
+  .keynote-box {
+    background: var(--surface);
+    border: 1px solid rgba(232,197,71,0.2);
+    border-radius: 18px;
+    padding: 28px 28px 24px;
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .keynote-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), rgba(232,197,71,0.2));
+    border-radius: 18px 18px 0 0;
+  }
+  .keynote-tag {
+    font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--gold); margin-bottom: 8px; font-weight: 500;
+  }
+  .keynote-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 400; color: var(--text);
+    margin-bottom: 4px; line-height: 1.3;
+  }
+  .keynote-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-style: italic; color: var(--muted);
+    margin-bottom: 16px; line-height: 1.5;
+  }
+  .keynote-body {
+    font-size: 0.83rem; color: var(--muted); line-height: 1.75;
+    margin-bottom: 20px;
+  }
+  .keynote-speakers {
+    display: flex; gap: 10px; align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .speaker-badge {
+    font-size: 0.72rem; padding: 4px 12px; border-radius: 20px;
+    background: rgba(232,197,71,0.08); border: 1px solid rgba(232,197,71,0.2);
+    color: var(--gold);
+  }
+  .speaker-org {
+    font-size: 0.72rem; color: var(--muted);
+  }
+
+  /* ── PARALLEL SESSIONS ── */
+  .parallell-block { margin-bottom: 32px; }
+
+  .parallell-header {
+    display: flex; align-items: baseline; gap: 12px;
+    margin-bottom: 12px;
+  }
+  .parallell-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; font-weight: 400; color: var(--text);
+  }
+  .parallell-time {
+    font-size: 0.72rem; color: var(--muted); letter-spacing: 0.04em;
+  }
+
+  .sesjon-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  @media (max-width: 600px) { .sesjon-grid { grid-template-columns: 1fr; } }
+
+  .sesjon-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .sesjon-name {
+    font-size: 0.83rem; color: var(--text); flex: 1; line-height: 1.4;
+  }
+  .sesjon-count {
+    font-size: 0.68rem; color: var(--muted);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2px 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── ANIMATE ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .animate { animation: fadeUp 0.5s ease both; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+  .delay-5 { animation-delay: 0.5s; }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    margin-top: 80px; padding-top: 28px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-text { font-size: 0.72rem; color: var(--muted); }
+  .footer-link {
+    font-size: 0.72rem; color: var(--muted); text-decoration: none;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .footer-link:hover { color: var(--gold); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="site-header animate">
+    <svg class="watercolor-blob" viewBox="0 0 340 160" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="blur"><feGaussianBlur stdDeviation="18"/></filter>
+      </defs>
+      <ellipse cx="150" cy="80" rx="160" ry="70" fill="#e8c547" filter="url(#blur)" opacity="0.5"/>
+      <ellipse cx="260" cy="60" rx="90" ry="50" fill="#c4935a" filter="url(#blur)" opacity="0.3"/>
+    </svg>
+    <div class="header-content">
+      <a href="index.html" class="back-link">
+        <svg viewBox="0 0 12 12" fill="none"><path d="M8 2L4 6l4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Tilbake til oversikten
+      </a>
+      <div class="kicker">Fagdag · DigSkole Gauldal</div>
+      <h1>mini<em>NKUL</em></h1>
+      <div class="subtitle">Deling av praksis — hele personalet i regionen</div>
+      <div class="header-meta">
+        <span class="meta-chip">29. oktober 2025</span>
+        <span class="meta-chip">08.30–15.00</span>
+        <span class="meta-chip">Rennebu barne- og ungdomsskole</span>
+        <span class="meta-chip highlight">24 parallellsesjoner</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- FRAMING QUOTE -->
+  <div class="framing-quote animate delay-1">
+    <blockquote>
+      «Deling av praksis er ikke bare en metode — det er en kulturbygging. Når lærere viser hverandre hva de faktisk gjør i klasserommet, skapes tillit, fellesskap og ny kunnskap.»
+    </blockquote>
+    <cite>Grunnlag for miniNKUL · Gauldal-regionen</cite>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-bar animate delay-2">
+    <div class="stat-card">
+      <div class="stat-number">4</div>
+      <div class="stat-label">Parallellrunder</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">24</div>
+      <div class="stat-label">Sesjoner</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">1</div>
+      <div class="stat-label">Hel dag — sammen</div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- PROGRAM -->
+  <section class="animate delay-2">
+    <div class="section-label">
+      <span class="dot" style="background:var(--gold)"></span>
+      Dagsorden
+    </div>
+    <h2 class="section-h2">Program for dagen</h2>
+    <p class="section-lead">Rennebu barne- og ungdomsskole som vertskap for en hel dag med deling, læring og faglig fellesskap.</p>
+
+    <table class="program-table">
+      <tr class="hl">
+        <td>08.30–09.15</td>
+        <td>
+          <div class="prog-title">Kunstnerisk innslag &amp; åpning</div>
+          <div class="prog-sub">Kultursalen — velkommen til miniNKUL</div>
+          <span class="prog-tag gold">Plenum</span>
+        </td>
+      </tr>
+      <tr class="hl">
+        <td>09.15–10.00</td>
+        <td>
+          <div class="prog-title">Keynote: Det digitale uterommet</div>
+          <div class="prog-sub">Lek, utforsking og læring med digital teknologi i naturen — Ståle Skagen og Geir Valøen</div>
+          <span class="prog-tag gold">Plenum</span>
+        </td>
+      </tr>
+      <tr>
+        <td>10.15–11.00</td>
+        <td>
+          <div class="prog-title">Parallell 1</div>
+          <div class="prog-sub">6 parallelle sesjoner</div>
+          <span class="prog-tag warm">Deling</span>
+        </td>
+      </tr>
+      <tr class="lunsj">
+        <td>11.00–11.45</td>
+        <td>
+          <div class="prog-title">Lunsj</div>
+          <span class="prog-tag teal">Pause</span>
+        </td>
+      </tr>
+      <tr>
+        <td>11.45–12.30</td>
+        <td>
+          <div class="prog-title">Parallell 2</div>
+          <div class="prog-sub">6 parallelle sesjoner</div>
+          <span class="prog-tag warm">Deling</span>
+        </td>
+      </tr>
+      <tr>
+        <td>12.45–13.30</td>
+        <td>
+          <div class="prog-title">Parallell 3</div>
+          <div class="prog-sub">6 parallelle sesjoner</div>
+          <span class="prog-tag warm">Deling</span>
+        </td>
+      </tr>
+      <tr>
+        <td>13.45–14.30</td>
+        <td>
+          <div class="prog-title">Parallell 4</div>
+          <div class="prog-sub">6 parallelle sesjoner</div>
+          <span class="prog-tag warm">Deling</span>
+        </td>
+      </tr>
+      <tr class="hl">
+        <td>14.45–15.00</td>
+        <td>
+          <div class="prog-title">Felles avslutning</div>
+          <div class="prog-sub">Kultursalen</div>
+          <span class="prog-tag gold">Plenum</span>
+        </td>
+      </tr>
+    </table>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- KEYNOTE -->
+  <section class="animate delay-3">
+    <div class="section-label">
+      <span class="dot" style="background:var(--gold)"></span>
+      Åpningsforedrag
+    </div>
+
+    <div class="keynote-box">
+      <div class="keynote-tag">Keynote · 09.15–10.00</div>
+      <div class="keynote-title">Det digitale uterommet</div>
+      <div class="keynote-sub">Lek, utforsking og læring med digital teknologi i uterommet</div>
+      <p class="keynote-body">
+        Hvilke pedagogiske muligheter åpner seg idet vi pakker digitale verktøy i tursekken og drar ut i naturen? Imøtekommer vi de ulike fagområdene i rammeplanen på en kreativ, konstruktiv og moderne måte når vi tilbyr barna digitale verktøy i uterommet? Hvordan kan disse verktøyene bidra til et utvidet blikk på naturen, og gi gode vilkår for undring og refleksjon?
+        <br><br>
+        Foredraget utfordrer den utbredte oppfatningen om digitale verktøy som passiviserende for barn, og tar oss direkte inn i praksisfeltet.
+      </p>
+      <div class="keynote-speakers">
+        <span class="speaker-badge">Ståle Skagen</span>
+        <span class="speaker-badge">Geir Valøen</span>
+        <span class="speaker-org">Trondheim kommune · Nasjonale priser for digitalt pedagogisk nybrottsarbeid</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- PARALLEL SESSIONS -->
+  <section class="animate delay-3">
+    <div class="section-label">
+      <span class="dot" style="background:var(--warm)"></span>
+      Parallellsesjoner
+    </div>
+    <h2 class="section-h2">24 sesjoner — lærere deler med lærere</h2>
+    <p class="section-lead">Fire runder med parallelle sesjoner der Gauldal-lærerne delte erfaringer fra egne klasserom. Antall påmeldte vises ved hver sesjon.</p>
+
+    <!-- Parallell 1 -->
+    <div class="parallell-block">
+      <div class="parallell-header">
+        <div class="parallell-title">Parallell 1</div>
+        <div class="parallell-time">10.15–11.00</div>
+      </div>
+      <div class="sesjon-grid">
+        <div class="sesjon-card">
+          <div class="sesjon-name">SMARTere teknologi</div>
+          <div class="sesjon-count">8 deltakere</div>
+        </div>
+        <div class="sesjon-card">
+          <div class="sesjon-name">KI og Showbie</div>
+          <div class="sesjon-count">14 deltakere</div>
+        </div>
+        <div class="sesjon-card">
+          <div class="sesjon-name">Canva</div>
+          <div class="sesjon-count">51 deltakere</div>
+        </div>
+        <div class="sesjon-card">
+          <div class="sesjon-name">Fagdager i matematikk</div>
+          <div class="sesjon-count">7 deltakere</div>
+        </div>
+        <div class="sesjon-card">
+          <div class="sesjon-name">Bryllup</div>
+          <div class="sesjon-count">17 deltakere</div>
+        </div>
+        <div class="sesjon-card">
+          <div class="sesjon-name">Merge Cube</div>
+          <div class="sesjon-count">10 deltakere</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parallell 2 -->
+    <div class="parallell-block">
+      <div class="parallell-header">
+        <div class="parallell-title">Parallell 2</div>
+        <div class="parallell-time">11.45–12.30</div>
+      </div>
+      <div class="sesjon-grid">
+        <div class="sesjon-card">
+          <div class="sesjon-name">Bygge meningsfulle klasserom og matematiske samtaler</div>
+          <div class="sesjon-count">43 deltakere</div>
+        </div>
+        <div class="sesjon-card">
+          <div class="sesjon-name">Swift 5–7 og KeyNote 1–7</div>
+          <div class="sesjon-count">5 deltakere</div>
+        </div>
+        <div class="sesjon-card">
+          <div class="sesjon-name">Stasjonsarbeid</div>
+          <div class="sesjon-count">15 deltakere</div>
+        </div>
+        <div class="sesjon-card">
+          <div class="sesjon-name">Novelle</div>
+          <div class="sesjon-count">23 deltakere</div>
+        </div>
+        <div class="sesjon-card">
+          <div class="sesjon-name">Disney</div>
+          <div class="sesjon-count">11 deltakere</div>
+        </div>
+        <div class="sesjon-card">
+          <div class="sesjon-name">Bookcreator</div>
+          <div class="sesjon-count">15 deltakere</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parallell 3 -->
+    <div class="parallell-block">
+      <div class="parallell-header">
+        <div class="parallell-title">Parallell 3</div>
+        <div class="parallell-time">12.45–13.30</div>
+      </div>
+      <div class="sesjon-grid">
+        <div class="sesjon-card">
+          <div class="sesjon-name">Programmering via Showbie</div>
+          <div class="sesjon-count">16 deltakere</div>
+        </div>
+        <div class="sesjon-card">
+          <div class="sesjon-name">iMovie og greenscreen</div>
+          <div class="sesjon-count">20 deltakere</div>
+        </div>
+        <div class="sesjon-card">
+          <div class="sesjon-name">Animasjon</div>
+          <div class="sesjon-count">16 deltakere</div>
+        </div>
+        <div class="sesjon-card">
+          <div class="sesjon-name">Impact study</div>
+          <div class="sesjon-count">10 deltakere</div>
+        </div>
+        <div class="sesjon-card">
+          <div class="sesjon-name">Spillbasert læring</div>
+          <div class="sesjon-count">35 deltakere</div>
+        </div>
+        <div class="sesjon-card">
+          <div class="sesjon-name">Fotspor</div>
+          <div class="sesjon-count">16 deltakere</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parallell 4 -->
+    <div class="parallell-block">
+      <div class="parallell-header">
+        <div class="parallell-title">Parallell 4</div>
+        <div class="parallell-time">13.45–14.30</div>
+      </div>
+      <div class="sesjon-grid">
+        <div class="sesjon-card">
+          <div class="sesjon-name">Teacher clarity</div>
+          <div class="sesjon-count">11 deltakere</div>
+        </div>
+        <div class="sesjon-card">
+          <div class="sesjon-name">Hvordan utnytte KI-verktøy i klasserommet</div>
+          <div class="sesjon-count">28 deltakere</div>
+        </div>
+        <div class="sesjon-card">
+          <div class="sesjon-name">Dinosaursafari</div>
+          <div class="sesjon-count">11 deltakere</div>
+        </div>
+        <div class="sesjon-card">
+          <div class="sesjon-name">Særskilt språkopplæring</div>
+          <div class="sesjon-count">12 deltakere</div>
+        </div>
+        <div class="sesjon-card">
+          <div class="sesjon-name">Creaza, Mentimeter og Padlet</div>
+          <div class="sesjon-count">16 deltakere</div>
+        </div>
+        <div class="sesjon-card">
+          <div class="sesjon-name">Grunnmuren for å lykkes med lesekurs</div>
+          <div class="sesjon-count">28 deltakere</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <span class="footer-text">miniNKUL · 29. oktober 2025 · Rennebu</span>
+    <a href="index.html" class="footer-link">← Tilbake til oversikten</a>
+  </footer>
+
+</div>
+</body>
+</html>
