@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seminar 21. mars 2025 — Rammeverk for PfDK · DigSkole Gauldal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #0f0f12;
+    --surface: #1a1a20;
+    --text:    #e8e4dc;
+    --muted:   #7a7670;
+    --border:  rgba(255,255,255,0.07);
+    --warm:    #c4935a;
+    --teal:    #7ab3b0;
+    --purple:  #9b8fad;
+    --gold:    #e8c547;
+    --green:   #82a87d;
+    --pink:    #d4819a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 56px 32px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    margin-bottom: 64px;
+    position: relative;
+  }
+
+  .watercolor-blob {
+    position: absolute;
+    top: -24px;
+    left: -16px;
+    width: 340px;
+    height: 160px;
+    pointer-events: none;
+    opacity: 0.22;
+    z-index: 0;
+  }
+
+  .header-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 28px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: var(--teal); }
+  .back-link svg { width: 12px; height: 12px; }
+
+  .kicker {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .site-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .site-header h1 em {
+    font-style: italic;
+    color: var(--purple);
+  }
+
+  .site-header .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .meta-chip {
+    font-size: 0.72rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .meta-chip.highlight {
+    background: rgba(155,143,173,0.1);
+    border-color: rgba(155,143,173,0.3);
+    color: var(--purple);
+  }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  /* ── SECTION LABELS ── */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #a09890;
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section-label .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── FRAMING QUOTE ── */
+  .framing-quote {
+    padding: 28px 32px;
+    background: rgba(155,143,173,0.07);
+    border-left: 3px solid var(--purple);
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 48px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+  }
+
+  .framing-quote blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.65;
+    margin-bottom: 12px;
+  }
+
+  .framing-quote cite {
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-style: normal;
+  }
+
+  /* ── UNDERSØK GRID ── */
+  .undersok-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+
+  @media (max-width: 700px) {
+    .undersok-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .undersok-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 18px 20px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .undersok-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 14px 14px 0 0;
+  }
+
+  .uk1::before { background: var(--warm); }
+  .uk2::before { background: var(--teal); }
+  .uk3::before { background: var(--purple); }
+  .uk4::before { background: var(--gold); }
+
+  .undersok-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+
+  .uk1 .undersok-icon { background: rgba(196,147,90,0.12); }
+  .uk2 .undersok-icon { background: rgba(122,179,176,0.12); }
+  .uk3 .undersok-icon { background: rgba(155,143,173,0.12); }
+  .uk4 .undersok-icon { background: rgba(232,197,71,0.12); }
+
+  .undersok-card h3 {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .undersok-card p {
+    font-size: 0.73rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ── MEKANISMER WHEEL ── */
+  .mek-intro {
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .mek-center {
+    background: var(--surface);
+    border: 1px solid rgba(155,143,173,0.25);
+    border-radius: 14px;
+    padding: 20px 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .mek-center-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .cap-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .cap-chip {
+    font-size: 0.62rem;
+    padding: 3px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid;
+  }
+
+  .cap-personlig  { background: rgba(196,147,90,0.1);  color: var(--warm);   border-color: rgba(196,147,90,0.3); }
+  .cap-inter      { background: rgba(122,179,176,0.1); color: var(--teal);   border-color: rgba(122,179,176,0.3); }
+  .cap-org        { background: rgba(130,168,125,0.1); color: var(--green);  border-color: rgba(130,168,125,0.3); }
+
+  .mek-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+
+  @media (max-width: 620px) {
+    .mek-grid { grid-template-columns: 1fr; }
+  }
+
+  .mek-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px 18px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mek-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 14px 14px 0 0;
+  }
+
+  .mek1::before { background: var(--warm); }
+  .mek2::before { background: var(--teal); }
+  .mek3::before { background: var(--gold); }
+  .mek4::before { background: var(--green); }
+
+  .mek-tag {
+    display: inline-block;
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  .mek1 .mek-tag { background: rgba(196,147,90,0.12); color: var(--warm); }
+  .mek2 .mek-tag { background: rgba(122,179,176,0.12); color: var(--teal); }
+  .mek3 .mek-tag { background: rgba(232,197,71,0.12); color: var(--gold); }
+  .mek4 .mek-tag { background: rgba(130,168,125,0.12); color: var(--green); }
+
+  .mek-name {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .mek-desc {
+    font-size: 0.76rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+
+  .mek-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+
+  .cap-label {
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    color: rgba(160,152,144,0.5);
+    margin-bottom: 7px;
+  }
+
+  .cap-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .cap-list li {
+    font-size: 0.72rem;
+    color: var(--muted);
+    line-height: 1.6;
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 5px;
+  }
+
+  .cap-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    opacity: 0.4;
+    font-size: 0.68rem;
+    top: 2px;
+  }
+
+  .mek-article-note {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: rgba(155,143,173,0.06);
+    border: 1px solid rgba(155,143,173,0.15);
+    border-radius: 10px;
+    font-size: 0.75rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .mek-article-note strong { color: var(--purple); }
+
+  /* ── PfDK RAMMEVERK ── */
+  .pfdk-intro {
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .pfdk-gruppe {
+    margin-bottom: 20px;
+  }
+
+  .pfdk-gruppe-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    padding: 3px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  .pg-ped  { background: rgba(122,179,176,0.1); color: var(--teal); border: 1px solid rgba(122,179,176,0.2); }
+  .pg-org  { background: rgba(196,147,90,0.1); color: var(--warm); border: 1px solid rgba(196,147,90,0.2); }
+  .pg-etik { background: rgba(155,143,173,0.1); color: var(--purple); border: 1px solid rgba(155,143,173,0.2); }
+
+  .pfdk-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .pfdk-grid.two-col { grid-template-columns: 1fr 1fr; }
+
+  @media (max-width: 600px) {
+    .pfdk-grid, .pfdk-grid.two-col { grid-template-columns: 1fr; }
+  }
+
+  .pfdk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pfdk-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    bottom: 0;
+    width: 3px;
+    border-radius: 12px 0 0 12px;
+  }
+
+  .pfdk-card.ped::before  { background: var(--teal); }
+  .pfdk-card.org::before  { background: var(--warm); }
+  .pfdk-card.etik::before { background: var(--purple); }
+
+  .pfdk-card-name {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .pfdk-card-desc {
+    font-size: 0.72rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── FERDIGHETER ── */
+  .ferd-intro {
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .ferd-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 700px) {
+    .ferd-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .ferd-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 14px 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ferd-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .fd1::before { background: var(--teal); }
+  .fd2::before { background: var(--warm); }
+  .fd3::before { background: var(--purple); }
+  .fd4::before { background: var(--green); }
+  .fd5::before { background: var(--gold); }
+
+  .ferd-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    opacity: 0.25;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .fd1 .ferd-num { color: var(--teal); }
+  .fd2 .ferd-num { color: var(--warm); }
+  .fd3 .ferd-num { color: var(--purple); }
+  .fd4 .ferd-num { color: var(--green); }
+  .fd5 .ferd-num { color: var(--gold); }
+
+  .ferd-name {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.35;
+  }
+
+  .ferd-desc {
+    font-size: 0.68rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .ferd-niva-note {
+    padding: 14px 18px;
+    background: rgba(232,197,71,0.05);
+    border: 1px solid rgba(232,197,71,0.12);
+    border-radius: 10px;
+    font-size: 0.74rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .ferd-niva-note strong { color: var(--gold); }
+
+  /* ── AKTIVITETER ── */
+  .aktivitet-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+
+  @media (max-width: 600px) {
+    .aktivitet-grid { grid-template-columns: 1fr; }
+  }
+
+  .aktivitet-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 22px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .aktivitet-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 14px 14px 0 0;
+  }
+
+  .ak1::before { background: var(--teal); }
+  .ak2::before { background: var(--warm); }
+  .ak3::before { background: var(--green); }
+
+  .ak-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+
+  .ak1 .ak-badge { background: rgba(122,179,176,0.12); color: var(--teal); }
+  .ak2 .ak-badge { background: rgba(196,147,90,0.12); color: var(--warm); }
+  .ak3 .ak-badge { background: rgba(130,168,125,0.12); color: var(--green); }
+
+  .aktivitet-card h3 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .aktivitet-card p {
+    font-size: 0.77rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+
+  .aktivitet-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .aktivitet-card ul li {
+    font-size: 0.75rem;
+    color: var(--muted);
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 5px;
+    line-height: 1.55;
+  }
+
+  .aktivitet-card ul li::before {
+    content: '·';
+    position: absolute;
+    left: 4px;
+    color: var(--teal);
+    opacity: 0.6;
+  }
+
+  /* ── REFLEKSJONSSPØRSMÅL ── */
+  .refl-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 600px) {
+    .refl-grid { grid-template-columns: 1fr; }
+  }
+
+  .refl-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 22px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .refl-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 14px 14px 0 0;
+  }
+
+  .refl-rektor::before  { background: var(--purple); }
+  .refl-ikt::before     { background: var(--teal); }
+
+  .refl-role {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .refl-rektor .refl-role { color: var(--purple); }
+  .refl-ikt .refl-role    { color: var(--teal); }
+
+  .refl-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.0rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+
+  .refl-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .refl-list li {
+    font-size: 0.76rem;
+    color: var(--muted);
+    padding-left: 16px;
+    position: relative;
+    margin-bottom: 9px;
+    line-height: 1.6;
+  }
+
+  .refl-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    opacity: 0.4;
+    font-size: 0.68rem;
+    top: 2px;
+  }
+
+  /* ── SURVEY SECTION ── */
+  .survey-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 620px) {
+    .survey-grid { grid-template-columns: 1fr; }
+  }
+
+  .survey-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 18px 16px;
+    text-align: center;
+  }
+
+  .survey-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--muted);
+    opacity: 0.4;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .survey-q {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  .survey-sub {
+    font-size: 0.7rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* ── HJEMMELEKSE ── */
+  .lekse-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 14px 14px 0;
+    padding: 24px 28px;
+  }
+
+  .lekse-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .lekse-wrap h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .lekse-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 16px;
+  }
+
+  @media (max-width: 560px) {
+    .lekse-grid { grid-template-columns: 1fr; }
+  }
+
+  .lekse-col h4 {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .lekse-col p, .lekse-col ul {
+    font-size: 0.76rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .lekse-col ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .lekse-col ul li {
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 5px;
+  }
+
+  .lekse-col ul li::before {
+    content: '·';
+    position: absolute;
+    left: 4px;
+    color: var(--gold);
+  }
+
+  /* ── REFERENCE ── */
+  .ref-box {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: rgba(155,143,173,0.05);
+    border: 1px solid rgba(155,143,173,0.12);
+    border-radius: 10px;
+    font-size: 0.73rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .ref-box a {
+    color: var(--purple);
+    text-decoration: none;
+  }
+
+  .ref-box a:hover { text-decoration: underline; }
+
+  /* ── SECTION HEADINGS ── */
+  .section-h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .section-lead {
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    margin-top: 80px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .brand-text {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .brand-text span { color: var(--gold); }
+
+  .footer-note {
+    font-size: 0.72rem;
+    color: rgba(122,102,112,0.6);
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  /* ── ANIMATIONS ── */
+  .animate {
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .delay-1 { animation-delay: 0.05s; }
+  .delay-2 { animation-delay: 0.12s; }
+  .delay-3 { animation-delay: 0.2s; }
+  .delay-4 { animation-delay: 0.28s; }
+  .delay-5 { animation-delay: 0.36s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HEADER ── -->
+  <header class="site-header animate delay-1">
+    <svg class="watercolor-blob" viewBox="0 0 340 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="170" cy="80" rx="160" ry="68" fill="var(--purple)"/>
+    </svg>
+    <div class="header-content">
+      <a href="index.html" class="back-link">
+        <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 2L4 6L8 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Tilbake til oversikt
+      </a>
+      <p class="kicker">Samling 7 · DigSkole Gauldal</p>
+      <h1>Rammeverk for <em>profesjonsfaglig digital kompetanse</em></h1>
+      <p class="subtitle">Mekanismer for bærekraftig kompetanseutvikling</p>
+      <div class="header-meta">
+        <span class="meta-chip">21. mars 2025</span>
+        <span class="meta-chip">Gauldal</span>
+        <span class="meta-chip highlight">PfDK-rammeverket</span>
+        <span class="meta-chip highlight">Mekanismer for utvikling</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── FRAMING QUOTE ── -->
+  <div class="framing-quote animate delay-2">
+    <blockquote>«PDC kan ikke forstås som et individuelt ferdighetssett — det utvikles som en kollektiv, mediert praksis forankret i skolens aktivitetssystem.»</blockquote>
+    <cite>Letnes, M.-A. (2025) · European Journal of Teacher Education</cite>
+  </div>
+
+  <!-- ── HVA VI UNDERSØKER ── -->
+  <div class="section-label animate delay-2">
+    <span class="dot" style="background: var(--purple);"></span>
+    Hva vi undersøker i dag
+  </div>
+
+  <div class="undersok-grid animate delay-3">
+    <div class="undersok-card uk1">
+      <div class="undersok-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.8" stroke-linecap="round">
+          <path d="M12 2a10 10 0 1 1 0 20A10 10 0 0 1 12 2z"/><path d="M12 8v4l3 3"/>
+        </svg>
+      </div>
+      <h3>Hvor er vi nå?</h3>
+      <p>Vi ser tilbake på den innledende spørreundersøkelsen og reflekterer over reisen fra oppstart til nå. Hva har endret seg?</p>
+    </div>
+    <div class="undersok-card uk2">
+      <div class="undersok-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round">
+          <circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/>
+        </svg>
+      </div>
+      <h3>Hva er PfDK-rammeverket?</h3>
+      <p>Sju kompetanseområder som beskriver lærerens profesjonsfaglige digitale kompetanse — pedagogisk, organisatorisk og etisk.</p>
+    </div>
+    <div class="undersok-card uk3">
+      <div class="undersok-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="1.8" stroke-linecap="round">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h4"/>
+        </svg>
+      </div>
+      <h3>Digitale ferdigheter</h3>
+      <p>Fem ferdighetsområder med fem progresjonsnivåer — fra «bruke og forstå» til «utøve digital dømmekraft».</p>
+    </div>
+    <div class="undersok-card uk4">
+      <div class="undersok-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round">
+          <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="var(--gold)" stroke="none"/>
+        </svg>
+      </div>
+      <h3>Mekanismer for utvikling</h3>
+      <p>Fire mekanismer — felles visjon, kollektiv læring, kritisk refleksjon og organisatorisk støtte — som driver kompetanseutvikling.</p>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ── SURVEY REFLECTION ── -->
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background: var(--warm);"></span>
+    Den innledende spørreundersøkelsen
+  </div>
+
+  <h2 class="section-h2 animate delay-3">Hvor var vi — og hvor er vi nå?</h2>
+  <p class="section-lead animate delay-3">Bruk noen minutter til å ta frem surveyen fra oppstarten og minne hverandre på utgangspunktet. Diskuter deretter utviklingen og besluttet om det er nyttig å gjennomføre en ny undersøkelse.</p>
+
+  <div class="survey-grid animate delay-4">
+    <div class="survey-card">
+      <div class="survey-num">1</div>
+      <p class="survey-q">Hvor var vi?</p>
+      <p class="survey-sub">Ta frem surveyen fra oppstarten og minne oss på utgangspunktet. Hva var utfordringene da?</p>
+    </div>
+    <div class="survey-card">
+      <div class="survey-num">2</div>
+      <p class="survey-q">Hvor er vi nå?</p>
+      <p class="survey-sub">Skal vi gjennomføre en ny survey? Hva har faktisk endret seg i praksis og i selvforståelse?</p>
+    </div>
+    <div class="survey-card">
+      <div class="survey-num">3</div>
+      <p class="survey-q">Hvor skal vi?</p>
+      <p class="survey-sub">Rammeverk for PfDK og grunnleggende digitale ferdigheter som kompass for videre arbeid.</p>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ── MEKANISMER ── -->
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background: var(--teal);"></span>
+    Forskning fra DigSkole
+  </div>
+
+  <h2 class="section-h2 animate delay-3">Mekanismer for utvikling av PfDK</h2>
+  <p class="section-lead animate delay-3">Basert på empirisk analyse fra DigSkole-prosjektet identifiserer Letnes (2025) fire mekanismer som driver profesjonsfaglig digital kompetanseutvikling — på tvers av personlige, mellommenneskelige og organisatoriske kapasiteter.</p>
+
+  <div class="mek-center animate delay-3">
+    <p class="mek-center-title">PfDK utvikles på tvers av tre kapasitetsnivåer</p>
+    <div class="cap-row">
+      <span class="cap-chip cap-personlig">Personlig</span>
+      <span class="cap-chip cap-inter">Interpersonlig</span>
+      <span class="cap-chip cap-org">Organisatorisk</span>
+    </div>
+  </div>
+
+  <div class="mek-grid animate delay-4">
+    <div class="mek-card mek1">
+      <div class="mek-tag">Mekanisme 1</div>
+      <p class="mek-name">Felles visjon og eierskap</p>
+      <p class="mek-desc">En felles forståelse av utviklingsprosjektet styrker engasjement og eierskap. Eierskap til et felles mål legger grunnlag for motivasjon og utvikler kapasitetene.</p>
+      <hr class="mek-divider">
+      <p class="cap-label">Kapasitetsutvikling</p>
+      <ul class="cap-list">
+        <li>Personlig: Sterkere motivasjon og handlingsvilje</li>
+        <li>Interpersonlig: Kollektiv forhandling om retning</li>
+        <li>Organisatorisk: Nye normer og forventninger stabiliseres</li>
+      </ul>
+    </div>
+    <div class="mek-card mek2">
+      <div class="mek-tag">Mekanisme 2</div>
+      <p class="mek-name">Kollektive læringsprosesser</p>
+      <p class="mek-desc">Kollektive læreprosesser styrker profesjonelle fellesskap. Når lærere deler kunnskap og reflekterer sammen, styrkes personlig kapasitet og organisasjonen bygger strukturer for kompetanseutvikling over tid.</p>
+      <hr class="mek-divider">
+      <p class="cap-label">Kapasitetsutvikling</p>
+      <ul class="cap-list">
+        <li>Personlig: Utforskning av verktøy i eget klasserom</li>
+        <li>Interpersonlig: Felles språk om pedagogisk teknologibruk</li>
+        <li>Organisatorisk: Rutiner for deling forankres i strukturen</li>
+      </ul>
+    </div>
+    <div class="mek-card mek3">
+      <div class="mek-tag">Mekanisme 3</div>
+      <p class="mek-name">Observasjon og kritisk refleksjon</p>
+      <p class="mek-desc">Kritisk refleksjon og kollegaveiledning driver profesjonell utvikling. En sterk tilbakemeldingskultur styrker selvinnsikt og pedagogisk innovasjon, og etablerer strukturer for kontinuerlig utvikling.</p>
+      <hr class="mek-divider">
+      <p class="cap-label">Kapasitetsutvikling</p>
+      <ul class="cap-list">
+        <li>Personlig: Nytt perspektiv på egne praksiser</li>
+        <li>Interpersonlig: Relasjonell tillit gjennom gjensidig observasjon</li>
+        <li>Organisatorisk: Systematisk kollegaveiledning som struktur</li>
+      </ul>
+    </div>
+    <div class="mek-card mek4">
+      <div class="mek-tag">Mekanisme 4</div>
+      <p class="mek-name">Organisatorisk støtte for bæreevne</p>
+      <p class="mek-desc">En solid institusjonell struktur forankrer utviklingen av digital kompetanse over tid. Strategisk ledelse, avsatt tid og ressurser styrker alle tre kapasitetene og sikrer kontinuerlig profesjonell vekst.</p>
+      <hr class="mek-divider">
+      <p class="cap-label">Kapasitetsutvikling</p>
+      <ul class="cap-list">
+        <li>Personlig: Trygghet til å prøve og feile</li>
+        <li>Interpersonlig: Kollegial støtte som norm</li>
+        <li>Organisatorisk: PfDK som del av skolens drift</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mek-article-note animate delay-5">
+    <strong>Artikkel:</strong> Letnes, M.-A. (2025). The ICT coordinator as a mediating actor in the development of professional digital competence within a school-based activity system. <em>European Journal of Teacher Education.</em> DOI: 10.1080/02619768.2025.2565634 — Ressurslæreren er ikke bare teknisk støtte, men en <em>medierende aktør</em> som oversetter strategi til pedagogisk praksis og bygger bro mellom skolelederens mål og lærernes hverdag.
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ── PfDK RAMMEVERK ── -->
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background: var(--purple);"></span>
+    Rammeverk for PfDK
+  </div>
+
+  <h2 class="section-h2 animate delay-3">Sju kompetanseområder</h2>
+  <p class="section-lead animate delay-3">Rammeverket for lærerens profesjonsfaglige digitale kompetanse (Kelentrić, Helland & Arstorp 2017/2024) er oppdatert for å harmonisere med nye læreplaner, nasjonal policy og digital utvikling. Kompetansen er dynamisk, sammensatt — og ikke individuell.</p>
+
+  <div class="pfdk-gruppe animate delay-4">
+    <span class="pfdk-gruppe-label pg-ped">Pedagogisk-didaktisk kompetanse</span>
+    <div class="pfdk-grid">
+      <div class="pfdk-card ped">
+        <p class="pfdk-card-name">Fag og grunnleggende ferdigheter</p>
+        <p class="pfdk-card-desc">Bruke digitale ressurser i fag og støtte elevenes utvikling av grunnleggende digitale ferdigheter som en integrert del av fagopplæringen.</p>
+      </div>
+      <div class="pfdk-card ped">
+        <p class="pfdk-card-name">Pedagogikk og fagdidaktikk</p>
+        <p class="pfdk-card-desc">Velge og begrunne bruk av digitale ressurser ut fra pedagogisk og fagdidaktisk forståelse — HVORFOR, ikke bare HVORDAN.</p>
+      </div>
+      <div class="pfdk-card ped">
+        <p class="pfdk-card-name">Ledelse av læreprosesser</p>
+        <p class="pfdk-card-desc">Lede og støtte elevenes læring med digitale ressurser, tilpasse opplæringen og skape inkluderende digitale læringsmiljøer.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pfdk-gruppe animate delay-4">
+    <span class="pfdk-gruppe-label pg-org">Organisatorisk og administrativ kompetanse</span>
+    <div class="pfdk-grid two-col">
+      <div class="pfdk-card org">
+        <p class="pfdk-card-name">Samhandling og kommunikasjon</p>
+        <p class="pfdk-card-desc">Bruke digitale ressurser til å kommunisere og samhandle med elever, kollegaer, foresatte og lokalsamfunnet på hensiktsmessige måter.</p>
+      </div>
+      <div class="pfdk-card org">
+        <p class="pfdk-card-name">Endring og utvikling</p>
+        <p class="pfdk-card-desc">Bidra til skolens digitale utvikling, oppdatere egne digitale kunnskaper og ferdigheter og støtte kollegers profesjonelle utvikling.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pfdk-gruppe animate delay-5">
+    <span class="pfdk-gruppe-label pg-etik">Etisk og kritisk kompetanse</span>
+    <div class="pfdk-grid two-col">
+      <div class="pfdk-card etik">
+        <p class="pfdk-card-name">Etikk</p>
+        <p class="pfdk-card-desc">Handle etisk og kritisk reflektert i møte med digitale ressurser — personvern, opphavsrett og digital danning i en vid forstand.</p>
+      </div>
+      <div class="pfdk-card etik">
+        <p class="pfdk-card-name">Skolen i samfunnet</p>
+        <p class="pfdk-card-desc">Forstå og forholde seg kritisk til digitaliseringens påvirkning på skole, individ og samfunn — og bidra til at elevene gjør det samme.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ── FERDIGHETSOMRÅDER ── -->
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background: var(--teal);"></span>
+    Grunnleggende digitale ferdigheter
+  </div>
+
+  <h2 class="section-h2 animate delay-3">Ferdighetsområder i digitale ferdigheter</h2>
+  <p class="section-lead animate delay-3">Fem ferdighetsområder beskriver hva det vil si å mestre digitale ferdigheter som grunnleggende ferdighet i skolen. Hvert område har fem progresjonsnivåer — fra enkel bruk til kritisk og selvstendig mestring.</p>
+
+  <div class="ferd-grid animate delay-4">
+    <div class="ferd-card fd1">
+      <div class="ferd-num">1</div>
+      <p class="ferd-name">Bruke og forstå</p>
+      <p class="ferd-desc">Navigere digitale ressurser, følge formkrav og ivareta informasjons- og datasikkerhet.</p>
+    </div>
+    <div class="ferd-card fd2">
+      <div class="ferd-num">2</div>
+      <p class="ferd-name">Finne og behandle</p>
+      <p class="ferd-desc">Tilegne seg, tolke og vurdere informasjon fra digitale kilder. Kildekritikk og kildehenvisning.</p>
+    </div>
+    <div class="ferd-card fd3">
+      <div class="ferd-num">3</div>
+      <p class="ferd-name">Produsere og bearbeide</p>
+      <p class="ferd-desc">Skape digitale produkter, enten ved nyskaping eller videreutvikling og gjenbruk av eksisterende ressurser.</p>
+    </div>
+    <div class="ferd-card fd4">
+      <div class="ferd-num">4</div>
+      <p class="ferd-name">Kommunisere og samhandle</p>
+      <p class="ferd-desc">Planlegge og gjennomføre læringsarbeid med andre ved hjelp av digitale samhandlingsressurser.</p>
+    </div>
+    <div class="ferd-card fd5">
+      <div class="ferd-num">5</div>
+      <p class="ferd-name">Utøve digital dømmekraft</p>
+      <p class="ferd-desc">Følge regler for personvern, vise hensyn på nett og reflektere etisk over egen rolle i digitale rom.</p>
+    </div>
+  </div>
+
+  <div class="ferd-niva-note animate delay-5">
+    <strong>Fem progresjonsnivåer</strong> — fra «følger enkle regler» (nivå 1) til «forvalter egne fremstillinger og vurderer eget produkt kritisk» (nivå 5). Hvert kompetanseområde i PfDK-rammeverket kobles til disse ferdighetsnivåene i elevopplæringen.
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ── AKTIVITETER ── -->
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background: var(--green);"></span>
+    Gruppeaktiviteter
+  </div>
+
+  <h2 class="section-h2 animate delay-3">Vi jobber sammen</h2>
+  <p class="section-lead animate delay-3">To gruppeøkter — én på tvers av skolene, én skolevis — for å koble rammeverket til lokal praksis.</p>
+
+  <div class="aktivitet-grid animate delay-4">
+    <div class="aktivitet-card ak1">
+      <div class="ak-badge">To skoler · Rektor og ressurslærer</div>
+      <h3>Hvordan henger kompetanseområdene sammen?</h3>
+      <p>Dere skal samarbeide om å utvikle en visuell modell som tydelig illustrerer sammenhengen mellom de sju kompetanseområdene i PfDK-rammeverket.</p>
+      <ul>
+        <li>Hva kjennetegner hvert av kompetanseområdene?</li>
+        <li>Hvordan påvirker disse hverandre?</li>
+        <li>Er det noen områder som er spesielt sentrale?</li>
+        <li>Bruk symboler, metaforer eller diagrammer</li>
+        <li>Presenter modellen i plenum etterpå</li>
+      </ul>
+    </div>
+    <div class="aktivitet-card ak2">
+      <div class="ak-badge">Skolevis · Lokalt rammeverk</div>
+      <h3>Nåsituasjon og lokale behov</h3>
+      <p>Deltakerne jobber i grupper per skole med å kartlegge utgangspunktet for lokalt rammeverksarbeid.</p>
+      <ul>
+        <li>Eksisterende praksis — elevenes digitale ferdigheter og lærernes PfDK</li>
+        <li>Styrker og svakheter</li>
+        <li>Lokale behov og utfordringer</li>
+        <li>Hvordan legge opp en økt for lokalt rammeverk i personalet?</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ── REFLEKSJONSSPØRSMÅL ── -->
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background: var(--purple);"></span>
+    Differensiert refleksjon
+  </div>
+
+  <h2 class="section-h2 animate delay-3">Vi deler oss</h2>
+  <p class="section-lead animate delay-3">Rektorer og ressurslærere arbeider med separate refleksjonsspørsmål — med utgangspunkt i sine ulike roller og ansvar i skolens digitale utvikling.</p>
+
+  <div class="refl-grid animate delay-4">
+    <div class="refl-card refl-rektor">
+      <p class="refl-role">Rektorer</p>
+      <h3>Ledelse av profesjonell digital utvikling</h3>
+      <ul class="refl-list">
+        <li>Hvordan etablere en felles visjon og eierskap til PfDK i personalet?</li>
+        <li>Hvordan legge til rette for kollektive læringsprosesser med erfaringsdeling og kritisk refleksjon?</li>
+        <li>Har dere rom for kollegaveiledning på skolen?</li>
+        <li>Hvordan sikre organisatorisk støtte til videreføring av PfDK etter prosjektperioden? Hvilke strukturer må på plass?</li>
+      </ul>
+    </div>
+    <div class="refl-card refl-ikt">
+      <p class="refl-role">Ressurslærere / IKT-lærere</p>
+      <h3>Rollen som medierende aktør</h3>
+      <ul class="refl-list">
+        <li>Hvordan kan dere bidra til å bygge personlige og interpersonlige kapasiteter på egen skole?</li>
+        <li>Hva trenger dere fra ledelsen (organisatorisk støtte) for å ivareta rollen som pådrivere for PfDK?</li>
+        <li>Hvordan vil dere bruke egne erfaringer fra prosjektet til å legge til rette for kollektive læringsprosesser og støtte erfaringsdeling og kritisk refleksjon blant kolleger?</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ── HJEMMELEKSE ── -->
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background: var(--gold);"></span>
+    Til neste samling
+  </div>
+
+  <div class="lekse-wrap animate delay-4">
+    <p class="lekse-label">Hjemmelekse · Lokalt rammeverksarbeid</p>
+    <h3>Sikre at lokalt rammeverk for PfDK forankres med bredt eierskap i personalet</h3>
+    <div class="lekse-grid">
+      <div class="lekse-col">
+        <h4>Oppgave</h4>
+        <p>Jobb sammen med personalet med skolens lokale rammeverk for PfDK. Sørg for at hele personalet er involvert og føler eierskap.</p>
+        <br>
+        <h4>Dokumentasjon</h4>
+        <ul>
+          <li>Noter personalets refleksjoner og planer</li>
+          <li>Disse tas med tilbake til neste samling</li>
+        </ul>
+      </div>
+      <div class="lekse-col">
+        <h4>Presentasjon til neste gang</h4>
+        <p>Lag en presentasjon der dere viser både <em>hvordan</em> dere har jobbet og det <em>ferdige rammeverket</em> for PfDK.</p>
+        <br>
+        <h4>Oppfølging</h4>
+        <ul>
+          <li>Avtal hvem som har ansvar for oppfølging</li>
+          <li>Sett tidsplan for implementering frem til neste samling</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── REFERENCE ── -->
+  <div class="ref-box animate delay-5">
+    <strong style="color: var(--text);">Sentrale referanser denne samlingen:</strong><br>
+    Kelentrić, M., Helland, K. &amp; Arstorp, A.-T. (2024). <em>Rammeverk for lærerens profesjonsfaglige digitale kompetanse (PfDK)</em>. Utdanningsdirektoratet.<br><br>
+    Letnes, M.-A. (2025). The ICT coordinator as a mediating actor in the development of professional digital competence within a school-based activity system. <em>European Journal of Teacher Education</em>. <a href="https://doi.org/10.1080/02619768.2025.2565634" target="_blank" rel="noopener">DOI: 10.1080/02619768.2025.2565634</a>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <a href="https://mariannletnes.github.io/Gauldals-DigSkole/" class="footer-brand" target="_blank">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="14" cy="14" r="13" stroke="rgba(232,197,71,0.3)" stroke-width="1"/>
+        <rect x="8" y="14" width="12" height="8" rx="0.8" stroke="var(--gold)" stroke-width="1" stroke-opacity="0.6"/>
+        <path d="M6 14 L14 8 L22 14" stroke="var(--gold)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.6"/>
+        <path d="M11.5 11 Q14 8.5 16.5 11" stroke="var(--teal)" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0.7"/>
+        <circle cx="14" cy="10" r="1" fill="var(--teal)" opacity="0.8"/>
+      </svg>
+      <span class="brand-text">DigSkole <span>Gauldal</span> · 2022–2027</span>
+    </a>
+    <div class="footer-note">
+      Ressursside for Seminar 21. mars 2025<br>
+      DigSkole Gauldal · NTNU
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
