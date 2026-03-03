@@ -397,19 +397,50 @@
   .lq4 { background: rgba(122,179,176,0.1); }
   .lq4 .q-num, .lq4 .q-role, .lq4 .q-desc { color: var(--teal); }
 
-  .letnes-axes {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-top: 10px;
-  }
-
-  .axis-label {
-    font-size: 0.62rem;
-    color: var(--muted);
+  .lm-actor {
     text-align: center;
-    letter-spacing: 0.06em;
+    padding: 6px 0;
+  }
+  .lm-actor-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.0rem;
+    font-weight: 400;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+  .lm-actor-sub {
+    font-size: 0.58rem;
     text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .lm-y-label {
+    text-align: center;
+    font-size: 0.6rem;
+    color: rgba(160,152,144,0.55);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 5px 0;
+  }
+  .lm-body {
+    display: grid;
+    grid-template-columns: 90px 1fr 90px;
+    gap: 10px;
+    align-items: center;
+  }
+  .lm-side-label {
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: rgba(160,152,144,0.5);
+    line-height: 1.7;
+  }
+  .lm-side-left { text-align: right; }
+  .lm-side-right { text-align: left; }
+  @media (max-width: 580px) {
+    .lm-body { grid-template-columns: 1fr; }
+    .lm-side-label { display: none; }
   }
 
   /* ── MODULER ── */
@@ -840,33 +871,42 @@
   </div>
 
   <div class="letnes-wrap animate delay-3">
-    <p class="letnes-intro">Lærerens pedagogiske digitale praksis er knyttet til to dimensjoner: kunnskap om <strong style="color:var(--text)">hvordan</strong> teknologien kan brukes, og kunnskap om <strong style="color:var(--text)">hvorfor</strong> digital teknologi velges eller ikke velges i ulike undervisningssammenhenger. Kombinasjonen av disse to gir fire mulige posisjoner:</p>
-    <div class="letnes-matrix">
-      <div class="letnes-q lq1">
-        <div class="q-num">1</div>
-        <div class="q-role">Den reflekterte brukeren</div>
-        <div class="q-desc">Høy kunnskap om <em>hvordan</em> + Høy kunnskap om <em>hvorfor</em> → Underviser som tar bevisste valg. Målet for DigSkole-reisen.</div>
-      </div>
-      <div class="letnes-q lq2">
-        <div class="q-num">2</div>
-        <div class="q-role">Den teknisk dyktige</div>
-        <div class="q-desc">Høy kunnskap om <em>hvordan</em> + Lav kunnskap om <em>hvorfor</em> → Bruker mye teknologi, men mangler det didaktiske begrunnelsesgrunnlaget.</div>
-      </div>
-      <div class="letnes-q lq3">
-        <div class="q-num">3</div>
-        <div class="q-role">Startpunktet</div>
-        <div class="q-desc">Lav kunnskap om <em>hvordan</em> + Lav kunnskap om <em>hvorfor</em> → Bruker lite digital teknologi. Trenger støtte på begge dimensjoner.</div>
-      </div>
-      <div class="letnes-q lq4">
-        <div class="q-num">4</div>
-        <div class="q-role">Den motiverte</div>
-        <div class="q-desc">Lav kunnskap om <em>hvordan</em> + Høy kunnskap om <em>hvorfor</em> → Forstår behovet, men trenger trening i å bruke verktøyene i praksis.</div>
-      </div>
+    <p class="letnes-intro">Matrisen krysser to typer kunnskap: kunnskap om digital teknologi som artefakt (vertikal akse, høy↕lav) og kunnskap om HVORDAN og HVORFOR bruke teknologien i undervisning og læringssammenheng (horisontal akse, lav↔høy). Modellen gjelder for pedagogen/læreren — og tilsvarende for barnet/eleven/studenten. <em>Letnes, M. (2021)</em></p>
+
+    <div class="lm-actor">
+      <div class="lm-actor-name">Pedagogen · læreren · UH-læreren</div>
+      <div class="lm-actor-sub">↓ også for barn · elev · student</div>
     </div>
-    <div class="letnes-axes">
-      <div class="axis-label">← Lav — Høy kunnskap om HVORFOR →</div>
-      <div class="axis-label">← Lav — Høy kunnskap om HVORFOR →</div>
+
+    <div class="lm-y-label">↑ Høy kunnskap om digital teknologi</div>
+    <div class="lm-body">
+      <div class="lm-side-label lm-side-left">← Lav kunnskap om HVORDAN og HVORFOR bruke digital teknologi i undervisning</div>
+      <div class="letnes-matrix">
+        <div class="letnes-q lq2">
+          <div class="q-num">2</div>
+          <div class="q-role">Høy teknologi · Lav didaktikk</div>
+          <div class="q-desc">Kjenner teknologien godt, men mangler pedagogisk begrunnelse — risiko for «teknologi for teknologiens skyld».</div>
+        </div>
+        <div class="letnes-q lq1">
+          <div class="q-num">1</div>
+          <div class="q-role">Høy teknologi · Høy didaktikk</div>
+          <div class="q-desc">Behersker teknologien og vet hvordan og hvorfor den fremmer læring — den fullt utviklede digitaldidaktiske kompetansen.</div>
+        </div>
+        <div class="letnes-q lq3">
+          <div class="q-num">3</div>
+          <div class="q-role">Lav teknologi · Lav didaktikk</div>
+          <div class="q-desc">Begrenset teknologisk erfaring og liten bevissthet om pedagogisk begrunnelse. Vegrer seg for teknologi i undervisningen.</div>
+        </div>
+        <div class="letnes-q lq4">
+          <div class="q-num">4</div>
+          <div class="q-role">Lav teknologi · Høy didaktikk</div>
+          <div class="q-desc">Sterk pedagogisk bevissthet om HVORFOR — men mangler den praktiske teknologikompetansen for å sette det ut i liv.</div>
+        </div>
+      </div>
+      <div class="lm-side-label lm-side-right">Høy kunnskap om HVORDAN og HVORFOR bruke digital teknologi i undervisning →</div>
     </div>
+    <div class="lm-y-label">↓ Lav kunnskap om digital teknologi</div>
+
     <p style="font-size:0.74rem; color:var(--muted); margin-top:10px; font-style:italic;">Letnes, M.-A. (2021). Digitalt mangfold – digitale skiller. I Postholm m.fl. (Red.), <em>Elev i skolen 1–7</em>. Cappelen Damm.</p>
   </div>
 
