@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samling 30. april 2025 — Deling og fagdagplanlegging · DigSkole Gauldal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #0f0f12;
+    --surface: #1a1a20;
+    --text:    #e8e4dc;
+    --muted:   #7a7670;
+    --border:  rgba(255,255,255,0.07);
+    --warm:    #c4935a;
+    --teal:    #7ab3b0;
+    --purple:  #9b8fad;
+    --gold:    #e8c547;
+    --green:   #82a87d;
+    --pink:    #d4819a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 56px 32px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── HEADER ── */
+  .site-header { margin-bottom: 64px; position: relative; }
+
+  .watercolor-blob {
+    position: absolute;
+    top: -24px; left: -16px;
+    width: 340px; height: 160px;
+    pointer-events: none;
+    opacity: 0.22; z-index: 0;
+  }
+
+  .header-content { position: relative; z-index: 1; }
+
+  .back-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--muted); text-decoration: none; margin-bottom: 28px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--teal); }
+  .back-link svg { width: 12px; height: 12px; }
+
+  .kicker {
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 10px; font-weight: 500;
+  }
+
+  .site-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 300; line-height: 1.15;
+    color: var(--text); margin-bottom: 6px;
+  }
+  .site-header h1 em { font-style: italic; color: var(--green); }
+
+  .site-header .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-weight: 300; font-style: italic;
+    color: var(--muted); margin-bottom: 20px;
+  }
+
+  .header-meta { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .meta-chip {
+    font-size: 0.72rem; padding: 4px 12px; border-radius: 20px;
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--muted); letter-spacing: 0.04em;
+  }
+  .meta-chip.highlight {
+    background: rgba(130,168,125,0.1);
+    border-color: rgba(130,168,125,0.3);
+    color: var(--green);
+  }
+
+  /* ── DIVIDER ── */
+  .section-divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+
+  /* ── SECTION LABELS ── */
+  .section-label {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.16em;
+    color: #a09890; margin-bottom: 24px; font-weight: 500;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .section-label .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── SECTION HEADINGS ── */
+  .section-h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 300; color: var(--text);
+    margin-bottom: 8px; line-height: 1.3;
+  }
+  .section-lead {
+    font-size: 0.83rem; color: var(--muted);
+    line-height: 1.7; margin-bottom: 24px;
+  }
+
+  /* ── FRAMING QUOTE ── */
+  .framing-quote {
+    padding: 28px 32px;
+    background: rgba(130,168,125,0.07);
+    border-left: 3px solid var(--green);
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 48px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+  }
+  .framing-quote blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-weight: 300; font-style: italic;
+    color: var(--text); line-height: 1.65; margin-bottom: 12px;
+  }
+  .framing-quote cite {
+    font-size: 0.72rem; color: var(--muted);
+    letter-spacing: 0.06em; text-transform: uppercase; font-style: normal;
+  }
+
+  /* ── PROGRAM TABLE ── */
+  .program-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 8px;
+  }
+  .program-table tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  .program-table tr:hover { background: rgba(255,255,255,0.025); }
+  .program-table tr.hl { background: rgba(130,168,125,0.06); }
+  .program-table tr.lunsj { background: rgba(232,197,71,0.05); }
+
+  .program-table td {
+    padding: 14px 16px;
+    vertical-align: top;
+    font-size: 0.83rem;
+    line-height: 1.5;
+  }
+  .program-table td:first-child {
+    width: 110px; color: var(--muted); font-size: 0.75rem;
+    letter-spacing: 0.04em; white-space: nowrap; padding-top: 16px;
+  }
+  .prog-title { color: var(--text); font-weight: 500; margin-bottom: 2px; }
+  .prog-sub   { color: var(--muted); font-size: 0.76rem; }
+
+  .prog-tag {
+    display: inline-block; font-size: 0.62rem; padding: 2px 8px;
+    border-radius: 10px; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 4px;
+  }
+  .prog-tag.green  { background: rgba(130,168,125,0.12); color: var(--green);  border: 1px solid rgba(130,168,125,0.2); }
+  .prog-tag.gold   { background: rgba(232,197,71,0.12);  color: var(--gold);   border: 1px solid rgba(232,197,71,0.2); }
+  .prog-tag.teal   { background: rgba(122,179,176,0.12); color: var(--teal);   border: 1px solid rgba(122,179,176,0.2); }
+  .prog-tag.purple { background: rgba(155,143,173,0.12); color: var(--purple); border: 1px solid rgba(155,143,173,0.2); }
+  .prog-tag.warm   { background: rgba(196,147,90,0.12);  color: var(--warm);   border: 1px solid rgba(196,147,90,0.2); }
+
+  /* ── DELING CARDS ── */
+  .deling-intro {
+    font-size: 0.83rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px;
+  }
+
+  .deling-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 620px) { .deling-grid { grid-template-columns: 1fr; } }
+
+  .deling-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 20px 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .deling-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; border-radius: 14px 14px 0 0;
+  }
+  .dc1::before { background: var(--green); }
+  .dc2::before { background: var(--teal); }
+  .dc3::before { background: var(--warm); }
+  .dc4::before { background: var(--purple); }
+
+  .deling-card h3 {
+    font-size: 0.85rem; font-weight: 500; color: var(--text);
+    margin-bottom: 8px; line-height: 1.4;
+  }
+  .deling-card p {
+    font-size: 0.75rem; color: var(--muted); line-height: 1.65;
+    margin-bottom: 10px;
+  }
+  .deling-card ul {
+    list-style: none; padding: 0;
+  }
+  .deling-card ul li {
+    font-size: 0.73rem; color: var(--muted);
+    padding-left: 14px; position: relative;
+    margin-bottom: 5px; line-height: 1.55;
+  }
+  .deling-card ul li::before {
+    content: '→'; position: absolute; left: 0;
+    opacity: 0.4; font-size: 0.68rem; top: 2px;
+  }
+
+  /* ── RESSURS-ORGANISERING ── */
+  .ressurs-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 26px;
+    margin-bottom: 16px;
+  }
+
+  .ressurs-box h3 {
+    font-size: 0.9rem; font-weight: 500; color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .ressurs-box p {
+    font-size: 0.78rem; color: var(--muted); line-height: 1.7; margin-bottom: 14px;
+  }
+
+  .ki-tip {
+    padding: 14px 18px;
+    background: rgba(232,197,71,0.05);
+    border: 1px solid rgba(232,197,71,0.12);
+    border-radius: 10px;
+    font-size: 0.75rem; color: var(--muted); line-height: 1.65;
+  }
+  .ki-tip strong { color: var(--gold); }
+
+  /* ── FAGDAG PLANNING ── */
+  .fagdag-intro {
+    font-size: 0.83rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px;
+  }
+
+  .fagdag-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 660px) { .fagdag-grid { grid-template-columns: 1fr; } }
+
+  .fagdag-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 18px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .fagdag-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px; border-radius: 12px 12px 0 0;
+  }
+  .fc1::before { background: var(--teal); }
+  .fc2::before { background: var(--warm); }
+  .fc3::before { background: var(--purple); }
+  .fc4::before { background: var(--green); }
+  .fc5::before { background: var(--gold); }
+  .fc6::before { background: var(--pink); }
+
+  .fagdag-card-icon {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    opacity: 0.7;
+  }
+
+  .fagdag-card h4 {
+    font-size: 0.78rem; font-weight: 500; color: var(--text);
+    margin-bottom: 6px; line-height: 1.4;
+  }
+  .fagdag-card p {
+    font-size: 0.7rem; color: var(--muted); line-height: 1.6;
+  }
+
+  .fagdag-sesjon-info {
+    background: var(--surface);
+    border: 1px solid rgba(130,168,125,0.2);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 20px;
+  }
+
+  .fagdag-sesjon-info h3 {
+    font-size: 0.88rem; font-weight: 500; color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .sesjon-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 560px) { .sesjon-grid { grid-template-columns: 1fr; } }
+
+  .sesjon-col ul {
+    list-style: none; padding: 0;
+  }
+  .sesjon-col ul li {
+    font-size: 0.75rem; color: var(--muted);
+    padding-left: 14px; position: relative;
+    margin-bottom: 7px; line-height: 1.55;
+  }
+  .sesjon-col ul li::before {
+    content: '·'; position: absolute; left: 4px;
+    color: var(--green);
+  }
+
+  /* ── IGP ── */
+  .igp-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+
+  .igp-header {
+    padding: 16px 22px;
+    background: rgba(122,179,176,0.06);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .igp-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; font-weight: 300; color: var(--text);
+  }
+
+  .igp-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media (max-width: 660px) { .igp-steps { grid-template-columns: 1fr 1fr; } }
+
+  .igp-step {
+    padding: 18px 18px 16px;
+    border-right: 1px solid var(--border);
+  }
+  .igp-step:last-child { border-right: none; }
+
+  .igp-step-letter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 600;
+    opacity: 0.22; line-height: 1; margin-bottom: 6px;
+  }
+  .igp-step:nth-child(1) .igp-step-letter { color: var(--warm); }
+  .igp-step:nth-child(2) .igp-step-letter { color: var(--teal); }
+  .igp-step:nth-child(3) .igp-step-letter { color: var(--purple); }
+  .igp-step:nth-child(4) .igp-step-letter { color: var(--green); }
+
+  .igp-step-title {
+    font-size: 0.78rem; font-weight: 500; color: var(--text);
+    margin-bottom: 5px;
+  }
+  .igp-step-time {
+    display: inline-block; font-size: 0.6rem; padding: 1px 7px;
+    border-radius: 10px; background: rgba(255,255,255,0.05);
+    color: var(--muted); margin-bottom: 8px;
+  }
+  .igp-step-desc {
+    font-size: 0.71rem; color: var(--muted); line-height: 1.6;
+  }
+
+  /* ── VIDERE PLANLEGGING ── */
+  .videre-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 14px 14px 0;
+    padding: 24px 28px;
+  }
+  .videre-label {
+    font-size: 0.6rem; text-transform: uppercase;
+    letter-spacing: 0.14em; color: var(--gold);
+    margin-bottom: 10px; font-weight: 500;
+  }
+  .videre-wrap h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; font-weight: 400; color: var(--text);
+    margin-bottom: 14px; line-height: 1.5;
+  }
+  .videre-wrap p {
+    font-size: 0.78rem; color: var(--muted); line-height: 1.7;
+  }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    margin-top: 80px; padding-top: 28px;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  }
+  .footer-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .brand-text { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; }
+  .brand-text span { color: var(--gold); }
+  .footer-note { font-size: 0.72rem; color: rgba(122,102,112,0.6); text-align: right; line-height: 1.6; }
+
+  /* ── ANIMATIONS ── */
+  .animate { animation: fadeUp 0.5s ease both; }
+  .delay-1 { animation-delay: 0.05s; }
+  .delay-2 { animation-delay: 0.12s; }
+  .delay-3 { animation-delay: 0.2s; }
+  .delay-4 { animation-delay: 0.28s; }
+  .delay-5 { animation-delay: 0.36s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HEADER ── -->
+  <header class="site-header animate delay-1">
+    <svg class="watercolor-blob" viewBox="0 0 340 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="170" cy="80" rx="160" ry="68" fill="var(--green)"/>
+    </svg>
+    <div class="header-content">
+      <a href="index.html" class="back-link">
+        <svg viewBox="0 0 12 12" fill="none"><path d="M8 2L4 6L8 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Tilbake til oversikt
+      </a>
+      <p class="kicker">Samling 8 · DigSkole Gauldal</p>
+      <h1>Deling og <em>fagdagplanlegging</em></h1>
+      <p class="subtitle">Skolene presenterer sitt PfDK-arbeid — og vi planlegger MiniNKUL i oktober</p>
+      <div class="header-meta">
+        <span class="meta-chip">30. april 2025</span>
+        <span class="meta-chip">Gauldal</span>
+        <span class="meta-chip highlight">Deling</span>
+        <span class="meta-chip highlight">Fagdag 29. okt</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── FRAMING QUOTE ── -->
+  <div class="framing-quote animate delay-2">
+    <blockquote>«Det som er nyttig og fungerer for deg, vil som oftest også fungere for andre. Det enkle er ofte det beste.»</blockquote>
+    <cite>DigSkole Gauldal · 30. april 2025</cite>
+  </div>
+
+  <!-- ── DAGSORDEN ── -->
+  <div class="section-label animate delay-2">
+    <span class="dot" style="background: var(--green);"></span>
+    Program for dagen
+  </div>
+
+  <div class="animate delay-3">
+    <table class="program-table">
+      <tr>
+        <td>09:00–11:30</td>
+        <td>
+          <div class="prog-title">Presentasjoner fra skolene</div>
+          <div class="prog-sub">Hvordan har vi jobbet med PfDK i personalet? Hver skole presenterer sitt lokale rammeverksarbeid.</div>
+          <span class="prog-tag green">Deling</span>
+        </td>
+      </tr>
+      <tr class="lunsj">
+        <td>11:30–12:30</td>
+        <td>
+          <div class="prog-title">Lunsj</div>
+        </td>
+      </tr>
+      <tr class="hl">
+        <td>12:30–13:15</td>
+        <td>
+          <div class="prog-title">Organisering av ressurser</div>
+          <div class="prog-sub">Idemyldring: 6 modeller for struktur — på tvers og innad i skolene.</div>
+          <span class="prog-tag teal">Idemyldring</span>
+        </td>
+      </tr>
+      <tr>
+        <td>13:15–15:00</td>
+        <td>
+          <div class="prog-title">Planlegging av fagdag 29. oktober</div>
+          <div class="prog-sub">Fagdagformat, parallelle sesjoner og IGP-økt for sesjonsbidrag.</div>
+          <span class="prog-tag gold">Fagdag</span>
+        </td>
+      </tr>
+      <tr>
+        <td>15:00–</td>
+        <td>
+          <div class="prog-title">Til planleggingsmøtet 13. juni</div>
+          <div class="prog-sub">Hva trenger vi til høsten? Innspill fra skolene.</div>
+          <span class="prog-tag purple">Fremover</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ── PRESENTASJONER ── -->
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background: var(--green);"></span>
+    Presentasjoner fra skolene
+  </div>
+
+  <h2 class="section-h2 animate delay-3">Lokalt PfDK-arbeid i personalet</h2>
+  <p class="section-lead animate delay-3">Hver skole presenterer hvordan de har jobbet med å forankre et lokalt rammeverk for PfDK i personalet — prosessen, valgene og det ferdige rammeverket.</p>
+
+  <div class="deling-grid animate delay-4">
+    <div class="deling-card dc1">
+      <h3>Hva presenterer dere?</h3>
+      <p>Hver skole viser frem sitt arbeid med to fokus:</p>
+      <ul>
+        <li>Prosessen — hvordan dere jobbet med personalet</li>
+        <li>Resultatet — det lokale PfDK-rammeverket</li>
+      </ul>
+    </div>
+    <div class="deling-card dc2">
+      <h3>Hva kan vi lære av hverandre?</h3>
+      <p>Lytt etter:</p>
+      <ul>
+        <li>Grep som skapte eierskap i personalet</li>
+        <li>Utfordringer og hvordan de ble løst</li>
+        <li>Strukturer som ser ut til å fungere</li>
+        <li>Ideer du kan ta med hjem til din skole</li>
+      </ul>
+    </div>
+    <div class="deling-card dc3">
+      <h3>Dokumentasjon underveis</h3>
+      <ul>
+        <li>Noter ned personalets refleksjoner og planer</li>
+        <li>Avtal hvem som har ansvar for oppfølging</li>
+        <li>Sett tidsplan for implementering</li>
+      </ul>
+    </div>
+    <div class="deling-card dc4">
+      <h3>Delingskultur som mekanisme</h3>
+      <p>Forskningen viser at erfaringsdeling på tvers av skoler styrker både personlige og organisatoriske kapasiteter — det er ikke tilfeldig at deling er en fast del av DigSkole.</p>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ── ORGANISERING ── -->
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background: var(--teal);"></span>
+    Organisering av ressurser
+  </div>
+
+  <h2 class="section-h2 animate delay-3">Idemyldring: Strukturmodeller</h2>
+  <p class="section-lead animate delay-3">Kom med 6 forslag til modeller som kan avhjelpe utfordringer med organisering av digitale ressurser og kompetanse — både på tvers av skolene og innad i den enkelte skole.</p>
+
+  <div class="ressurs-box animate delay-4">
+    <h3>Spørsmål å ta utgangspunkt i</h3>
+    <p>Hvilke strukturer og modeller kan bidra til at PfDK-arbeidet ikke stopper opp etter prosjektperioden? Tenk på hverdagsstruktur, samarbeidsformer og ansvarsfordeling — og bruk gjerne KI til å generere innovative forslag.</p>
+    <div class="ki-tip">
+      <strong>KI-tips:</strong> For å bruke KI effektivt til idemyldring, lag en god prompt som forklarer konteksten: hvem dere er (ressurslærere og rektorer i en kommune), hva utfordringen er (forankre og videreføre PfDK-arbeid i personalgrupper på 5–20 lærere), og hva dere trenger (6 konkrete strukturmodeller med praktisk beskrivelse). Jo mer kontekst KI-en får, jo mer relevante forslag.
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ── FAGDAG PLANLEGGING ── -->
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background: var(--gold);"></span>
+    Fagdag 29. oktober 2025
+  </div>
+
+  <h2 class="section-h2 animate delay-3">MiniNKUL — planlegging i fellesskap</h2>
+  <p class="section-lead animate delay-3">29. oktober arrangerer vi en fagdag for hele personalet i regionen. Nå setter vi rammene og starter planleggingen av sesjoner, plenum og program.</p>
+
+  <div class="fagdag-grid animate delay-4">
+    <div class="fagdag-card fc1">
+      <p class="fagdag-card-icon">📋</p>
+      <h4>Skjema for innmelding</h4>
+      <p>Vi trenger en arbeidsgruppe som lager og administrerer skjema for innmelding av sesjoner. Frist må fastsettes.</p>
+    </div>
+    <div class="fagdag-card fc2">
+      <p class="fagdag-card-icon">🏫</p>
+      <h4>Bidrag fra alle skolene</h4>
+      <p>Vi jobber med at alle skolene bidrar med minst ett sesjonsinnslag. Ressurslærerne er nøkkelen.</p>
+    </div>
+    <div class="fagdag-card fc3">
+      <p class="fagdag-card-icon">🎤</p>
+      <h4>Plenumforedrag</h4>
+      <p>Hvem skal vi spørre? Her trenger vi en arbeidsgruppe. Foredragene holdes før lunsj for hele gruppen.</p>
+    </div>
+    <div class="fagdag-card fc4">
+      <p class="fagdag-card-icon">💬</p>
+      <h4>Paneldebatt?</h4>
+      <p>Skal vi ha en paneldebatt som del av programmet? Diskuter format og hvem som bør delta.</p>
+    </div>
+    <div class="fagdag-card fc5">
+      <p class="fagdag-card-icon">👀</p>
+      <h4>De som skal på NKUL</h4>
+      <p>Hold øynene åpne! Ta med ideer og inspirasjon tilbake som kan brukes på fagdagen vår.</p>
+    </div>
+    <div class="fagdag-card fc6">
+      <p class="fagdag-card-icon">📅</p>
+      <h4>Planleggingsmøte</h4>
+      <p>13. juni: Planleggingsmøte for høstens innhold. Ta med innspill om behov fra din skole.</p>
+    </div>
+  </div>
+
+  <!-- ── OM SESJONENE ── -->
+  <div class="fagdag-sesjon-info animate delay-5">
+    <h3>Om de parallelle sesjonene</h3>
+    <div class="sesjon-grid">
+      <div class="sesjon-col">
+        <ul>
+          <li>Målgruppe: Ressurslærere, andre lærere ved deltakerskolene, leverandører</li>
+          <li>Varighet: 45 minutter per sesjon</li>
+          <li>Gjentakelse: Kjøres to ganger om det er mange påmeldte</li>
+          <li>Innhold: Knyttet til digitalisering i skolen og PfDK</li>
+        </ul>
+      </div>
+      <div class="sesjon-col">
+        <ul>
+          <li>Format: Tenk gjerne workshop — praktiske elementer gir aktiv læring</li>
+          <li>Ambisjonsnivå: Ikke tenk for vanskelig. Det enkle er ofte det beste!</li>
+          <li>Det som fungerer for deg, fungerer for andre</li>
+          <li>Innmelding via skjema — frist kommer</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ── IGP ── -->
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background: var(--teal);"></span>
+    Arbeidsøkt
+  </div>
+
+  <h2 class="section-h2 animate delay-3">IGP — Planlegging av parallelle sesjoner</h2>
+  <p class="section-lead animate delay-3">Individuelt–Gruppe–Plenum. En strukturert arbeidsform for å hjelpe alle med å komme i gang med planleggingen av sitt sesjonsinnslag til fagdagen.</p>
+
+  <div class="igp-wrap animate delay-4">
+    <div class="igp-header">
+      <h3>Individuelt · Gruppe · Plenum · Individuelt</h3>
+    </div>
+    <div class="igp-steps">
+      <div class="igp-step">
+        <div class="igp-step-letter">I</div>
+        <p class="igp-step-title">Individuelt</p>
+        <span class="igp-step-time">15 min</span>
+        <p class="igp-step-desc">Hvilken sesjon kan du tenke deg å holde på fagdagen? Tenk gjennom tema, format og hvem du vil nå.</p>
+      </div>
+      <div class="igp-step">
+        <div class="igp-step-letter">G</div>
+        <p class="igp-step-title">Gruppe</p>
+        <span class="igp-step-time">30 min</span>
+        <p class="igp-step-desc">Fortell hverandre om sesjonene dere har planlagt. Gi hverandre konstruktive innspill og ideer.</p>
+      </div>
+      <div class="igp-step">
+        <div class="igp-step-letter">P</div>
+        <p class="igp-step-title">Plenum</p>
+        <span class="igp-step-time">20 min</span>
+        <p class="igp-step-desc">Hver gruppe forteller om hvilke tema man tenker å holde. Oversikt over sesjonene vi kan tilby.</p>
+      </div>
+      <div class="igp-step">
+        <div class="igp-step-letter">I</div>
+        <p class="igp-step-title">Individuelt</p>
+        <span class="igp-step-time">15 min</span>
+        <p class="igp-step-desc">Fortsett planleggingen av din sesjon. Kan nå begynne å melde inn via innmeldingsskjemaet.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ── TIL PLANLEGGINGSMØTET ── -->
+  <div class="section-label animate delay-3">
+    <span class="dot" style="background: var(--gold);"></span>
+    Fremover
+  </div>
+
+  <div class="videre-wrap animate delay-4">
+    <p class="videre-label">Til planleggingsmøtet · 13. juni</p>
+    <h3>Hva trenger vi til høsten?</h3>
+    <p>Tenk igjennom hva din skole og ditt personale trenger for å ta prosjektet videre til høsten 2025. Bruk gjerne personalet til å samle innspill. Ta dette med til planleggingsmøtet 13. juni, slik at vi kan planlegge høsten godt for alle.</p>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <a href="https://mariannletnes.github.io/Gauldals-DigSkole/" class="footer-brand" target="_blank">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="14" cy="14" r="13" stroke="rgba(232,197,71,0.3)" stroke-width="1"/>
+        <rect x="8" y="14" width="12" height="8" rx="0.8" stroke="var(--gold)" stroke-width="1" stroke-opacity="0.6"/>
+        <path d="M6 14 L14 8 L22 14" stroke="var(--gold)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.6"/>
+        <path d="M11.5 11 Q14 8.5 16.5 11" stroke="var(--teal)" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0.7"/>
+        <circle cx="14" cy="10" r="1" fill="var(--teal)" opacity="0.8"/>
+      </svg>
+      <span class="brand-text">DigSkole <span>Gauldal</span> · 2022–2027</span>
+    </a>
+    <div class="footer-note">
+      Ressursside for Samling 30. april 2025<br>
+      DigSkole Gauldal · NTNU
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
