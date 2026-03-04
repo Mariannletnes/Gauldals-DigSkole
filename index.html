@@ -296,11 +296,6 @@
     cursor: pointer;
   }
 
-  .p1 .event:has(.event-link):hover { box-shadow: inset 0 0 0 1px rgba(196,147,90,0.4); }
-  .p2 .event:has(.event-link):hover { box-shadow: inset 0 0 0 1px rgba(122,179,176,0.4); }
-  .p3 .event:has(.event-link):hover { box-shadow: inset 0 0 0 1px rgba(155,143,173,0.4); }
-  .p-now .event:has(.event-link):hover { box-shadow: inset 0 0 0 1px rgba(232,197,71,0.4); }
-
   .event-link::after {
     content: '';
     position: absolute;
@@ -328,11 +323,6 @@
   .resource-btn:hover {
     opacity: 1;
   }
-
-  .p1 .resource-btn:hover { background: rgba(196,147,90,0.1); }
-  .p2 .resource-btn:hover { background: rgba(122,179,176,0.1); }
-  .p3 .resource-btn:hover { background: rgba(155,143,173,0.1); }
-  .p-now .resource-btn:hover { background: rgba(232,197,71,0.1); }
 
   .event-date {
     font-size: 0.8rem;
@@ -367,40 +357,25 @@
     margin-top: 4px;
   }
 
+  /* ── PHASE COLOR VARIABLES ── */
+  .p1       { --pc: var(--phase1); --pc-rgb: 196,147,90; }
+  .p2       { --pc: var(--phase2); --pc-rgb: 122,179,176; }
+  .p3       { --pc: var(--phase3); --pc-rgb: 155,143,173; }
+  .p-now    { --pc: var(--now);    --pc-rgb: 232,197,71;  }
+  .p-future { --pc: var(--future); --pc-rgb: 130,168,125; }
+
   /* ── PHASE COLORS ── */
-  .p1 .phase-year { color: var(--phase1); }
-  .p1 .phase-dot { color: var(--phase1); background: var(--phase1); }
-  .p1 .phase-title { color: var(--phase1); }
-  .p1 .event-tag { background: rgba(196,147,90,0.15); color: var(--phase1); }
-  .p1 .phase-icon { color: var(--phase1); }
-  .p1 .resource-btn { color: var(--phase1); }
+  .phase .phase-year,
+  .phase .phase-title,
+  .phase .phase-icon,
+  .phase .resource-btn      { color: var(--pc); }
+  .phase .phase-dot          { color: var(--pc); background: var(--pc); }
+  .phase .event-tag          { background: rgba(var(--pc-rgb),0.15); color: var(--pc); }
+  .phase .resource-btn:hover { background: rgba(var(--pc-rgb),0.1); }
+  .phase .event:has(.event-link):hover { box-shadow: inset 0 0 0 1px rgba(var(--pc-rgb),0.4); }
 
-  .p2 .phase-year { color: var(--phase2); }
-  .p2 .phase-dot { color: var(--phase2); background: var(--phase2); }
-  .p2 .phase-title { color: var(--phase2); }
-  .p2 .event-tag { background: rgba(122,179,176,0.15); color: var(--phase2); }
-  .p2 .phase-icon { color: var(--phase2); }
-  .p2 .resource-btn { color: var(--phase2); }
-
-  .p3 .phase-year { color: var(--phase3); }
-  .p3 .phase-dot { color: var(--phase3); background: var(--phase3); }
-  .p3 .phase-title { color: var(--phase3); }
-  .p3 .event-tag { background: rgba(155,143,173,0.15); color: var(--phase3); }
-  .p3 .phase-icon { color: var(--phase3); }
-  .p3 .resource-btn { color: var(--phase3); }
-
-  .p-now .phase-year { color: var(--now); }
-  .p-now .phase-dot { color: var(--now); background: var(--now); box-shadow: 0 0 12px var(--now), 0 0 0 1px var(--now); }
-  .p-now .phase-title { color: var(--now); }
-  .p-now .event-tag { background: rgba(232,197,71,0.15); color: var(--now); }
-  .p-now .phase-icon { color: var(--now); }
-  .p-now .resource-btn { color: var(--now); }
-
-  .p-future .phase-year { color: var(--future); }
-  .p-future .phase-dot { color: var(--future); background: var(--future); }
-  .p-future .phase-title { color: var(--future); }
-  .p-future .event-tag { background: rgba(130,168,125,0.15); color: var(--future); }
-  .p-future .phase-icon { color: var(--future); }
+  /* now-fasen: ekstra glow på dot */
+  .p-now .phase-dot { box-shadow: 0 0 12px var(--pc), 0 0 0 1px var(--pc); }
 
   /* ── NOW MARKER ── */
   .now-marker {
@@ -491,6 +466,38 @@
     background: var(--border);
     align-self: stretch;
   }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .footer-brand .brand-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--muted);
+  }
+  .footer-brand .brand-text span { color: var(--gold); }
+  .footer-note {
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.5;
+  }
+  .footer-note a { color: inherit; }
 </style>
 </head>
 <body>
@@ -942,6 +949,26 @@
       <div class="status">→ Nå tar vi tak</div>
     </div>
   </div>
+
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <a href="index.html" class="footer-brand">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="14" cy="14" r="13" stroke="rgba(232,197,71,0.3)" stroke-width="1"/>
+        <rect x="8" y="14" width="12" height="8" rx="0.8" stroke="var(--gold)" stroke-width="1" stroke-opacity="0.6"/>
+        <path d="M6 14 L14 8 L22 14" stroke="var(--gold)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.6"/>
+        <path d="M11.5 11 Q14 8.5 16.5 11" stroke="var(--teal)" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0.7"/>
+        <circle cx="14" cy="10" r="1" fill="var(--teal)" opacity="0.8"/>
+      </svg>
+      <span class="brand-text">DigSkole <span>Gauldal</span> · 2022–2027</span>
+    </a>
+    <div class="footer-note">
+      Denne siden er en ressurs for prosjektet DigSkole Gauldal.<br>
+      Innholdet er produsert av og vedlikeholdes av Mari-Ann Letnes.<br>
+      <a href="mailto:mari.ann.letnes@ntnu.no">mari.ann.letnes@ntnu.no</a>
+    </div>
+  </footer>
 
 </div>
 </div>
