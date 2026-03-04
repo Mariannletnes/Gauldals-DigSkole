@@ -11,7 +11,7 @@
     --surface: #1a1a20;
     --border: rgba(255,255,255,0.07);
     --text: #e8e4dc;
-    --muted: #7a7670;
+    --muted: #8a8580;
     --phase1: #c4935a;
     --phase2: #7ab3b0;
     --phase3: #9b8fad;
@@ -96,7 +96,7 @@
     border-radius: 999px;
     border: 1px solid rgba(232,197,71,0.35);
     color: var(--now);
-    font-size: 0.68rem;
+    font-size: 0.76rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     text-decoration: none;
@@ -127,7 +127,7 @@
   .tpack-letter.ck { background: rgba(155,143,173,0.25); color: var(--phase3); font-size: 1rem; }
 
   .tpack-label {
-    font-size: 0.68rem;
+    font-size: 0.76rem;
     color: var(--muted);
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -264,6 +264,7 @@
   }
 
   .event {
+    position: relative;
     display: flex;
     gap: 16px;
     align-items: baseline;
@@ -276,8 +277,50 @@
     background: rgba(255,255,255,0.03);
   }
 
+  .event:has(.event-link):hover {
+    cursor: pointer;
+  }
+
+  .event-link {
+    position: relative;
+    z-index: 1;
+  }
+
+  .event-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+  }
+
+  .resource-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 8px;
+    padding: 5px 11px;
+    border-radius: 999px;
+    border: 1px solid currentColor;
+    font-size: 0.76rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    opacity: 0.75;
+    transition: opacity 0.2s ease, background 0.2s ease;
+  }
+
+  .resource-btn:hover {
+    opacity: 1;
+  }
+
+  .p1 .resource-btn:hover { background: rgba(196,147,90,0.1); }
+  .p2 .resource-btn:hover { background: rgba(122,179,176,0.1); }
+  .p3 .resource-btn:hover { background: rgba(155,143,173,0.1); }
+  .p-now .resource-btn:hover { background: rgba(232,197,71,0.1); }
+
   .event-date {
-    font-size: 0.72rem;
+    font-size: 0.8rem;
     color: var(--muted);
     white-space: nowrap;
     min-width: 80px;
@@ -293,13 +336,13 @@
   }
 
   .event-content span {
-    font-size: 0.76rem;
+    font-size: 0.82rem;
     color: var(--muted);
     line-height: 1.5;
   }
 
   .event-tag {
-    font-size: 0.62rem;
+    font-size: 0.75rem;
     padding: 2px 7px;
     border-radius: 10px;
     font-weight: 500;
@@ -315,24 +358,28 @@
   .p1 .phase-title { color: var(--phase1); }
   .p1 .event-tag { background: rgba(196,147,90,0.15); color: var(--phase1); }
   .p1 .phase-icon { color: var(--phase1); }
+  .p1 .resource-btn { color: var(--phase1); }
 
   .p2 .phase-year { color: var(--phase2); }
   .p2 .phase-dot { color: var(--phase2); background: var(--phase2); }
   .p2 .phase-title { color: var(--phase2); }
   .p2 .event-tag { background: rgba(122,179,176,0.15); color: var(--phase2); }
   .p2 .phase-icon { color: var(--phase2); }
+  .p2 .resource-btn { color: var(--phase2); }
 
   .p3 .phase-year { color: var(--phase3); }
   .p3 .phase-dot { color: var(--phase3); background: var(--phase3); }
   .p3 .phase-title { color: var(--phase3); }
   .p3 .event-tag { background: rgba(155,143,173,0.15); color: var(--phase3); }
   .p3 .phase-icon { color: var(--phase3); }
+  .p3 .resource-btn { color: var(--phase3); }
 
   .p-now .phase-year { color: var(--now); }
   .p-now .phase-dot { color: var(--now); background: var(--now); box-shadow: 0 0 12px var(--now), 0 0 0 1px var(--now); }
   .p-now .phase-title { color: var(--now); }
   .p-now .event-tag { background: rgba(232,197,71,0.15); color: var(--now); }
   .p-now .phase-icon { color: var(--now); }
+  .p-now .resource-btn { color: var(--now); }
 
   .p-future .phase-year { color: var(--future); }
   .p-future .phase-dot { color: var(--future); background: var(--future); }
@@ -359,7 +406,7 @@
   }
 
   .now-text {
-    font-size: 0.65rem;
+    font-size: 0.76rem;
     text-transform: uppercase;
     letter-spacing: 0.14em;
     color: var(--now);
@@ -399,14 +446,14 @@
   }
 
   .tpack-col .desc {
-    font-size: 0.72rem;
+    font-size: 0.8rem;
     color: var(--muted);
     line-height: 1.5;
   }
 
   .tpack-col .status {
     margin-top: 10px;
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     padding: 3px 10px;
@@ -522,33 +569,33 @@
       <!-- ── Main labels ── -->
       <!-- PK -->
       <text x="145" y="145" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="22" font-weight="600" fill="#7ab3b0" fill-opacity="0.95">PK</text>
-      <text x="145" y="165" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9.5" fill="#7ab3b0" fill-opacity="0.65" letter-spacing="0.06em">Pedagogical</text>
-      <text x="145" y="178" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9.5" fill="#7ab3b0" fill-opacity="0.65" letter-spacing="0.06em">Knowledge</text>
+      <text x="145" y="165" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" fill="#7ab3b0" fill-opacity="0.8" letter-spacing="0.06em">Pedagogical</text>
+      <text x="145" y="181" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" fill="#7ab3b0" fill-opacity="0.8" letter-spacing="0.06em">Knowledge</text>
 
       <!-- CK -->
       <text x="455" y="145" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="22" font-weight="600" fill="#9b8fad" fill-opacity="0.95">CK</text>
-      <text x="455" y="165" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9.5" fill="#9b8fad" fill-opacity="0.65" letter-spacing="0.06em">Content</text>
-      <text x="455" y="178" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9.5" fill="#9b8fad" fill-opacity="0.65" letter-spacing="0.06em">Knowledge</text>
+      <text x="455" y="165" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" fill="#9b8fad" fill-opacity="0.8" letter-spacing="0.06em">Content</text>
+      <text x="455" y="181" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" fill="#9b8fad" fill-opacity="0.8" letter-spacing="0.06em">Knowledge</text>
 
       <!-- TK -->
       <text x="300" y="368" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="22" font-weight="600" fill="#e8c547" fill-opacity="0.95">TK</text>
-      <text x="300" y="382" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9.5" fill="#e8c547" fill-opacity="0.65" letter-spacing="0.06em">Technological Knowledge</text>
+      <text x="300" y="384" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" fill="#e8c547" fill-opacity="0.8" letter-spacing="0.06em">Technological Knowledge</text>
 
       <!-- ── Overlap labels ── -->
       <!-- PCK -->
-      <text x="300" y="152" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" font-weight="500" fill="#e8e4dc" fill-opacity="0.5" letter-spacing="0.05em">PCK</text>
+      <text x="300" y="152" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="500" fill="#e8e4dc" fill-opacity="0.6" letter-spacing="0.05em">PCK</text>
 
       <!-- TPK -->
-      <text x="222" y="262" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" font-weight="500" fill="#e8e4dc" fill-opacity="0.5" letter-spacing="0.05em">TPK</text>
+      <text x="222" y="262" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="500" fill="#e8e4dc" fill-opacity="0.6" letter-spacing="0.05em">TPK</text>
 
       <!-- TCK -->
-      <text x="378" y="262" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" font-weight="500" fill="#e8e4dc" fill-opacity="0.5" letter-spacing="0.05em">TCK</text>
+      <text x="378" y="262" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="500" fill="#e8e4dc" fill-opacity="0.6" letter-spacing="0.05em">TCK</text>
 
       <!-- TPACK center -->
-      <text x="300" y="216" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="14" font-weight="600" fill="#e8c547" fill-opacity="0.9" letter-spacing="0.08em">TPACK</text>
+      <text x="300" y="216" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="16" font-weight="600" fill="#e8c547" fill-opacity="0.9" letter-spacing="0.08em">TPACK</text>
 
       <!-- Caption -->
-      <text x="300" y="23" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="#7a7670" letter-spacing="0.12em" text-transform="uppercase">RAMMEVERKET FOR DIGITAL KOMPETANSE</text>
+      <text x="300" y="23" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" fill="#8a8580" letter-spacing="0.12em" text-transform="uppercase">RAMMEVERKET FOR DIGITAL KOMPETANSE</text>
     </svg>
   </div>
 
@@ -589,10 +636,7 @@
             <strong>Oppstart og felles retning</strong>
             <span>Digitalisering som samfunnsendring. Design for læring og PfDK som teoretisk ramme. DigSkole som samskapingsprosjekt med fem moduler.</span>
             <div class="event-tag">CK · PK</div>
-            <a href="kickoff-ressurs.html" style="display:inline-flex; align-items:center; gap:5px; margin-top:8px; font-size:0.72rem; color:var(--phase1); text-decoration:none; font-weight:500; letter-spacing:0.04em;" target="_blank">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="8" height="10" rx="1" stroke="currentColor" stroke-width="1.1"/><line x1="3" y1="4" x2="7" y2="4" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/><line x1="3" y1="6" x2="7" y2="6" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/><line x1="3" y1="8" x2="5.5" y2="8" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/></svg>
-              Ressursside fra kickoffen →
-            </a>
+            <a href="kickoff-ressurs.html" class="resource-btn event-link" target="_blank">Ressursside fra kickoffen</a>
           </div>
         </div>
         <div class="event">
@@ -609,10 +653,7 @@
             <strong>Spørreundersøkelse og lokal forankring</strong>
             <span>Surveys til lærere og elever. Lokal prosjektbeskrivelse.</span>
             <div class="event-tag">Kartlegging</div>
-            <a href="spørreundersøkelse pre-og-post.html" style="display:inline-flex; align-items:center; gap:5px; margin-top:8px; font-size:0.72rem; color:var(--phase1); text-decoration:none; font-weight:500; letter-spacing:0.04em;" target="_blank">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="8" height="10" rx="1" stroke="currentColor" stroke-width="1.1"/><line x1="3" y1="4" x2="7" y2="4" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/><line x1="3" y1="6" x2="7" y2="6" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/><line x1="3" y1="8" x2="5.5" y2="8" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/></svg>
-              Om undersøkelsen →
-            </a>
+            <a href="spørreundersøkelse pre-og-post.html" class="resource-btn event-link" target="_blank">Om undersøkelsen</a>
           </div>
         </div>
       </div>
@@ -650,10 +691,7 @@
             <strong>Elevens digitale verden</strong>
             <span>Custer dim. 4: teknologi som sosial kraft og makt</span>
             <div class="event-tag">Custer D4 · Makt/kraft</div>
-            <a href="samling-okt23-ressurs.html" style="display:inline-flex; align-items:center; gap:5px; margin-top:8px; font-size:0.72rem; color:var(--phase2); text-decoration:none; font-weight:500; letter-spacing:0.04em;" target="_blank">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="8" height="10" rx="1" stroke="currentColor" stroke-width="1.1"/><line x1="3" y1="4" x2="7" y2="4" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/><line x1="3" y1="6" x2="7" y2="6" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/><line x1="3" y1="8" x2="5.5" y2="8" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/></svg>
-              Ressursside fra samlingen →
-            </a>
+            <a href="samling-okt23-ressurs.html" class="resource-btn event-link" target="_blank">Ressursside fra samlingen</a>
           </div>
         </div>
         <div class="event">
@@ -662,10 +700,7 @@
             <strong>Modul 3 — Legge til rette for læring</strong>
             <span>Custer dim. 2: kunnskap om hvorfor teknologi i undervisning</span>
             <div class="event-tag">Custer D2 · Kunnskap</div>
-            <a href="samling6nov-ressurs.html" style="display:inline-flex; align-items:center; gap:5px; margin-top:8px; font-size:0.72rem; color:var(--phase2); text-decoration:none; font-weight:500; letter-spacing:0.04em;" target="_blank">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="8" height="10" rx="1" stroke="currentColor" stroke-width="1.1"/><line x1="3" y1="4" x2="7" y2="4" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/><line x1="3" y1="6" x2="7" y2="6" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/><line x1="3" y1="8" x2="5.5" y2="8" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/></svg>
-              Ressursside fra samlingen →
-            </a>
+            <a href="samling6nov-ressurs.html" class="resource-btn event-link" target="_blank">Ressursside fra samlingen</a>
           </div>
         </div>
         <div class="event">
@@ -674,10 +709,7 @@
             <strong>KI og undervisning</strong>
             <span>Custer dim. 2 og 4: kunnskap om KI og teknologi som sosial konstruksjon. Policy og etikk.</span>
             <div class="event-tag">Custer D2 · D4</div>
-            <a href="5_januar_2024.html" style="display:inline-flex; align-items:center; gap:5px; margin-top:8px; font-size:0.72rem; color:var(--phase2); text-decoration:none; font-weight:500; letter-spacing:0.04em;">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="8" height="10" rx="1" stroke="currentColor" stroke-width="1.1"/><line x1="3" y1="4" x2="7" y2="4" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/><line x1="3" y1="6" x2="7" y2="6" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/><line x1="3" y1="8" x2="5.5" y2="8" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/></svg>
-              Ressursside fra samlingen →
-            </a>
+            <a href="5_januar_2024.html" class="resource-btn event-link">Ressursside fra samlingen</a>
           </div>
         </div>
         <div class="event">
@@ -686,10 +718,7 @@
             <strong>Kreativ problemløsning</strong>
             <span>Custer dim. 3: prosess — problemløsning og innovasjon</span>
             <div class="event-tag">Custer D3 · Prosess</div>
-            <a href="cps_metoden.html" style="display:inline-flex; align-items:center; gap:5px; margin-top:8px; font-size:0.72rem; color:var(--phase2); text-decoration:none; font-weight:500; letter-spacing:0.04em;" target="_blank">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="8" height="10" rx="1" stroke="currentColor" stroke-width="1.1"/><line x1="3" y1="4" x2="7" y2="4" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/><line x1="3" y1="6" x2="7" y2="6" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/><line x1="3" y1="8" x2="5.5" y2="8" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/></svg>
-              Ressursside for CPS-metoden →
-            </a>
+            <a href="cps_metoden.html" class="resource-btn event-link" target="_blank">Ressursside for CPS-metoden</a>
           </div>
         </div>
         <div class="event">
@@ -728,10 +757,7 @@
             <strong>Rammeverk for PfDK og grunnleggende digitale ferdigheter</strong>
             <span>Hvordan lykkes med utviklingsarbeid.</span>
             <div class="event-tag">PfDK · Rammeverk</div>
-            <a href="21-mars2025-ressurs.html" style="display:inline-flex; align-items:center; gap:5px; margin-top:8px; font-size:0.72rem; color:var(--phase3); text-decoration:none; font-weight:500; letter-spacing:0.04em;" target="_blank">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Ressursside fra samlingen →
-            </a>
+            <a href="21-mars2025-ressurs.html" class="resource-btn event-link" target="_blank">Ressursside fra samlingen</a>
           </div>
         </div>
         <div class="event">
@@ -740,10 +766,7 @@
             <strong>Presentasjon av PfDK-arbeid i personalet</strong>
             <span>Planlegging av høsten 2025 og fagdag 29. oktober.</span>
             <div class="event-tag">Forankring</div>
-            <a href="30-april2025-ressurs.html" style="display:inline-flex; align-items:center; gap:5px; margin-top:8px; font-size:0.72rem; color:var(--phase3); text-decoration:none; font-weight:500; letter-spacing:0.04em;" target="_blank">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Ressursside fra samlingen →
-            </a>
+            <a href="30-april2025-ressurs.html" class="resource-btn event-link" target="_blank">Ressursside fra samlingen</a>
           </div>
         </div>
         <div class="event">
@@ -758,10 +781,7 @@
           <div class="event-content">
             <strong>MiniNKUL — hele personalet i regionen</strong>
             <div class="event-tag">Fellessamling</div>
-            <a href="29-oktober2025-ressurs.html" style="display:inline-flex; align-items:center; gap:5px; margin-top:8px; font-size:0.72rem; color:var(--phase3); text-decoration:none; font-weight:500; letter-spacing:0.04em;" target="_blank">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Ressursside fra fagdagen →
-            </a>
+            <a href="29-oktober2025-ressurs.html" class="resource-btn event-link" target="_blank">Ressursside fra fagdagen</a>
           </div>
         </div>
         <div class="event">
@@ -806,10 +826,7 @@
             <strong>Workshop — Hva nå?</strong>
             <span>Erkjennelsen: vi har jobbet mye med Custers dim. 2 (kunnskap om hvorfor) og dim. 4 (makt/etikk) — men dim. 1 (artefakt/verktøy) og dim. 3 (prosess/produksjon) har blitt glemt. T-en i TPACK mangler.</span>
             <div class="event-tag">Produsent / Konsument</div>
-            <a href="30_januar_2026.html" style="display:inline-flex; align-items:center; gap:5px; margin-top:8px; font-size:0.72rem; color:var(--now); text-decoration:none; font-weight:500; letter-spacing:0.04em;" target="_blank">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="8" height="10" rx="1" stroke="currentColor" stroke-width="1.1"/><line x1="3" y1="4" x2="7" y2="4" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/><line x1="3" y1="6" x2="7" y2="6" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/><line x1="3" y1="8" x2="5.5" y2="8" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/></svg>
-              Ressursside fra workshopen →
-            </a>
+            <a href="30_januar_2026.html" class="resource-btn event-link" target="_blank">Ressursside fra workshopen</a>
           </div>
         </div>
         <div class="event">
@@ -818,10 +835,7 @@
             <strong>Samling 22 — Teknologi og estetisk inngang til læring ← du er her</strong>
             <span>Sanselig og estetisk inngang · Klafki · Akvarell + Book Creator · Eleven som produsent. Custer dim. 1: læreren bruker verktøyet selv. Custer dim. 3: skapende prosess med digitale materialer.</span>
             <div class="event-tag">Custer D1 · D3 · T i TPACK</div>
-            <a href="samling7-ressurs.html" style="display:inline-flex; align-items:center; gap:5px; margin-top:8px; font-size:0.72rem; color:var(--now); text-decoration:none; font-weight:500; letter-spacing:0.04em;" target="_blank">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="8" height="10" rx="1" stroke="currentColor" stroke-width="1.1"/><line x1="3" y1="4" x2="7" y2="4" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/><line x1="3" y1="6" x2="7" y2="6" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/><line x1="3" y1="8" x2="5.5" y2="8" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/></svg>
-              Ressursside etter samlingen →
-            </a>
+            <a href="samling7-ressurs.html" class="resource-btn event-link" target="_blank">Ressursside etter samlingen</a>
           </div>
         </div>
       </div>
