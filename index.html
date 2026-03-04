@@ -277,6 +277,21 @@
     background: rgba(255,255,255,0.03);
   }
 
+  .event.current {
+    background: rgba(232,197,71,0.05);
+    box-shadow: inset 0 0 0 1px rgba(232,197,71,0.25);
+  }
+
+  .event.current .event-content strong::after {
+    content: ' ← du er her';
+    font-size: 0.72rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--now);
+    opacity: 0.8;
+    letter-spacing: 0.02em;
+  }
+
   .event:has(.event-link):hover {
     cursor: pointer;
   }
@@ -829,10 +844,10 @@
             <a href="30_januar_2026.html" class="resource-btn event-link" target="_blank">Ressursside fra workshopen</a>
           </div>
         </div>
-        <div class="event">
+        <div class="event current">
           <div class="event-date">6. mar 2026</div>
           <div class="event-content">
-            <strong>Samling 22 — Teknologi og estetisk inngang til læring ← du er her</strong>
+            <strong>Samling 22 — Teknologi og estetisk inngang til læring</strong>
             <span>Sanselig og estetisk inngang · Klafki · Akvarell + Book Creator · Eleven som produsent. Custer dim. 1: læreren bruker verktøyet selv. Custer dim. 3: skapende prosess med digitale materialer.</span>
             <div class="event-tag">Custer D1 · D3 · T i TPACK</div>
             <a href="samling7-ressurs.html" class="resource-btn event-link" target="_blank">Ressursside etter samlingen</a>
