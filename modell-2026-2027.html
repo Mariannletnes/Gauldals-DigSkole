@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modell 2026/2027 — DigSkole Gauldal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:      #0f0f12;
+      --surface: #1a1a20;
+      --border:  rgba(255,255,255,0.07);
+      --text:    #e8e4dc;
+      --muted:   #8a8580;
+      --c-ntnu:  #7ab3b0;
+      --c-net:   #82a87d;
+      --c-elev:  #c4935a;
+      --c-ki:    #9b8fad;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      background: var(--bg);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 32px 80px;
+      position: relative;
+    }
+
+    /* ── HEADER ── */
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--muted); font-size: 0.85rem;
+      text-decoration: none; margin-bottom: 36px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--text); }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem; font-weight: 300;
+      line-height: 1.15; margin-bottom: 8px;
+    }
+    h1 em { font-style: italic; color: #e8c547; }
+
+    .subtitle {
+      color: var(--muted); font-size: 0.9rem;
+      margin-bottom: 52px;
+    }
+
+    /* ── LAYOUT ── */
+    .layout {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* ── WHEEL ── */
+    .wheel-wrap { position: relative; }
+    #wheel { width: 100%; height: auto; display: block; }
+
+    /* ── SEGMENT LIST ── */
+    .seg-list { list-style: none; padding-top: 8px; }
+
+    .seg-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 10px 14px; border-radius: 8px;
+      cursor: pointer; margin-bottom: 3px;
+      border: 1px solid transparent;
+      transition: background 0.18s, border-color 0.18s;
+    }
+    .seg-item:hover { background: rgba(255,255,255,0.04); }
+    .seg-item.active {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.12);
+    }
+
+    .seg-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.78rem; font-weight: 500; flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .seg-info strong { display: block; font-size: 0.88rem; margin-bottom: 1px; }
+    .seg-info .partner { font-size: 0.78rem; color: var(--muted); }
+
+    /* ── DETAIL PANEL ── */
+    .detail-panel {
+      grid-column: 1 / -1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 32px;
+      display: none;
+      animation: fadeIn 0.2s ease;
+    }
+    .detail-panel.visible { display: block; }
+
+    @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+
+    .detail-header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 14px;
+    }
+    .detail-num {
+      width: 42px; height: 42px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; font-weight: 500; flex-shrink: 0;
+    }
+    .detail-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem; font-weight: 300; line-height: 1.2;
+    }
+    .detail-partner { color: var(--muted); font-size: 0.88rem; margin-top: 2px; }
+    .detail-desc { color: var(--text); line-height: 1.65; opacity: 0.87; max-width: 720px; }
+
+    .detail-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 18px; padding: 8px 20px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px; font-size: 0.85rem;
+      color: var(--text); text-decoration: none;
+      transition: background 0.18s;
+    }
+    .detail-link:hover { background: rgba(255,255,255,0.07); }
+    .detail-soon { margin-top: 14px; font-size: 0.82rem; color: var(--muted); font-style: italic; }
+
+    /* ── LEGEND ── */
+    .legend {
+      display: flex; flex-wrap: wrap; gap: 16px;
+      margin-top: 40px; padding-top: 28px;
+      border-top: 1px solid var(--border);
+      grid-column: 1 / -1;
+    }
+    .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--muted); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 800px) {
+      .layout { grid-template-columns: 1fr; }
+      h1 { font-size: 2rem; }
+      .detail-panel { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <a href="index.html" class="back-link">← Tilbake til tidslinjen</a>
+
+  <h1>DigSkole Gauldal — <em>Modell 2026/2027</em></h1>
+  <p class="subtitle">Ti steg for høsten 2026 og våren 2027 · Klikk på et segment for mer informasjon</p>
+
+  <div class="layout">
+
+    <!-- WHEEL -->
+    <div class="wheel-wrap">
+      <svg id="wheel" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+
+    <!-- LIST -->
+    <ul class="seg-list" id="segList"></ul>
+
+    <!-- DETAIL PANEL -->
+    <div class="detail-panel" id="detailPanel">
+      <div class="detail-header">
+        <div class="detail-num" id="dNum"></div>
+        <div>
+          <div class="detail-title" id="dTitle"></div>
+          <div class="detail-partner" id="dPartner"></div>
+        </div>
+      </div>
+      <p class="detail-desc" id="dDesc"></p>
+      <a class="detail-link" id="dLink" href="#" target="_blank" style="display:none">Gå til ressursside →</a>
+      <p class="detail-soon" id="dSoon"></p>
+    </div>
+
+    <!-- LEGEND -->
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#7ab3b0"></div> Samling med NTNU</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#82a87d"></div> Nettverkssamling</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#c4935a"></div> Elevaktive læringsforsøk (UE)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#9b8fad"></div> KI med NTNU</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ── DATA ────────────────────────────────────────────────────
+const SEGS = [
+  {
+    id: 1, label: "Inkludering", short: "Inkludering",
+    title: "Inkluderende undersøkelser",
+    partner: "med NTNU",
+    color: "#7ab3b0",
+    desc: "Inkluderende undersøkelser i samarbeid med NTNU — utforske og kartlegge digital praksis i skolen med vekt på inkludering for alle elever.",
+    href: null
+  },
+  {
+    id: 2, label: "Nettverk", short: "Nettverk",
+    title: "Nettverk",
+    partner: "",
+    color: "#82a87d",
+    desc: "Nettverkssamling for erfaringsdeling og kollegial veiledning mellom lærere på tvers av skoler i Gauldal.",
+    href: null
+  },
+  {
+    id: 3, label: "Motivasjon", short: "Motivasjon",
+    title: "Motivasjon",
+    partner: "med NTNU",
+    color: "#7ab3b0",
+    desc: "Motivasjon og mestring med NTNU — hva skal til for at eleven opplever seg som produsent og ikke bare konsument av digital teknologi?",
+    href: null
+  },
+  {
+    id: 4, label: "Nettverk", short: "Nettverk",
+    title: "Nettverk",
+    partner: "",
+    color: "#82a87d",
+    desc: "Nettverkssamling for erfaringsdeling og kollegial veiledning mellom lærere på tvers av skoler i Gauldal.",
+    href: null
+  },
+  {
+    id: 5, label: "Elevforsøk", short: "Elevforsøk",
+    title: "Elevaktive læringsforsøk",
+    partner: "med UE",
+    color: "#c4935a",
+    desc: "Elevaktive læringsforsøk i samarbeid med Ungt Entreprenørskap (UE) — elevene som skapere, problemløsere og aktive produsenter.",
+    href: null
+  },
+  {
+    id: 6, label: "KI", short: "KI",
+    title: "KI — Kunstig Intelligens",
+    partner: "med NTNU",
+    color: "#9b8fad",
+    desc: "Kunstig intelligens i alle fire Custer-dimensjoner: KI som artefakt og verktøy (D1), kunnskap om hvordan og hvorfor KI virker (D2), KI i skapende prosesser (D3) og KI som sosial kraft og maktforhold (D4).",
+    href: null
+  },
+  {
+    id: 7, label: "Nettverk", short: "Nettverk",
+    title: "Nettverk",
+    partner: "",
+    color: "#82a87d",
+    desc: "Nettverkssamling for erfaringsdeling og kollegial veiledning mellom lærere på tvers av skoler i Gauldal.",
+    href: null
+  },
+  {
+    id: 8, label: "Vurdering", short: "Vurdering",
+    title: "Avansert vurdering og teknologi",
+    partner: "med NTNU",
+    color: "#7ab3b0",
+    desc: "Avansert vurdering og teknologi med NTNU — digitale vurderingsverktøy, prosessen med å vurdere skapende digitalt arbeid, og hva som gir god vurderingspraksis i den digitale skolen.",
+    href: null
+  },
+  {
+    id: 9, label: "Nettverk", short: "Nettverk",
+    title: "Nettverk",
+    partner: "",
+    color: "#82a87d",
+    desc: "Nettverkssamling for erfaringsdeling og kollegial veiledning mellom lærere på tvers av skoler i Gauldal.",
+    href: null
+  },
+  {
+    id: 10, label: "Nettverk", short: "Nettverk",
+    title: "Nettverk",
+    partner: "",
+    color: "#82a87d",
+    desc: "Avsluttende nettverkssamling — oppsummering av reisen, deling av erfaringer og refleksjon over veien videre.",
+    href: null
+  }
+];
+
+// ── SVG HELPERS ─────────────────────────────────────────────
+const NS  = 'http://www.w3.org/2000/svg';
+const CX  = 250, CY = 250;
+const R_OUT  = 243;   // outer number ring
+const R_NIN  = 210;   // inner number ring / outer main seg
+const R_SIN  = 88;    // inner main seg (center hole)
+const R_CTR  = 80;    // center circle
+
+function svgEl(tag, attrs) {
+  const e = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+  return e;
+}
+
+function polar(r, deg) {
+  const rad = (deg - 90) * Math.PI / 180;
+  return { x: CX + r * Math.cos(rad), y: CY + r * Math.sin(rad) };
+}
+
+function arcPath(r1, r2, a1, a2) {
+  const p1 = polar(r1, a1), p2 = polar(r1, a2);
+  const p3 = polar(r2, a2), p4 = polar(r2, a1);
+  const lg = (a2 - a1) > 180 ? 1 : 0;
+  return `M${p1.x},${p1.y} A${r1},${r1},0,${lg},1,${p2.x},${p2.y} `
+       + `L${p3.x},${p3.y} A${r2},${r2},0,${lg},0,${p4.x},${p4.y} Z`;
+}
+
+// ── BUILD WHEEL ─────────────────────────────────────────────
+const svg  = document.getElementById('wheel');
+const n    = SEGS.length;
+const step = 360 / n;
+const GAP  = 1.5;
+
+const segEls = []; // main path elements for interactivity
+
+// Subtle background glow ring
+svg.appendChild(svgEl('circle', {
+  cx: CX, cy: CY, r: R_OUT + 4,
+  fill: 'none', stroke: 'rgba(255,255,255,0.04)', 'stroke-width': '1'
+}));
+
+SEGS.forEach((seg, i) => {
+  const a1    = i * step - step / 2;
+  const a2    = a1 + step;
+  const a1g   = a1 + GAP;
+  const a2g   = a2 - GAP;
+  const mid   = (a1 + a2) / 2;
+
+  // ── Main donut segment ──
+  const path = svgEl('path', {
+    d: arcPath(R_NIN, R_SIN, a1g, a2g),
+    fill: seg.color,
+    opacity: '0.72',
+    'data-id': seg.id,
+    style: 'cursor:pointer; transition: opacity 0.18s, filter 0.18s;'
+  });
+  svg.appendChild(path);
+  segEls.push(path);
+
+  // ── Outer number ring ──
+  const numRing = svgEl('path', {
+    d: arcPath(R_OUT, R_NIN + 1, a1g, a2g),
+    fill: seg.color,
+    opacity: '0.38',
+    'pointer-events': 'none'
+  });
+  svg.appendChild(numRing);
+
+  // Number in outer ring
+  const np = polar((R_OUT + R_NIN) / 2, mid);
+  const nt = svgEl('text', {
+    x: np.x, y: np.y,
+    'text-anchor': 'middle', 'dominant-baseline': 'middle',
+    fill: 'white', 'font-size': '11',
+    'font-family': 'DM Sans, sans-serif', 'font-weight': '500',
+    'pointer-events': 'none'
+  });
+  nt.textContent = seg.id;
+  svg.appendChild(nt);
+
+  // ── Short label inside segment ──
+  const labelR = (R_NIN + R_SIN) / 2;
+  const lp = polar(labelR, mid);
+  // Rotation: align text radially; flip bottom-half for readability
+  const rot = mid > 180 ? mid + 90 : mid - 90;
+  const lt = svgEl('text', {
+    x: lp.x, y: lp.y,
+    'text-anchor': 'middle', 'dominant-baseline': 'middle',
+    fill: 'white', 'font-size': '9',
+    'font-family': 'DM Sans, sans-serif', 'font-weight': '400',
+    opacity: '0.85',
+    transform: `rotate(${rot},${lp.x},${lp.y})`,
+    'pointer-events': 'none'
+  });
+  lt.textContent = seg.short;
+  svg.appendChild(lt);
+});
+
+// ── Center circle ──
+svg.appendChild(svgEl('circle', { cx: CX, cy: CY, r: R_CTR + 1, fill: '#0f0f12' }));
+svg.appendChild(svgEl('circle', { cx: CX, cy: CY, r: R_CTR, fill: '#1a1a20' }));
+svg.appendChild(svgEl('circle', {
+  cx: CX, cy: CY, r: R_CTR,
+  fill: 'none', stroke: 'rgba(255,255,255,0.09)', 'stroke-width': '1'
+}));
+
+const cTexts = [
+  { text: 'DigSkole', y: CY - 12, size: '17', weight: '300', family: 'Cormorant Garamond, serif' },
+  { text: 'Gauldal',  y: CY + 7,  size: '17', weight: '300', family: 'Cormorant Garamond, serif' },
+  { text: '2026/2027', y: CY + 24, size: '9', weight: '400', family: 'DM Sans, sans-serif', opacity: '0.4' }
+];
+cTexts.forEach(ct => {
+  const t = svgEl('text', {
+    x: CX, y: ct.y,
+    'text-anchor': 'middle', 'dominant-baseline': 'middle',
+    fill: 'white', 'font-size': ct.size,
+    'font-family': ct.family, 'font-weight': ct.weight,
+    opacity: ct.opacity || '1',
+    'pointer-events': 'none'
+  });
+  t.textContent = ct.text;
+  svg.appendChild(t);
+});
+
+// ── BUILD LIST ───────────────────────────────────────────────
+const list = document.getElementById('segList');
+SEGS.forEach(seg => {
+  const li = document.createElement('li');
+  li.className = 'seg-item';
+  li.dataset.id = seg.id;
+  li.innerHTML = `
+    <div class="seg-num" style="background:${seg.color}22; color:${seg.color}">${seg.id}</div>
+    <div class="seg-info">
+      <strong>${seg.title}</strong>
+      ${seg.partner ? `<span class="partner">${seg.partner}</span>` : ''}
+    </div>`;
+  list.appendChild(li);
+});
+
+// ── INTERACTIVITY ────────────────────────────────────────────
+let activeId = null;
+
+function activate(id) {
+  activeId = id;
+  const seg = SEGS.find(s => s.id === id);
+
+  // Update wheel segments
+  segEls.forEach((el, i) => {
+    if (SEGS[i].id === id) {
+      el.setAttribute('opacity', '1');
+      el.style.filter = `drop-shadow(0 0 10px ${seg.color}99)`;
+    } else {
+      el.setAttribute('opacity', '0.38');
+      el.style.filter = '';
+    }
+  });
+
+  // Update list
+  document.querySelectorAll('.seg-item').forEach(li => {
+    li.classList.toggle('active', parseInt(li.dataset.id) === id);
+  });
+
+  // Update detail panel
+  const dNum = document.getElementById('dNum');
+  dNum.textContent = seg.id;
+  dNum.style.cssText = `background:${seg.color}22; color:${seg.color}; width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1rem; font-weight:500; flex-shrink:0;`;
+
+  document.getElementById('dTitle').textContent   = seg.title;
+  document.getElementById('dPartner').textContent = seg.partner || '';
+  document.getElementById('dDesc').textContent    = seg.desc;
+
+  const linkEl = document.getElementById('dLink');
+  const soonEl = document.getElementById('dSoon');
+  if (seg.href) {
+    linkEl.href = seg.href;
+    linkEl.style.display = 'inline-flex';
+    soonEl.textContent = '';
+  } else {
+    linkEl.style.display = 'none';
+    soonEl.textContent = 'Ressursside kommer etter samlingen.';
+  }
+
+  document.getElementById('detailPanel').classList.add('visible');
+
+  // Scroll detail panel into view on mobile
+  if (window.innerWidth < 800) {
+    document.getElementById('detailPanel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+// Click on SVG
+svg.addEventListener('click', e => {
+  const id = parseInt(e.target.dataset?.id);
+  if (id) activate(id);
+});
+
+// Hover highlight (subtle)
+svg.addEventListener('mouseover', e => {
+  const id = parseInt(e.target.dataset?.id);
+  if (id && id !== activeId) {
+    const el = segEls.find((_, i) => SEGS[i].id === id);
+    if (el) el.style.opacity = '0.9';
+  }
+});
+svg.addEventListener('mouseout', e => {
+  const id = parseInt(e.target.dataset?.id);
+  if (id && id !== activeId) {
+    const el = segEls.find((_, i) => SEGS[i].id === id);
+    if (el) el.setAttribute('opacity', activeId ? '0.38' : '0.72');
+  }
+});
+
+// Click on list
+list.addEventListener('click', e => {
+  const li = e.target.closest('.seg-item');
+  if (li) activate(parseInt(li.dataset.id));
+});
+</script>
+</body>
+</html>
