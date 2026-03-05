@@ -157,7 +157,7 @@
   <a href="index.html" class="back-link">← Tilbake til tidslinjen</a>
 
   <h1>DigSkole Gauldal — <em>Modell 2026/2027</em></h1>
-  <p class="subtitle">Ti steg for høsten 2026 og våren 2027 · Klikk på et segment for mer informasjon</p>
+  <p class="subtitle">Ni steg for høsten 2026 og våren 2027 · Klikk på et segment for mer informasjon</p>
 
   <div class="layout">
 
@@ -198,23 +198,7 @@
 // ── DATA ────────────────────────────────────────────────────
 const SEGS = [
   {
-    id: 1, label: "Inkludering", short: "Inkludering",
-    title: "Inkluderende undersøkelser",
-    partner: "med NTNU",
-    color: "#7ab3b0",
-    desc: "Inkluderende undersøkelser i samarbeid med NTNU — utforske og kartlegge digital praksis i skolen med vekt på inkludering for alle elever.",
-    href: null
-  },
-  {
-    id: 2, label: "Nettverk", short: "Nettverk",
-    title: "Nettverk",
-    partner: "",
-    color: "#82a87d",
-    desc: "Nettverkssamling for erfaringsdeling og kollegial veiledning mellom lærere på tvers av skoler i Gauldal.",
-    href: null
-  },
-  {
-    id: 3, label: "Motivasjon", short: "Motivasjon",
+    id: 1, icon: 'trophy',
     title: "Motivasjon",
     partner: "med NTNU",
     color: "#7ab3b0",
@@ -222,7 +206,7 @@ const SEGS = [
     href: null
   },
   {
-    id: 4, label: "Nettverk", short: "Nettverk",
+    id: 2, icon: 'network',
     title: "Nettverk",
     partner: "",
     color: "#82a87d",
@@ -230,7 +214,23 @@ const SEGS = [
     href: null
   },
   {
-    id: 5, label: "Elevforsøk", short: "Elevforsøk",
+    id: 3, icon: 'people',
+    title: "Inkluderende praksis",
+    partner: "med NTNU",
+    color: "#7ab3b0",
+    desc: "Inkluderende praksis med NTNU — teknologi som inkluderingsverktøy og universell utforming i praksis. Hvordan designe for alle elever?",
+    href: null
+  },
+  {
+    id: 4, icon: 'network',
+    title: "Nettverk",
+    partner: "",
+    color: "#82a87d",
+    desc: "Nettverkssamling for erfaringsdeling og kollegial veiledning mellom lærere på tvers av skoler i Gauldal.",
+    href: null
+  },
+  {
+    id: 5, icon: 'students',
     title: "Elevaktive læringsforsøk",
     partner: "med UE",
     color: "#c4935a",
@@ -238,7 +238,7 @@ const SEGS = [
     href: null
   },
   {
-    id: 6, label: "KI", short: "KI",
+    id: 6, icon: 'ai',
     title: "KI — Kunstig Intelligens",
     partner: "med NTNU",
     color: "#9b8fad",
@@ -246,7 +246,7 @@ const SEGS = [
     href: null
   },
   {
-    id: 7, label: "Nettverk", short: "Nettverk",
+    id: 7, icon: 'network',
     title: "Nettverk",
     partner: "",
     color: "#82a87d",
@@ -254,7 +254,7 @@ const SEGS = [
     href: null
   },
   {
-    id: 8, label: "Vurdering", short: "Vurdering",
+    id: 8, icon: 'assessment',
     title: "Avansert vurdering og teknologi",
     partner: "med NTNU",
     color: "#7ab3b0",
@@ -262,15 +262,7 @@ const SEGS = [
     href: null
   },
   {
-    id: 9, label: "Nettverk", short: "Nettverk",
-    title: "Nettverk",
-    partner: "",
-    color: "#82a87d",
-    desc: "Nettverkssamling for erfaringsdeling og kollegial veiledning mellom lærere på tvers av skoler i Gauldal.",
-    href: null
-  },
-  {
-    id: 10, label: "Nettverk", short: "Nettverk",
+    id: 9, icon: 'network',
     title: "Nettverk",
     partner: "",
     color: "#82a87d",
@@ -304,6 +296,92 @@ function arcPath(r1, r2, a1, a2) {
   const lg = (a2 - a1) > 180 ? 1 : 0;
   return `M${p1.x},${p1.y} A${r1},${r1},0,${lg},1,${p2.x},${p2.y} `
        + `L${p3.x},${p3.y} A${r2},${r2},0,${lg},0,${p4.x},${p4.y} Z`;
+}
+
+// ── ICONS ────────────────────────────────────────────────────
+// color: optional — if given, icon uses that color (for list); otherwise white (for wheel)
+function drawIcon(iconType, cx, cy, color) {
+  const stroke = color || 'rgba(255,255,255,0.92)';
+
+  // Dynamic fill: low opacity of the stroke color
+  const f = (opacity) => {
+    if (color) {
+      const alpha = Math.round(opacity * 255).toString(16).padStart(2, '0');
+      return color + alpha;
+    }
+    return `rgba(255,255,255,${opacity})`;
+  };
+
+  const g = svgEl('g', {
+    transform: `translate(${cx},${cy})`,
+    stroke,
+    'stroke-width': '1.35',
+    'stroke-linecap': 'round',
+    'stroke-linejoin': 'round',
+    fill: 'none',
+    'pointer-events': 'none'
+  });
+  const S = (tag, a) => { const e = svgEl(tag, a); g.appendChild(e); };
+
+  switch (iconType) {
+    case 'people':
+      S('circle', {cx:'-3.8', cy:'-4.5', r:'2.3', fill: f(0.18)});
+      S('circle', {cx:'3.8',  cy:'-4.5', r:'2.3', fill: f(0.18)});
+      S('path',   {d:'M-8,2 Q-3.8,6 0,2 Q3.8,6 8,2'});
+      break;
+
+    case 'network':
+      S('circle', {cx:'0',    cy:'-6',  r:'2.1', fill: f(0.18)});
+      S('circle', {cx:'-5.5', cy:'4',   r:'2.1', fill: f(0.18)});
+      S('circle', {cx:'5.5',  cy:'4',   r:'2.1', fill: f(0.18)});
+      S('line', {x1:'0', y1:'-3.9', x2:'-3.8', y2:'2.4'});
+      S('line', {x1:'0', y1:'-3.9', x2:'3.8',  y2:'2.4'});
+      S('line', {x1:'-3.5', y1:'4', x2:'3.5',  y2:'4'});
+      break;
+
+    case 'trophy':
+      S('path', {d:'M-4.5,-7 L4.5,-7 Q5.5,-1 0,3.5 Q-5.5,-1 -4.5,-7 Z',
+                 fill: f(0.14)});
+      S('path', {d:'M-4.5,-7 Q-8,-4.5 -8,-1.5 Q-8,1.5 -4,3.5'});
+      S('path', {d:'M4.5,-7 Q8,-4.5 8,-1.5 Q8,1.5 4,3.5'});
+      S('line', {x1:'-3', y1:'3.5', x2:'3', y2:'3.5'});
+      S('line', {x1:'0',  y1:'3.5', x2:'0', y2:'7'});
+      S('line', {x1:'-3.5', y1:'7', x2:'3.5', y2:'7'});
+      break;
+
+    case 'students':
+      S('circle', {cx:'-6', cy:'-5.5', r:'2.1', fill: f(0.18)});
+      S('circle', {cx:'0',  cy:'-5.5', r:'2.1', fill: f(0.18)});
+      S('circle', {cx:'6',  cy:'-5.5', r:'2.1', fill: f(0.18)});
+      S('line', {x1:'-8', y1:'-0.5', x2:'8',  y2:'-0.5'});
+      S('line', {x1:'-7', y1:'-0.5', x2:'-7', y2:'5'});
+      S('line', {x1:'7',  y1:'-0.5', x2:'7',  y2:'5'});
+      break;
+
+    case 'ai':
+      S('rect', {x:'-5', y:'-5', width:'10', height:'10', rx:'2',
+                 fill: f(0.12)});
+      S('line', {x1:'-5', y1:'-2.5', x2:'-8', y2:'-2.5'});
+      S('line', {x1:'-5', y1:'2.5',  x2:'-8', y2:'2.5'});
+      S('line', {x1:'5',  y1:'-2.5', x2:'8',  y2:'-2.5'});
+      S('line', {x1:'5',  y1:'2.5',  x2:'8',  y2:'2.5'});
+      S('line', {x1:'-2.5', y1:'-5', x2:'-2.5', y2:'-8'});
+      S('line', {x1:'2.5',  y1:'-5', x2:'2.5',  y2:'-8'});
+      S('line', {x1:'-2.5', y1:'5',  x2:'-2.5', y2:'8'});
+      S('line', {x1:'2.5',  y1:'5',  x2:'2.5',  y2:'8'});
+      S('circle', {cx:'0', cy:'0', r:'2', fill: f(0.38), stroke:'none'});
+      break;
+
+    case 'assessment':
+      S('rect', {x:'-5.5', y:'-7', width:'11', height:'14', rx:'1.5',
+                 fill: f(0.1)});
+      S('rect', {x:'-2.5', y:'-8.5', width:'5', height:'3', rx:'1',
+                 fill: f(0.18)});
+      S('line', {x1:'-3.5', y1:'-2', x2:'3.5', y2:'-2'});
+      S('path', {d:'M-3.5,2.5 L-1,5.5 L4.5,-0.5'});
+      break;
+  }
+  return g;
 }
 
 // ── BUILD WHEEL ─────────────────────────────────────────────
@@ -359,22 +437,10 @@ SEGS.forEach((seg, i) => {
   nt.textContent = seg.id;
   svg.appendChild(nt);
 
-  // ── Short label inside segment ──
-  const labelR = (R_NIN + R_SIN) / 2;
-  const lp = polar(labelR, mid);
-  // Rotation: align text radially; flip bottom-half for readability
-  const rot = mid > 180 ? mid + 90 : mid - 90;
-  const lt = svgEl('text', {
-    x: lp.x, y: lp.y,
-    'text-anchor': 'middle', 'dominant-baseline': 'middle',
-    fill: 'white', 'font-size': '9',
-    'font-family': 'DM Sans, sans-serif', 'font-weight': '400',
-    opacity: '0.85',
-    transform: `rotate(${rot},${lp.x},${lp.y})`,
-    'pointer-events': 'none'
-  });
-  lt.textContent = seg.short;
-  svg.appendChild(lt);
+  // ── Icon inside segment (upright, centered at mid-radius) ──
+  const iconR = R_SIN + (R_NIN - R_SIN) * 0.52;
+  const ip = polar(iconR, mid);
+  svg.appendChild(drawIcon(seg.icon, ip.x, ip.y));
 });
 
 // ── Center circle ──
@@ -409,12 +475,29 @@ SEGS.forEach(seg => {
   const li = document.createElement('li');
   li.className = 'seg-item';
   li.dataset.id = seg.id;
-  li.innerHTML = `
-    <div class="seg-num" style="background:${seg.color}22; color:${seg.color}">${seg.id}</div>
-    <div class="seg-info">
-      <strong>${seg.title}</strong>
-      ${seg.partner ? `<span class="partner">${seg.partner}</span>` : ''}
-    </div>`;
+
+  // Number badge
+  const numDiv = document.createElement('div');
+  numDiv.className = 'seg-num';
+  numDiv.style.cssText = `background:${seg.color}22; color:${seg.color}`;
+  numDiv.textContent = seg.id;
+  li.appendChild(numDiv);
+
+  // Small colored icon
+  const iconSvg = document.createElementNS(NS, 'svg');
+  iconSvg.setAttribute('viewBox', '-11 -11 22 22');
+  iconSvg.setAttribute('width', '22');
+  iconSvg.setAttribute('height', '22');
+  iconSvg.style.cssText = 'flex-shrink:0; margin-top:1px;';
+  iconSvg.appendChild(drawIcon(seg.icon, 0, 0, seg.color));
+  li.appendChild(iconSvg);
+
+  // Text
+  const infoDiv = document.createElement('div');
+  infoDiv.className = 'seg-info';
+  infoDiv.innerHTML = `<strong>${seg.title}</strong>${seg.partner ? `<span class="partner">${seg.partner}</span>` : ''}`;
+  li.appendChild(infoDiv);
+
   list.appendChild(li);
 });
 
